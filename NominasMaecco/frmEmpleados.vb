@@ -108,7 +108,7 @@ Public Class frmEmpleados
                 SQL &= "','" & txtdireccion.Text
                 SQL &= "','" & txtciudad.Text & "'," & cboestado.SelectedValue & ",'" & txtcp.Text
                 SQL &= "'," & cbosexo.SelectedIndex & ",'" & Format(dtpfechanac.Value.Date, "yyyy/dd/MM") & "','" & Format(dtpCaptura.Value.Date, "yyyy/dd/MM")
-                SQL &= "','" & cbopuesto.Text & "','" & txtfunciones.Text
+                SQL &= "','" & cbopuesto.Text & "','" & cbodepartamento.Text
                 SQL &= "'," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text)
                 SQL &= ",'','" & txtnacionalidad.Text & "','','','" & txtduracion.Text & "','" & txtcomentarios.Text
                 SQL &= "',1," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",0" & ",-1" & "," & cbopertenece.SelectedIndex + 1 & "," & cbobanco.SelectedValue
@@ -136,7 +136,7 @@ Public Class frmEmpleados
                 SQL &= "','" & txtdireccion.Text
                 SQL &= "','" & txtciudad.Text & "'," & cboestado.SelectedValue & ",'" & txtcp.Text
                 SQL &= "'," & cbosexo.SelectedIndex & ",'" & Format(dtpfechanac.Value.Date, "yyyy/dd/MM") & "','" & Format(dtpCaptura.Value.Date, "yyyy/dd/MM")
-                SQL &= "','" & cbopuesto.Text & "','" & txtfunciones.Text
+                SQL &= "','" & cbopuesto.Text & "','" & cbodepartamento.Text
                 SQL &= "'," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text)
                 SQL &= ",'','" & txtnacionalidad.Text & "','','','" & txtduracion.Text & "','" & txtcomentarios.Text
                 SQL &= "',1," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",0" & ",-1" & "," & cbopertenece.SelectedIndex + 1 & "," & cbobanco.SelectedValue
@@ -264,7 +264,7 @@ Public Class frmEmpleados
                 'item.SubItems.Add("" & civil)
                 cbopertenece.SelectedIndex = Integer.Parse(Fila.Item("iOrigen")) - 1
                 'item.SubItems.Add("" & Fila.Item("cPuesto"))
-                txtfunciones.Text = Fila.Item("cFuncionesPuesto")
+                'txtfunciones.Text = Fila.Item("cFuncionesPuesto")
                 'item.SubItems.Add("" & Fila.Item("cFuncionesPuesto"))
                 cbocategoria.SelectedIndex = Fila.Item("iCategoria")
                 'Dim Categoria As String = IIf(Fila.Item("iCategoria") = "0", "A", "B")
@@ -470,7 +470,7 @@ Public Class frmEmpleados
         cbosexo.TabIndex = 8
         cboedocivil.TabIndex = 9
         cbopuesto.TabIndex = 10
-        txtfunciones.TabIndex = 11
+        cbodepartamento.TabIndex = 11
         cbocategoria.TabIndex = 12
         dtppatrona.TabIndex = 13
         dtpsindicato.TabIndex = 14
@@ -637,7 +637,7 @@ Public Class frmEmpleados
                 'item.SubItems.Add("" & civil)
 
                 'item.SubItems.Add("" & Fila.Item("cPuesto"))
-                txtfunciones.Text = Fila.Item("cFuncionesPuesto")
+                'txtfunciones.Text = Fila.Item("cFuncionesPuesto")
                 'item.SubItems.Add("" & Fila.Item("cFuncionesPuesto"))
                 cbocategoria.SelectedIndex = Fila.Item("iCategoria")
                 'Dim Categoria As String = IIf(Fila.Item("iCategoria") = "0", "A", "B")

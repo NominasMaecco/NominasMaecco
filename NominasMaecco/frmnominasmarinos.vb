@@ -239,18 +239,18 @@ Public Class frmnominasmarinos
             dsPeriodo.Tables("Tabla").Columns.Add("Buque")
             dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Infonavit")
             dsPeriodo.Tables("Tabla").Columns.Add("Valor_Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_TMM")
             dsPeriodo.Tables("Tabla").Columns.Add("Salario_Diario")
             dsPeriodo.Tables("Tabla").Columns.Add("Salario_Cotización")
             dsPeriodo.Tables("Tabla").Columns.Add("Dias_Trabajados")
             dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
             dsPeriodo.Tables("Tabla").Columns.Add("Número_días")
-            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Bruto")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Fijo_Gravado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Fijo_Exento")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base")
+            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Fijo")
             dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Ocasional")
             dsPeriodo.Tables("Tabla").Columns.Add("Desc_Sem_Obligatorio")
             dsPeriodo.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_Mensual")
             dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
             dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_exento")
             dsPeriodo.Tables("Tabla").Columns.Add("Total_Aguinaldo")
@@ -265,22 +265,30 @@ Public Class frmnominasmarinos
             dsPeriodo.Tables("Tabla").Columns.Add("Infonavit")
             dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
             dsPeriodo.Tables("Tabla").Columns.Add("Ajuste_infonavit")
+            dsPeriodo.Tables("Tabla").Columns.Add("Cuota_Sindical")
             dsPeriodo.Tables("Tabla").Columns.Add("Pension_Alimenticia")
             dsPeriodo.Tables("Tabla").Columns.Add("Prestamo")
             dsPeriodo.Tables("Tabla").Columns.Add("Fonacot")
             dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Generado")
             dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Neto_Pagar")
-            dsPeriodo.Tables("Tabla").Columns.Add("Excendente")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total")
+            dsPeriodo.Tables("Tabla").Columns.Add("Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo_Personal_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Adeudo_Infonavit_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Complemento_Sindicato")
+            dsPeriodo.Tables("Tabla").Columns.Add("Retenciones_Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("%_Comisión")
+            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Complemento")
             dsPeriodo.Tables("Tabla").Columns.Add("IMSS_CS")
             dsPeriodo.Tables("Tabla").Columns.Add("RCV_CS")
             dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_CS")
             dsPeriodo.Tables("Tabla").Columns.Add("ISN_CS")
-            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo_Personal")
-            dsPeriodo.Tables("Tabla").Columns.Add("Adeudo_Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Complemento_Asimilados")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_Costo_Social")
+            dsPeriodo.Tables("Tabla").Columns.Add("Subtotal")
+            dsPeriodo.Tables("Tabla").Columns.Add("IVA")
+            dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
+
 
            
 
@@ -326,7 +334,7 @@ Public Class frmnominasmarinos
                     fila.Item("Tipo_Infonavit") = rwNominaGuardada(x)("TipoInfonavit").ToString
                     fila.Item("Valor_Infonavit") = rwNominaGuardada(x)("fValor").ToString
                     '
-                    fila.Item("Sueldo_Base") = rwNominaGuardada(x)("fSalarioBase").ToString
+                    fila.Item("Sueldo_Base_TMM") = rwNominaGuardada(x)("fSalarioBase").ToString
                     fila.Item("Salario_Diario") = rwNominaGuardada(x)("fSalarioDiario").ToString
                     fila.Item("Salario_Cotización") = rwNominaGuardada(x)("fSalarioBC").ToString
 
@@ -334,18 +342,17 @@ Public Class frmnominasmarinos
                     fila.Item("Dias_Trabajados") = rwNominaGuardada(x)("iDiasTrabajados").ToString
                     fila.Item("Tipo_Incapacidad") = rwNominaGuardada(x)("TipoIncapacidad").ToString
                     fila.Item("Número_días") = rwNominaGuardada(x)("iNumeroDias").ToString
-                    fila.Item("Sueldo_Bruto") = rwNominaGuardada(x)("fSueldoBruto").ToString
-                    fila.Item("Tiempo_Extra_Fijo_Gravado") = rwNominaGuardada(x)("fTExtraFijoGravado").ToString
-                    fila.Item("Tiempo_Extra_Fijo_Exento") = rwNominaGuardada(x)("fTExtraFijoExento").ToString
+                    fila.Item("Sueldo_Base") = rwNominaGuardada(x)("fSueldoBruto").ToString
+                    fila.Item("Tiempo_Extra_Fijo") = rwNominaGuardada(x)("fTExtraFijo").ToString
                     fila.Item("Tiempo_Extra_Ocasional") = rwNominaGuardada(x)("fTExtraOcasional").ToString
                     fila.Item("Desc_Sem_Obligatorio") = rwNominaGuardada(x)("fDescSemObligatorio").ToString
                     fila.Item("Vacaciones_proporcionales") = rwNominaGuardada(x)("fVacacionesProporcionales").ToString
+                    fila.Item("Sueldo_Base_Mensual") = "" 'REALIZAR LA SUMATORIA
                     fila.Item("Aguinaldo_gravado") = rwNominaGuardada(x)("fAguinaldoGravado").ToString
                     fila.Item("Aguinaldo_exento") = rwNominaGuardada(x)("fAguinaldoExento").ToString
                     fila.Item("Total_Aguinaldo") = rwNominaGuardada(x)("fAguinaldoGravado").ToString + rwNominaGuardada(x)("fAguinaldoExento").ToString
                     fila.Item("Prima_vac_gravado") = rwNominaGuardada(x)("fPrimaVacacionalGravado").ToString
                     fila.Item("Prima_vac_exento") = rwNominaGuardada(x)("fPrimaVacacionalExento").ToString
-
                     fila.Item("Total_Prima_vac") = rwNominaGuardada(x)("fPrimaVacacionalGravado").ToString + rwNominaGuardada(x)("fPrimaVacacionalExento").ToString
                     fila.Item("Total_percepciones") = rwNominaGuardada(x)("fTotalPercepciones").ToString
                     fila.Item("Total_percepciones_p/isr") = rwNominaGuardada(x)("fTotalPercepcionesISR").ToString
@@ -355,6 +362,8 @@ Public Class frmnominasmarinos
                     fila.Item("Infonavit") = rwNominaGuardada(x)("fInfonavit").ToString
                     fila.Item("Infonavit_bim_anterior") = rwNominaGuardada(x)("fInfonavitBanterior").ToString
                     fila.Item("Ajuste_infonavit") = rwNominaGuardada(x)("fAjusteInfonavit").ToString
+                    fila.Item("Cuota_Sindical") = rwNominaGuardada(x)("fCuotaSindical").ToString
+
                     fila.Item("Pension_Alimenticia") = rwNominaGuardada(x)("fPensionAlimenticia").ToString
                     fila.Item("Prestamo") = rwNominaGuardada(x)("fPrestamo").ToString
                     fila.Item("Fonacot") = rwNominaGuardada(x)("fFonacot").ToString
@@ -371,6 +380,47 @@ Public Class frmnominasmarinos
                     fila.Item("Adeudo_Infonavit") = rwNominaGuardada(x)("fImporte2").ToString
                     fila.Item("Diferencia_Infonavit") = rwNominaGuardada(x)("fImporte3").ToString
                     fila.Item("Complemento_Asimilados") = rwNominaGuardada(x)("fImporte4").ToString
+
+                    
+                    
+                    fila.Item("Aguinaldo_gravado") = ""
+                    fila.Item("Aguinaldo_exento") = ""
+                    fila.Item("Total_Aguinaldo") = ""
+                    fila.Item("Prima_vac_gravado") = ""
+                    fila.Item("Prima_vac_exento") = ""
+                    fila.Item("Total_Prima_vac") = ""
+                    fila.Item("Total_percepciones") = ""
+                    fila.Item("Total_percepciones_p/isr") = ""
+                    fila.Item("Incapacidad") = ""
+                    fila.Item("ISR") = ""
+                    fila.Item("IMSS") = ""
+                    fila.Item("Infonavit") = ""
+                    fila.Item("Infonavit_bim_anterior") = ""
+                    fila.Item("Ajuste_infonavit") = ""
+                    fila.Item("Cuota_Sindical") = ""
+                    fila.Item("Pension_Alimenticia") = ""
+                    fila.Item("Prestamo") = ""
+                    fila.Item("Fonacot") = ""
+                    fila.Item("Subsidio_Generado") = ""
+                    fila.Item("Subsidio_Aplicado") = ""
+                    fila.Item("Maecco") = ""
+                    fila.Item("Prestamo_Personal_S") = ""
+                    fila.Item("Adeudo_Infonavit_S") = ""
+                    fila.Item("Diferencia_Infonavit_S") = ""
+                    fila.Item("Complemento_Sindicato") = ""
+                    fila.Item("Retenciones_Maecco") = ""
+                    fila.Item("%_Comisión") = ""
+                    fila.Item("Comisión_Maecco") = ""
+                    fila.Item("Comisión_Complemento") = ""
+                    fila.Item("IMSS_CS") = ""
+                    fila.Item("RCV_CS") = ""
+                    fila.Item("Infonavit_CS") = ""
+                    fila.Item("ISN_CS") = ""
+                    fila.Item("Total_Costo_Social") = ""
+                    fila.Item("Subtotal") = ""
+                    fila.Item("IVA") = ""
+                    fila.Item("TOTAL_DEPOSITO") = ""
+
 
                     dsPeriodo.Tables("Tabla").Rows.Add(fila)
                 Next
@@ -512,28 +562,32 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(21).ReadOnly = True
                 dtgDatos.Columns(21).Width = 150
-                'Tiempo_Extra_Fijo_Gravado
+                'Tiempo_Extra_Fijo
                 dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(22).ReadOnly = True
                 dtgDatos.Columns(22).Width = 150
-
-                'Tiempo_Extra_Fijo_Exento
-                dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(23).ReadOnly = True
-                dtgDatos.Columns(23).Width = 150
 
                 'Tiempo_Extra_Ocasional
                 dtgDatos.Columns(24).Width = 150
                 dtgDatos.Columns(24).ReadOnly = True
                 dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
                 'Desc_Sem_Obligatorio
                 dtgDatos.Columns(25).Width = 150
                 dtgDatos.Columns(25).ReadOnly = True
                 dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
                 'Vacaciones_proporcionales
                 dtgDatos.Columns(26).Width = 150
                 dtgDatos.Columns(26).ReadOnly = True
                 dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                'Sueldo Base Mensual
+                dtgDatos.Columns(26).Width = 150
+                dtgDatos.Columns(26).ReadOnly = True
+                dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
                 'Aguinaldo_gravado
                 dtgDatos.Columns(27).Width = 150
                 dtgDatos.Columns(27).ReadOnly = True
@@ -591,18 +645,27 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(38).ReadOnly = True
                 dtgDatos.Columns(38).Width = 150
+
                 'Infonavit_bim_anterior
                 dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'dtgDatos.Columns(39).ReadOnly = True
                 dtgDatos.Columns(39).Width = 150
+
                 'Ajuste_infonavit
                 dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'dtgDatos.Columns(40).ReadOnly = True
                 dtgDatos.Columns(40).Width = 150
+
+                'Cuota_Sindical
+                dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(38).ReadOnly = True
+                dtgDatos.Columns(38).Width = 150
+
                 'Pension_Alimenticia
                 dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'dtgDatos.Columns(40).ReadOnly = True
                 dtgDatos.Columns(41).Width = 150
+
                 'Prestamo
                 dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(42).ReadOnly = True
@@ -619,51 +682,87 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(45).ReadOnly = True
                 dtgDatos.Columns(45).Width = 150
-                'Neto_Pagar
+                'Maecco
                 dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(46).ReadOnly = True
                 dtgDatos.Columns(46).Width = 150
 
-                'Excendente
+                'Prestamo Personal Sindicato
                 dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(47).ReadOnly = True
                 dtgDatos.Columns(47).Width = 150
 
-                'Total
+                'Adeudo_Infonavit_S
                 dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(48).ReadOnly = True
                 dtgDatos.Columns(48).Width = 150
+
+                'Difencia infonavit Sindicato
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
+
+                'Complemento Sindicato
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
+
+                'Retenciones_Maecco
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
+
+                '% Comision
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
+
+                'Comision_Maecco
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
+
+                'Comision Complemento
+                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).Width = 150
 
                 'IMSS_CS
                 dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(49).ReadOnly = True
                 dtgDatos.Columns(49).Width = 150
+
                 'RCV_CS
                 dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(50).ReadOnly = True
                 dtgDatos.Columns(50).Width = 150
+
                 'Infonavit_CS
                 dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(51).ReadOnly = True
                 dtgDatos.Columns(51).Width = 150
+
                 'ISN_CS
                 dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(52).ReadOnly = True
                 dtgDatos.Columns(52).Width = 150
-                'Prestamo_Personal
+
+                'Total Costo Social
                 dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(53).ReadOnly = True
                 dtgDatos.Columns(53).Width = 150
-                'Adeudo_Infonavit
+
+                'Subtotal
                 dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(54).ReadOnly = True
                 dtgDatos.Columns(54).Width = 150
-                'Diferencia_Infonavit
+
+                'IVA
                 dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(55).ReadOnly = True
                 dtgDatos.Columns(55).Width = 150
 
-                'Complemento_Asimilados
+                'TOTAL DEPOSITO
                 dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 dtgDatos.Columns(56).ReadOnly = True
                 dtgDatos.Columns(56).Width = 150
@@ -744,24 +843,23 @@ Public Class frmnominasmarinos
 
                         fila.Item("Tipo_Infonavit") = rwDatosEmpleados(x)("cTipoFactor").ToString
                         fila.Item("Valor_Infonavit") = rwDatosEmpleados(x)("fFactor").ToString
-                        fila.Item("Sueldo_Base") = "0.00"
+                        fila.Item("Sueldo_Base_TMM") = "0.00"
                         fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fSueldoBase").ToString
                         fila.Item("Salario_Cotización") = rwDatosEmpleados(x)("fSueldoIntegrado").ToString
                         fila.Item("Dias_Trabajados") = "30"
                         fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
                         fila.Item("Número_días") = NumDiasIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
-                        fila.Item("Sueldo_Bruto") = ""
-                        fila.Item("Tiempo_Extra_Fijo_Gravado") = ""
-                        fila.Item("Tiempo_Extra_Fijo_Exento") = ""
+                        fila.Item("Sueldo_Base") = ""
+                        fila.Item("Tiempo_Extra_Fijo") = ""
                         fila.Item("Tiempo_Extra_Ocasional") = ""
                         fila.Item("Desc_Sem_Obligatorio") = ""
                         fila.Item("Vacaciones_proporcionales") = ""
+                        fila.Item("Sueldo_Base_Mensual") = ""
                         fila.Item("Aguinaldo_gravado") = ""
                         fila.Item("Aguinaldo_exento") = ""
                         fila.Item("Total_Aguinaldo") = ""
                         fila.Item("Prima_vac_gravado") = ""
                         fila.Item("Prima_vac_exento") = ""
-
                         fila.Item("Total_Prima_vac") = ""
                         fila.Item("Total_percepciones") = ""
                         fila.Item("Total_percepciones_p/isr") = ""
@@ -771,22 +869,29 @@ Public Class frmnominasmarinos
                         fila.Item("Infonavit") = ""
                         fila.Item("Infonavit_bim_anterior") = ""
                         fila.Item("Ajuste_infonavit") = ""
+                        fila.Item("Cuota_Sindical") = ""
                         fila.Item("Pension_Alimenticia") = ""
                         fila.Item("Prestamo") = ""
                         fila.Item("Fonacot") = ""
                         fila.Item("Subsidio_Generado") = ""
                         fila.Item("Subsidio_Aplicado") = ""
-                        fila.Item("Neto_Pagar") = ""
-                        fila.Item("Excendente") = ""
-                        fila.Item("Total") = ""
+                        fila.Item("Maecco") = ""
+                        fila.Item("Prestamo_Personal_S") = ""
+                        fila.Item("Adeudo_Infonavit_S") = ""
+                        fila.Item("Diferencia_Infonavit_S") = ""
+                        fila.Item("Complemento_Sindicato") = ""
+                        fila.Item("Retenciones_Maecco") = ""
+                        fila.Item("%_Comisión") = ""
+                        fila.Item("Comisión_Maecco") = ""
+                        fila.Item("Comisión_Complemento") = ""
                         fila.Item("IMSS_CS") = ""
                         fila.Item("RCV_CS") = ""
                         fila.Item("Infonavit_CS") = ""
                         fila.Item("ISN_CS") = ""
-                        fila.Item("Prestamo_Personal") = ""
-                        fila.Item("Adeudo_Infonavit") = ""
-                        fila.Item("Diferencia_Infonavit") = ""
-                        fila.Item("Complemento_Asimilados") = ""
+                        fila.Item("Total_Costo_Social") = ""
+                        fila.Item("Subtotal") = ""
+                        fila.Item("IVA") = ""
+                        fila.Item("TOTAL_DEPOSITO") = ""
 
                         dsPeriodo.Tables("Tabla").Rows.Add(fila)
 
@@ -935,28 +1040,32 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(21).ReadOnly = True
                     dtgDatos.Columns(21).Width = 150
-                    'Tiempo_Extra_Fijo_Gravado
+                    'Tiempo_Extra_Fijo
                     dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(22).ReadOnly = True
                     dtgDatos.Columns(22).Width = 150
-
-                    'Tiempo_Extra_Fijo_Exento
-                    dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(23).ReadOnly = True
-                    dtgDatos.Columns(23).Width = 150
 
                     'Tiempo_Extra_Ocasional
                     dtgDatos.Columns(24).Width = 150
                     dtgDatos.Columns(24).ReadOnly = True
                     dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
                     'Desc_Sem_Obligatorio
                     dtgDatos.Columns(25).Width = 150
                     dtgDatos.Columns(25).ReadOnly = True
                     dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
                     'Vacaciones_proporcionales
                     dtgDatos.Columns(26).Width = 150
                     dtgDatos.Columns(26).ReadOnly = True
                     dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+                    'Sueldo Base Mensual
+                    dtgDatos.Columns(26).Width = 150
+                    dtgDatos.Columns(26).ReadOnly = True
+                    dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
                     'Aguinaldo_gravado
                     dtgDatos.Columns(27).Width = 150
                     dtgDatos.Columns(27).ReadOnly = True
@@ -1014,25 +1123,34 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(38).ReadOnly = True
                     dtgDatos.Columns(38).Width = 150
+
                     'Infonavit_bim_anterior
                     dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     'dtgDatos.Columns(39).ReadOnly = True
                     dtgDatos.Columns(39).Width = 150
+
                     'Ajuste_infonavit
                     dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     'dtgDatos.Columns(40).ReadOnly = True
                     dtgDatos.Columns(40).Width = 150
+
+                    'Cuota_Sindical
+                    dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(38).ReadOnly = True
+                    dtgDatos.Columns(38).Width = 150
+
                     'Pension_Alimenticia
                     dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     'dtgDatos.Columns(40).ReadOnly = True
                     dtgDatos.Columns(41).Width = 150
+
                     'Prestamo
                     dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(42).ReadOnly = True
+                    dtgDatos.Columns(42).ReadOnly = True
                     dtgDatos.Columns(42).Width = 150
                     'Fonacot
                     dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(43).ReadOnly = True
+                    dtgDatos.Columns(43).ReadOnly = True
                     dtgDatos.Columns(43).Width = 150
                     'Subsidio_Generado
                     dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1042,55 +1160,91 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(45).ReadOnly = True
                     dtgDatos.Columns(45).Width = 150
-                    'Neto_Pagar
+                    'Maecco
                     dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(46).ReadOnly = True
                     dtgDatos.Columns(46).Width = 150
 
-                    'Excendente
+                    'Prestamo Personal Sindicato
                     dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(47).ReadOnly = True
                     dtgDatos.Columns(47).Width = 150
 
-                    'Total
+                    'Adeudo_Infonavit_S
                     dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(48).ReadOnly = True
                     dtgDatos.Columns(48).Width = 150
+
+                    'Difencia infonavit Sindicato
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
+
+                    'Complemento Sindicato
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
+
+                    'Retenciones_Maecco
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
+
+                    '% Comision
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
+
+                    'Comision_Maecco
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
+
+                    'Comision Complemento
+                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).Width = 150
 
                     'IMSS_CS
                     dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(49).ReadOnly = True
                     dtgDatos.Columns(49).Width = 150
+
                     'RCV_CS
                     dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(50).ReadOnly = True
                     dtgDatos.Columns(50).Width = 150
+
                     'Infonavit_CS
                     dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(51).ReadOnly = True
                     dtgDatos.Columns(51).Width = 150
+
                     'ISN_CS
                     dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(52).ReadOnly = True
                     dtgDatos.Columns(52).Width = 150
-                    'Prestamo_Personal
+
+                    'Total Costo Social
                     dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(53).ReadOnly = True
+                    dtgDatos.Columns(53).ReadOnly = True
                     dtgDatos.Columns(53).Width = 150
-                    'Adeudo_Infonavit
+
+                    'Subtotal
                     dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(54).ReadOnly = True
+                    dtgDatos.Columns(54).ReadOnly = True
                     dtgDatos.Columns(54).Width = 150
-                    'Diferencia_Infonavit
+
+                    'IVA
                     dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(55).ReadOnly = True
+                    dtgDatos.Columns(55).ReadOnly = True
                     dtgDatos.Columns(55).Width = 150
 
-                    'Complemento_Asimilados
+                    'TOTAL DEPOSITO
                     dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(56).ReadOnly = True
                     dtgDatos.Columns(56).Width = 150
-                    'calcular()
+
 
                     'Cambiamos index del combo en el grid
 

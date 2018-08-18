@@ -33,6 +33,7 @@ Partial Class frmEmpleados
         Me.txtsalario = New System.Windows.Forms.TextBox()
         Me.cbojornada = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdimss = New System.Windows.Forms.Button()
         Me.cmdPension = New System.Windows.Forms.Button()
         Me.cmdDocumentos = New System.Windows.Forms.Button()
         Me.cmdFamiliar = New System.Windows.Forms.Button()
@@ -112,8 +113,6 @@ Partial Class frmEmpleados
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtfunciones = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.cboedocivil = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -150,7 +149,6 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
-        Me.cmdimss = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -159,24 +157,18 @@ Partial Class frmEmpleados
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(8, 633)
+        Me.Label48.Location = New System.Drawing.Point(532, 156)
         Me.Label48.Name = "Label48"
-
-        Me.Label48.Size = New System.Drawing.Size(42, 18)
-        Me.Label48.TabIndex = 195
-        Me.Label48.Text = "Barco"
-
         Me.Label48.Size = New System.Drawing.Size(48, 18)
         Me.Label48.TabIndex = 195
         Me.Label48.Text = "Buque"
-
         '
         'cbodepartamento
         '
         Me.cbodepartamento.FormattingEnabled = True
-        Me.cbodepartamento.Location = New System.Drawing.Point(7, 609)
+        Me.cbodepartamento.Location = New System.Drawing.Point(535, 132)
         Me.cbodepartamento.Name = "cbodepartamento"
-        Me.cbodepartamento.Size = New System.Drawing.Size(419, 26)
+        Me.cbodepartamento.Size = New System.Drawing.Size(306, 26)
         Me.cbodepartamento.TabIndex = 194
         '
         'cbopuesto
@@ -254,6 +246,18 @@ Partial Class frmEmpleados
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
+        '
+        'cmdimss
+        '
+        Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
+        Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
+        Me.cmdimss.Name = "cmdimss"
+        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
+        Me.cmdimss.TabIndex = 47
+        Me.cmdimss.Text = "Imss"
+        Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdimss.UseVisualStyleBackColor = True
         '
         'cmdPension
         '
@@ -967,22 +971,6 @@ Partial Class frmEmpleados
         Me.Label10.TabIndex = 128
         Me.Label10.Text = "Categoria"
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(535, 156)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 18)
-        Me.Label9.TabIndex = 127
-        Me.Label9.Text = "Desc. Buque"
-        '
-        'txtfunciones
-        '
-        Me.txtfunciones.Location = New System.Drawing.Point(535, 132)
-        Me.txtfunciones.Name = "txtfunciones"
-        Me.txtfunciones.Size = New System.Drawing.Size(305, 26)
-        Me.txtfunciones.TabIndex = 126
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -1284,18 +1272,6 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
         '
-        'cmdimss
-        '
-        Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
-        Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
-        Me.cmdimss.Name = "cmdimss"
-        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
-        Me.cmdimss.TabIndex = 47
-        Me.cmdimss.Text = "Imss"
-        Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdimss.UseVisualStyleBackColor = True
-        '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1383,8 +1359,6 @@ Partial Class frmEmpleados
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtfunciones)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.cboedocivil)
         Me.Controls.Add(Me.Label7)
@@ -1496,8 +1470,6 @@ Partial Class frmEmpleados
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents txtfunciones As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents cboedocivil As ComboBox
     Friend WithEvents Label7 As Label
