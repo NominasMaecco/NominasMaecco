@@ -326,7 +326,7 @@ Public Class frmImportarEmpleadosAlta
                         If b <> "" Then
                             Dim banco As DataRow() = nConsulta("select * from bancos where clave =" & b)
                             If banco Is Nothing Then
-                                idbanco = 1
+                                idbanco = 36
                                 mensa = "Revise el tipo de banco"
                                 ' bandera = False
                             Else
@@ -339,7 +339,7 @@ Public Class frmImportarEmpleadosAlta
                         Dim p As String = Trim(empleadofull.SubItems(15).Text) ''CPuesto
                         Dim cPuesto As String
                         If p <> "" Then
-                            Dim puesto As DataRow() = nConsulta("select * FROM Puestos where cNombre like '" & p & "'")
+                            Dim puesto As DataRow() = nConsulta("select * FROM Puestos where cDescripcion like '" & p & "'")
                             If puesto Is Nothing Then
                                 cPuesto = ""
                                 mensa = "Revise el tipo de Puesto"
@@ -361,7 +361,7 @@ Public Class frmImportarEmpleadosAlta
                             Dim dpto As DataRow() = nConsulta("SELECT * FROM Departamentos where cNombre LIKE '" & d & "'")
                             If dpto Is Nothing Then
                                 iIdDpto = " "
-                                mensa = "Revise el tipo de dapartamento"
+                                mensa = "Revise el tipo de departamento"
                                 'bandera = False
                             Else
                                 iIdDpto = dpto(0).Item("iIdDepartamento")
@@ -377,7 +377,7 @@ Public Class frmImportarEmpleadosAlta
                             Dim lugar As DataRow() = nConsulta("SELECT * FROM Cat_Estados WHERE cClave LIKE'" & l & "'")
                             If lugar Is Nothing Then
                                 cLugar = ""
-                                mensa = "Revise el tipo de Puesto"
+                                mensa = "Revise el Estado"
                                 'bandera = False
                             Else
                                 cLugar = lugar(0).Item("cEstado")
