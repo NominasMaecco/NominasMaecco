@@ -416,8 +416,8 @@ Public Class frmImportarEmpleadosAlta
 
                         'Cuenta o clabe
 
-                        Dim cuenta As String
-                        Dim clabe As String
+                        Dim cuenta As String = 0
+                        Dim clabe As String = 0
 
                         If Len(Trim(empleadofull.SubItems(25).Text)) = 18 Then
                             cuenta = 0
@@ -432,7 +432,7 @@ Public Class frmImportarEmpleadosAlta
                             cuenta = 0
 
                         End If
-                        If Trim(empleadofull.SubItems(30).Text) = 18 Then 'clabe
+                        If Len(Trim(empleadofull.SubItems(30).Text)) = 18 Then 'clabe
                             clabe = Trim(empleadofull.SubItems(30).Text)
                         End If
 

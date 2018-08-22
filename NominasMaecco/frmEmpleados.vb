@@ -291,7 +291,7 @@ Public Class frmEmpleados
                 'item.SubItems.Add("" & IIf(Fila.Item("iPermanente") = "0", "No", "Si"))
                 txtcredito.Text = Fila.Item("cInfonavit")
                 'item.SubItems.Add("" & Fila.Item("cInfonavit"))
-                'If Fila.Item("cInfonavit") <> Nothing Then
+                'If Fila.Item("cInfonavit") <> Nothing And Fila.Item("cInfonavit") > 0 Then
                 '    chkInfonavit.Checked = True
                 'Else
                 '    chkInfonavit.Checked = False
