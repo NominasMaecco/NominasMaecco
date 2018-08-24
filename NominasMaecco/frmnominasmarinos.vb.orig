@@ -169,7 +169,6 @@ Public Class frmnominasmarinos
             Dim PrimaSA As Double
             Dim cadenabanco As String
             dtgDatos.Columns.Clear()
-
             dtgDatos.DataSource = Nothing
 
 
@@ -636,11 +635,11 @@ Public Class frmnominasmarinos
 
                 'Prestamo
                 dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(43).ReadOnly = True
+                dtgDatos.Columns(43).ReadOnly = True
                 dtgDatos.Columns(43).Width = 150
                 'Fonacot
                 dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(44).ReadOnly = True
+                dtgDatos.Columns(44).ReadOnly = True
                 dtgDatos.Columns(44).Width = 150
                 'Subsidio_Generado
                 dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -657,17 +656,17 @@ Public Class frmnominasmarinos
 
                 'Prestamo Personal Sindicato
                 dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(48).ReadOnly = True
+                dtgDatos.Columns(48).ReadOnly = True
                 dtgDatos.Columns(48).Width = 150
 
                 'Adeudo_Infonavit_S
                 dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(49).ReadOnly = True
+                dtgDatos.Columns(49).ReadOnly = True
                 dtgDatos.Columns(49).Width = 150
 
                 'Difencia infonavit Sindicato
                 dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(50).ReadOnly = True
+                dtgDatos.Columns(50).ReadOnly = True
                 dtgDatos.Columns(50).Width = 150
 
                 'Complemento Sindicato
@@ -1114,11 +1113,11 @@ Public Class frmnominasmarinos
 
                     'Prestamo
                     dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(43).ReadOnly = True
+                    dtgDatos.Columns(43).ReadOnly = True
                     dtgDatos.Columns(43).Width = 150
                     'Fonacot
                     dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(44).ReadOnly = True
+                    dtgDatos.Columns(44).ReadOnly = True
                     dtgDatos.Columns(44).Width = 150
                     'Subsidio_Generado
                     dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1135,17 +1134,17 @@ Public Class frmnominasmarinos
 
                     'Prestamo Personal Sindicato
                     dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(48).ReadOnly = True
+                    dtgDatos.Columns(48).ReadOnly = True
                     dtgDatos.Columns(48).Width = 150
 
                     'Adeudo_Infonavit_S
                     dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(49).ReadOnly = True
+                    dtgDatos.Columns(49).ReadOnly = True
                     dtgDatos.Columns(49).Width = 150
 
                     'Difencia infonavit Sindicato
                     dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(50).ReadOnly = True
+                    dtgDatos.Columns(50).ReadOnly = True
                     dtgDatos.Columns(50).Width = 150
 
                     'Complemento Sindicato
@@ -1466,7 +1465,7 @@ Public Class frmnominasmarinos
                 pnlProgreso.Visible = True
 
                 Application.DoEvents()
-                'pnlCatalogo.Enabled = False
+                pnlCatalogo.Enabled = False
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = dtgDatos.Rows.Count
@@ -1711,7 +1710,7 @@ Public Class frmnominasmarinos
         Try
             'verificamos que tenga dias a calcular
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                If Double.Parse(IIf(dtgDatos.Rows(x).Cells(18).Value = "", "0", dtgDatos.Rows(x).Cells(18).Value)) <= 0 Then
+                If Double.Parse(IIf(dtgDatos.Rows(x).Cells(17).Value = "", "0", dtgDatos.Rows(x).Cells(17).Value)) <= 0 Then
                     MessageBox.Show("Existen trabajadores que no tiene dias trabajados, favor de verificar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
@@ -1734,7 +1733,7 @@ Public Class frmnominasmarinos
             pnlProgreso.Visible = True
 
             Application.DoEvents()
-            'pnlCatalogo.Enabled = False
+            pnlCatalogo.Enabled = False
             pgbProgreso.Minimum = 0
             pgbProgreso.Value = 0
             pgbProgreso.Maximum = dtgDatos.Rows.Count
@@ -4510,7 +4509,7 @@ Public Class frmnominasmarinos
             Dim columna As Integer
             m_currentControl = Nothing
             columna = CInt(DirectCast(sender, System.Windows.Forms.DataGridView).CurrentCell.ColumnIndex)
-            If columna = 15 Or columna = 18 Or columna = 39 Or columna = 40 Or columna = 41 Or columna = 42 Or columna = 43 Or columna = 44 Or columna = 48 Or columna = 49 Or columna = 50 Or columna = 10 Then
+            If columna = 15 Or columna = 18 Or columna = 39 Or columna = 40 Or columna = 41 Or columna = 42 Or columna = 43 Or columna = 10 Then
                 AddHandler e.Control.KeyPress, AddressOf TextboxNumeric_KeyPress
                 m_currentControl = e.Control
             End If
@@ -4978,7 +4977,7 @@ Public Class frmnominasmarinos
                             fila.Item("Tipo_Infonavit") = dtgDatos.Rows(y).Cells(13).Value
                             fila.Item("Valor_Infonavit") = IIf(dtgDatos.Rows(y).Cells(14).Value = "", "0", dtgDatos.Rows(y).Cells(14).Value.ToString.Replace(",", ""))
                             'salario base
-                            fila.Item("Sueldo_Base_TMM") = dtgDatos.Rows(y).Cells(15).Value
+                            fila.Item("Sueldo_Base") = dtgDatos.Rows(y).Cells(15).Value
                             fila.Item("Salario_Diario") = dtgDatos.Rows(y).Cells(16).Value
                             fila.Item("Salario_Cotización") = dtgDatos.Rows(y).Cells(17).Value
                             fila.Item("Dias_Trabajados") = dtgDatos.Rows(y).Cells(18).Value
@@ -5033,38 +5032,17 @@ Public Class frmnominasmarinos
                             dsPeriodo.Tables("Tabla").Rows.Add(fila)
                         Next
 
+                        'Agregar a la tabla los datos que vienen de la busqueda de empleados
+                        For x As Integer = 0 To ids.Length - 1
 
-
-                        cadenaempleados = ""
-
-                        For y As Integer = 0 To ids.Length - 1
-                            If y = 0 Then
-                                cadenaempleados = " iIdEmpleadoC=" & ids(y)
-                            Else
-                                cadenaempleados &= "  or iIdEmpleadoC=" & ids(y)
-                            End If
-                        Next
-
-
-
-
-
-
-                        sql = "select  * from empleadosC where " 'fkiIdClienteInter=-1"
-                        sql &= cadenaempleados
-                        sql &= " order by cFuncionesPuesto,cNombreLargo"
-
-                        Dim rwDatosEmpleados As DataRow() = nConsulta(sql)
-                        If rwDatosEmpleados Is Nothing = False Then
-                            'Agregar a la tabla los datos que vienen de la busqueda de empleados
-                            For x As Integer = 0 To ids.Length - 1
-
-                                Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
-                                'Dim fila As DataRow = dt.NewRow
-                                'Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
-
-
-
+                            Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
+                            'Dim fila As DataRow = dt.NewRow
+                            'Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
+                            sql = "select  * from empleadosC where " 'fkiIdClienteInter=-1"
+                            sql &= " iIdEmpleadoC=" & ids(x)
+                            sql &= " order by cFuncionesPuesto,cNombreLargo"
+                            Dim rwDatosEmpleados As DataRow() = nConsulta(sql)
+                            If rwDatosEmpleados Is Nothing = False Then
                                 fila.Item("Consecutivo") = (x + 1).ToString
                                 fila.Item("Id_empleado") = rwDatosEmpleados(x)("iIdEmpleadoC").ToString
                                 fila.Item("CodigoEmpleado") = rwDatosEmpleados(x)("cCodigoEmpleado").ToString
@@ -5137,11 +5115,11 @@ Public Class frmnominasmarinos
 
 
 
+                            End If
 
+                        Next
+                        'dtgDatos.DataSource = dt
 
-                            Next
-                            'dtgDatos.DataSource = dt
-                        End If
                         dtgDatos.Columns.Clear()
                         Dim chk As New DataGridViewCheckBoxColumn()
                         dtgDatos.Columns.Add(chk)
@@ -5628,7 +5606,7 @@ Public Class frmnominasmarinos
 
 
                             Next
-                            dtgDatos.Columns.Clear()
+
                             Dim chk As New DataGridViewCheckBoxColumn()
                             dtgDatos.Columns.Add(chk)
                             chk.HeaderText = ""
@@ -6042,7 +6020,7 @@ Public Class frmnominasmarinos
             Case 12, 0 : Return "Diciembre"
 
 
-
+                
         End Select
 
         Return Date.Now().Month().ToString
