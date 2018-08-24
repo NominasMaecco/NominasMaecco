@@ -3210,7 +3210,7 @@ Public Class frmnominasmarinos
     Private Sub cmdexcel_Click(sender As Object, e As EventArgs) Handles cmdexcel.Click
         Try
 
-            If (dtgDatos.Rows(0).Cells(60).Value = 0) Then
+            If (dtgDatos.Rows(0).Cells(60).Value = 0 Or dtgDatos.Rows(0).Cells(60).Value Is Nothing) Then
                 calcular()
 
             End If

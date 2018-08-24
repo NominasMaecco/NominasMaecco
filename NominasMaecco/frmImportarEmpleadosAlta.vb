@@ -339,7 +339,7 @@ Public Class frmImportarEmpleadosAlta
                         Dim p As String = Trim(empleadofull.SubItems(15).Text) ''CPuesto
                         Dim cPuesto As String
                         If p <> "" Then
-                            Dim puesto As DataRow() = nConsulta("select * FROM Puestos where cDescripcion like '" & p & "'")
+                            Dim puesto As DataRow() = nConsulta("select * FROM Puestos where cNombre like '" & p & "'")
                             If puesto Is Nothing Then
                                 cPuesto = ""
                                 mensa = "Revise el tipo de Puesto"
