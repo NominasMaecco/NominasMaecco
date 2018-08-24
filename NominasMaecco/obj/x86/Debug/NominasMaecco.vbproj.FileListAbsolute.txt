@@ -2,7 +2,6 @@ C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.pdb
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.xml
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\ClosedXML.dll
-C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmAgregarEmpleado.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmBuscarEmpleado.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmDocumentos.resources
