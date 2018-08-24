@@ -225,69 +225,7 @@ Public Class frmnominasmarinos
 
             Dim dsPeriodo As New DataSet
             dsPeriodo.Tables.Add("Tabla")
-            dsPeriodo.Tables("Tabla").Columns.Add("Consecutivo")
-            dsPeriodo.Tables("Tabla").Columns.Add("Id_empleado")
-            dsPeriodo.Tables("Tabla").Columns.Add("CodigoEmpleado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Nombre")
-            dsPeriodo.Tables("Tabla").Columns.Add("Status")
-            dsPeriodo.Tables("Tabla").Columns.Add("RFC")
-            dsPeriodo.Tables("Tabla").Columns.Add("CURP")
-            dsPeriodo.Tables("Tabla").Columns.Add("Num_IMSS")
-            dsPeriodo.Tables("Tabla").Columns.Add("Fecha_Nac")
-            dsPeriodo.Tables("Tabla").Columns.Add("Edad")
-            dsPeriodo.Tables("Tabla").Columns.Add("Puesto")
-            dsPeriodo.Tables("Tabla").Columns.Add("Buque")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Valor_Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_TMM")
-            dsPeriodo.Tables("Tabla").Columns.Add("Salario_Diario")
-            dsPeriodo.Tables("Tabla").Columns.Add("Salario_Cotización")
-            dsPeriodo.Tables("Tabla").Columns.Add("Dias_Trabajados")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
-            dsPeriodo.Tables("Tabla").Columns.Add("Número_días")
-            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Fijo")
-            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Ocasional")
-            dsPeriodo.Tables("Tabla").Columns.Add("Desc_Sem_Obligatorio")
-            dsPeriodo.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
-            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_Mensual")
-            dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_exento")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total_Aguinaldo")
-            dsPeriodo.Tables("Tabla").Columns.Add("Prima_vac_gravado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Prima_vac_exento")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total_Prima_vac")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total_percepciones")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total_percepciones_p/isr")
-            dsPeriodo.Tables("Tabla").Columns.Add("Incapacidad")
-            dsPeriodo.Tables("Tabla").Columns.Add("ISR")
-            dsPeriodo.Tables("Tabla").Columns.Add("IMSS")
-            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
-            dsPeriodo.Tables("Tabla").Columns.Add("Ajuste_infonavit")
-            dsPeriodo.Tables("Tabla").Columns.Add("Cuota_Sindical")
-            dsPeriodo.Tables("Tabla").Columns.Add("Pension_Alimenticia")
-            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo")
-            dsPeriodo.Tables("Tabla").Columns.Add("Fonacot")
-            dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Generado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
-            dsPeriodo.Tables("Tabla").Columns.Add("Maecco")
-            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo_Personal_S")
-            dsPeriodo.Tables("Tabla").Columns.Add("Adeudo_Infonavit_S")
-            dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_S")
-            dsPeriodo.Tables("Tabla").Columns.Add("Complemento_Sindicato")
-            dsPeriodo.Tables("Tabla").Columns.Add("Retenciones_Maecco")
-            dsPeriodo.Tables("Tabla").Columns.Add("%_Comisión")
-            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Maecco")
-            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Complemento")
-            dsPeriodo.Tables("Tabla").Columns.Add("IMSS_CS")
-            dsPeriodo.Tables("Tabla").Columns.Add("RCV_CS")
-            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_CS")
-            dsPeriodo.Tables("Tabla").Columns.Add("ISN_CS")
-            dsPeriodo.Tables("Tabla").Columns.Add("Total_Costo_Social")
-            dsPeriodo.Tables("Tabla").Columns.Add("Subtotal")
-            dsPeriodo.Tables("Tabla").Columns.Add("IVA")
-            dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
+
 
 
            
@@ -3593,34 +3531,34 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(9).Value
                     hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(10).FormattedValue
                     hoja2.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
-                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value
-                    hoja2.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value
-                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value
-                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(21).Value ''Sueldo Bruto
-                    hoja2.Cell(filaExcel, 15).Value = CDbl(IIf(dtgDatos.Rows(x).Cells(22).Value = "", "0", dtgDatos.Rows(x).Cells(22).Value)) + CDbl(IIf(dtgDatos.Rows(x).Cells(22).Value = "", "0", dtgDatos.Rows(x).Cells(23).Value))
-                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(24).Value
-                    hoja2.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(25).Value
-                    hoja2.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(26).Value
-                    hoja2.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(15).Value 'Sueldo Mensua
-                    hoja2.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(27).Value
-                    hoja2.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(28).Value
-                    hoja2.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(29).Value
-                    hoja2.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(30).Value
-                    hoja2.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(31).Value
-                    hoja2.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(32).Value
-                    hoja2.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(33).Value
-                    hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(34).Value
-                    hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value
-                    hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value
-                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value
-                    hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value
-                    hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value
-                    hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(43).Value
-                    hoja2.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(41).Value
-                    hoja2.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(42).Value
+                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'SALARIO DIARO
+                    hoja2.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
+                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS TRABAJADOS
+                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(21).Value 'SUELDO BRUTO
+                    hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(22).Value
+                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(23).Value
+                    hoja2.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(24).Value 'DESC. SEM OBLIGATORIO
+                    hoja2.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(25).Value 'VACACIONES PROPORCIONALES
+                    hoja2.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(26).Value 'SUELDO BASE MENSUAL
+                    hoja2.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(27).Value ' AGUINALDO GRAVADO
+                    hoja2.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(28).Value ' AGUINALDO EXENTO
+                    hoja2.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(29).Value 'TOTAL AGINALDO
+                    hoja2.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(30).Value ' PRIMA VACIONA
+                    hoja2.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(31).Value ' EXENTA
+                    hoja2.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(32).Value ' TOTLA PRIMAS
+                    hoja2.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(33).Value ''TOTAL PERCEPCIONES
+                    hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPCIONES /ISR
+                    hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
+                    hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR
+                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMS
+                    hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
+                    hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
+                    hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
+                    hoja2.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(42).Value 'PENSION ALIMENT
+                    hoja2.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(43).Value ' PRESTAMO
                     hoja2.Cell(filaExcel, 36).FormulaA1 = "=AB" & filaExcel & "+AC" & filaExcel & "+AD" & filaExcel & "+AE" & filaExcel & "+AF" & filaExcel & "+AG" & filaExcel & "+AH" & filaExcel & "+AI" & filaExcel
                     hoja2.Cell(filaExcel, 37).FormulaA1 = "=Z" & filaExcel & "-AJ" & filaExcel
-                    hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(40).Value
+                    hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
                     hoja2.Cell(filaExcel, 39).FormulaA1 = "=AK" & filaExcel & "-AL" & filaExcel
 
                     filaExcel = filaExcel + 1
