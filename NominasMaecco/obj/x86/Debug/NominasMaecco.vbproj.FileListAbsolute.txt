@@ -53,3 +53,4 @@ C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe.m
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.application
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe.manifest
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.application
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache

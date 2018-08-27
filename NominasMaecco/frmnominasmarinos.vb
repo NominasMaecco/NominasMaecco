@@ -2069,6 +2069,86 @@ Public Class frmnominasmarinos
                 pgbProgreso.Value += 1
                 Application.DoEvents()
             Next
+
+            'verificar costo social
+
+            Dim contador, Posicion2, Posicion3, Posicion4 As Integer
+
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                contador = 0
+
+                For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                    If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+                        contador = contador + 1
+                        If contador = 2 Then
+                            Posicion2 = y
+                        End If
+                        If contador = 3 Then
+                            Posicion3 = y
+                        End If
+                        If contador = 4 Then
+                            Posicion4 = y
+                        End If
+                    End If
+
+                    
+
+                Next
+                If contador = 2 Then
+                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(60).Value = "0.00"
+                    End If
+
+                End If
+                If contador = 3 Then
+                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(60).Value = "0.00"
+                    End If
+                    If dtgDatos.Rows(Posicion3).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(60).Value = "0.00"
+                    End If
+                End If
+                If contador = 4 Then
+                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion2).Cells(60).Value = "0.00"
+                    End If
+                    If dtgDatos.Rows(Posicion3).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(60).Value = "0.00"
+                    End If
+                    If dtgDatos.Rows(Posicion4).Cells(5).Value = "PLANTA" Then
+                        dtgDatos.Rows(Posicion4).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(Posicion4).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(Posicion4).Cells(58).Value = "0.00"
+                        dtgDatos.Rows(Posicion4).Cells(59).Value = "0.00"
+                        dtgDatos.Rows(Posicion3).Cells(60).Value = "0.00"
+                    End If
+                End If
+
+            Next
+
+
+
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
