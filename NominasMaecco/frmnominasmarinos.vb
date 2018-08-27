@@ -611,7 +611,7 @@ Public Class frmnominasmarinos
 
                 'Infonavit
                 dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(38).ReadOnly = True
+                'dtgDatos.Columns(38).ReadOnly = True
                 dtgDatos.Columns(38).Width = 150
 
                 'Infonavit_bim_anterior
@@ -754,17 +754,24 @@ Public Class frmnominasmarinos
                 Next
 
 
-                'Cambiamos el index del combro de departamentos
-
-                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                '    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                '    Dim rwFila As DataRow() = nConsulta(sql)
 
 
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    'Aguinaldo total
+                    dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(27).Value) + Double.Parse(dtgDatos.Rows(x).Cells(28).Value), 2)
+
+                    '
+                    'Total Prima de vacaciones                    
+                    dtgDatos.Rows(x).Cells(32).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(30).Value) + Double.Parse(dtgDatos.Rows(x).Cells(31).Value), 2)
 
 
-                'Next
+                Next
+
+
+
+
+                
 
                 MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -1089,7 +1096,7 @@ Public Class frmnominasmarinos
 
                     'Infonavit
                     dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(38).ReadOnly = True
+                    'dtgDatos.Columns(38).ReadOnly = True
                     dtgDatos.Columns(38).Width = 150
 
                     'Infonavit_bim_anterior
@@ -4520,7 +4527,7 @@ Public Class frmnominasmarinos
             Dim columna As Integer
             m_currentControl = Nothing
             columna = CInt(DirectCast(sender, System.Windows.Forms.DataGridView).CurrentCell.ColumnIndex)
-            If columna = 15 Or columna = 18 Or columna = 39 Or columna = 40 Or columna = 41 Or columna = 42 Or columna = 43 Or columna = 44 Or columna = 48 Or columna = 49 Or columna = 50 Or columna = 10 Then
+            If columna = 15 Or columna = 18 Or columna = 38 Or columna = 39 Or columna = 40 Or columna = 41 Or columna = 42 Or columna = 43 Or columna = 44 Or columna = 48 Or columna = 49 Or columna = 50 Or columna = 10 Then
                 AddHandler e.Control.KeyPress, AddressOf TextboxNumeric_KeyPress
                 m_currentControl = e.Control
             End If
