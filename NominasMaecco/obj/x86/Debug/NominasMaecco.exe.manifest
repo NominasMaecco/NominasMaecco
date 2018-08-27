@@ -59,14 +59,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NominasMaecco.exe" size="881664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NominasMaecco.exe" size="883712">
       <assemblyIdentity name="NominasMaecco" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>psSsPbre7JW1ZEklpT7ZnYJ0sMg=</dsig:DigestValue>
+        <dsig:DigestValue>qx3MHUDlNMacvs2n3FtdPc4v4Y8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
