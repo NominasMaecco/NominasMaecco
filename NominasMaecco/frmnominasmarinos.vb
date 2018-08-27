@@ -3210,11 +3210,7 @@ Public Class frmnominasmarinos
     Private Sub cmdexcel_Click(sender As Object, e As EventArgs) Handles cmdexcel.Click
         Try
 
-            If (dtgDatos.Rows(0).Cells(60).Value = 0 Or dtgDatos.Rows(0).Cells(60).Value Is Nothing) Then
-                calcular()
-
-            End If
-
+           
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
             Dim periodo As String
@@ -3372,32 +3368,34 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
 
-                        hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
-                        hoja.Cell(filaExcel + x, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                        hoja.Cell(filaExcel + total + 1, 3).Value = ("Total " & nombrebuque).ToUpper
-                        'hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                        'hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Font.SetBold(True)
+                        'hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                        'hoja.Cell(filaExcel + x, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                        'hoja.Cell(filaExcel + total + 1, 3).Value = ("Total " & nombrebuque).ToUpper
+                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Font.SetBold(True)
 
-                        hoja.Cell(filaExcel + x + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 16).Value = " " ' "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 24).Value = "" ' "=SUMA(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
+                         hoja.Cell(filaExcel + total + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 24).Value = " " '"=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
+
 
                         H += " +" & "H" & filaExcel + x + 1
                         I += " +" & "I" & filaExcel + x + 1
@@ -3488,7 +3486,7 @@ Public Class frmnominasmarinos
                     End If
                 Next x
                 filaExcel = filaExcel + 1
-                contadorexcelbuquefinal = filaExcel + total - 1
+                contadorexcelbuquefinal = filaExcel + total
                 veracruz = contadorexcelbuquefinal + 1
                 hoja.Cell(filaExcel + total, 3).Value = "GASTOS ADMINISTRATIVOS"
                 hoja.Cell(filaExcel + total, 17).Value = "3,000.00"
@@ -3509,9 +3507,9 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 16).Value = " " '=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
@@ -3528,7 +3526,7 @@ Public Class frmnominasmarinos
                 'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Font.SetBold(True)
 
-                hoja.Cell(filaExcel + total + 4, 3).Value = "TOTAL FINAL TULA, TAJIN, TULUM Y VERACRUZ"
+                hoja.Cell(filaExcel + total + 4, 3).Value = "TOTAL FINAL DURANGO, TAJIN, TULA Y VERACRUZ"
                 hoja.Cell(filaExcel + total + 4, 8).FormulaA1 = "=" & H
                 hoja.Cell(filaExcel + total + 4, 9).FormulaA1 = "=" & I
                 hoja.Cell(filaExcel + total + 4, 10).FormulaA1 = "=" & J
@@ -3781,7 +3779,7 @@ Public Class frmnominasmarinos
                 Dim year As Integer = moment.Year
 
 
-                dialogo.FileName = "TMM NOMINA MAECCO" + MonthString(month).ToUpper + " " + year.ToString
+                dialogo.FileName = "TMM NOMINA MAECCO " + MonthString(month).ToUpper + " " + year.ToString
                 'dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " "
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
@@ -3790,7 +3788,6 @@ Public Class frmnominasmarinos
                     ' OK button pressed
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
-                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
