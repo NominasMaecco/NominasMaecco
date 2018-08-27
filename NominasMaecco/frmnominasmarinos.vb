@@ -225,7 +225,69 @@ Public Class frmnominasmarinos
 
             Dim dsPeriodo As New DataSet
             dsPeriodo.Tables.Add("Tabla")
-
+            dsPeriodo.Tables("Tabla").Columns.Add("Consecutivo")
+            dsPeriodo.Tables("Tabla").Columns.Add("Id_empleado")
+            dsPeriodo.Tables("Tabla").Columns.Add("CodigoEmpleado")
+            dsPeriodo.Tables("Tabla").Columns.Add("Nombre")
+            dsPeriodo.Tables("Tabla").Columns.Add("Status")
+            dsPeriodo.Tables("Tabla").Columns.Add("RFC")
+            dsPeriodo.Tables("Tabla").Columns.Add("CURP")
+            dsPeriodo.Tables("Tabla").Columns.Add("Num_IMSS")
+            dsPeriodo.Tables("Tabla").Columns.Add("Fecha_Nac")
+            dsPeriodo.Tables("Tabla").Columns.Add("Edad")
+            dsPeriodo.Tables("Tabla").Columns.Add("Puesto")
+            dsPeriodo.Tables("Tabla").Columns.Add("Buque")
+            dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Infonavit")
+            dsPeriodo.Tables("Tabla").Columns.Add("Valor_Infonavit")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_TMM")
+            dsPeriodo.Tables("Tabla").Columns.Add("Salario_Diario")
+            dsPeriodo.Tables("Tabla").Columns.Add("Salario_Cotización")
+            dsPeriodo.Tables("Tabla").Columns.Add("Dias_Trabajados")
+            dsPeriodo.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
+            dsPeriodo.Tables("Tabla").Columns.Add("Número_días")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base")
+            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Fijo")
+            dsPeriodo.Tables("Tabla").Columns.Add("Tiempo_Extra_Ocasional")
+            dsPeriodo.Tables("Tabla").Columns.Add("Desc_Sem_Obligatorio")
+            dsPeriodo.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
+            dsPeriodo.Tables("Tabla").Columns.Add("Sueldo_Base_Mensual")
+            dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
+            dsPeriodo.Tables("Tabla").Columns.Add("Aguinaldo_exento")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_Aguinaldo")
+            dsPeriodo.Tables("Tabla").Columns.Add("Prima_vac_gravado")
+            dsPeriodo.Tables("Tabla").Columns.Add("Prima_vac_exento")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_Prima_vac")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_percepciones")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_percepciones_p/isr")
+            dsPeriodo.Tables("Tabla").Columns.Add("Incapacidad")
+            dsPeriodo.Tables("Tabla").Columns.Add("ISR")
+            dsPeriodo.Tables("Tabla").Columns.Add("IMSS")
+            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit")
+            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
+            dsPeriodo.Tables("Tabla").Columns.Add("Ajuste_infonavit")
+            dsPeriodo.Tables("Tabla").Columns.Add("Cuota_Sindical")
+            dsPeriodo.Tables("Tabla").Columns.Add("Pension_Alimenticia")
+            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo")
+            dsPeriodo.Tables("Tabla").Columns.Add("Fonacot")
+            dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Generado")
+            dsPeriodo.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
+            dsPeriodo.Tables("Tabla").Columns.Add("Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("Prestamo_Personal_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Adeudo_Infonavit_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_S")
+            dsPeriodo.Tables("Tabla").Columns.Add("Complemento_Sindicato")
+            dsPeriodo.Tables("Tabla").Columns.Add("Retenciones_Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("%_Comisión")
+            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Maecco")
+            dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Complemento")
+            dsPeriodo.Tables("Tabla").Columns.Add("IMSS_CS")
+            dsPeriodo.Tables("Tabla").Columns.Add("RCV_CS")
+            dsPeriodo.Tables("Tabla").Columns.Add("Infonavit_CS")
+            dsPeriodo.Tables("Tabla").Columns.Add("ISN_CS")
+            dsPeriodo.Tables("Tabla").Columns.Add("Total_Costo_Social")
+            dsPeriodo.Tables("Tabla").Columns.Add("Subtotal")
+            dsPeriodo.Tables("Tabla").Columns.Add("IVA")
+            dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
 
 
            
@@ -3232,7 +3294,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(12).Value
                         hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value 'Puesto
                         hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias laborados
-                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(21).Value ' SUELDO ORDINARIO TMM
+                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
                         hoja.Cell(filaExcel + x, 9).FormulaA1 = "=MAECCO!AL" & filatmp + x
                         hoja.Cell(filaExcel + x, 10).FormulaA1 = "=MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x
                         hoja.Cell(filaExcel + x, 11).FormulaA1 = "=MAECCO!AG" & filatmp + x
@@ -3493,7 +3555,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 4, 27).FormulaA1 = "=" & AA
                 hoja.Cell(filaExcel + total + 4, 28).FormulaA1 = "=" & AB
                 hoja.Range(filaExcel + total + 4, 8, filaExcel + total + 3, 26).Style.Fill.BackgroundColor = XLColor.PeachOrange
-                recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "text black")
+                recorrerFilasColumnas(hoja, 11, (total + filaExcel + 30), 31, "text black")
 
                 Dim sep As Integer = filaExcel + total + 8
                 hoja.Cell(sep, 3).Value = "TAJIN"
@@ -3501,10 +3563,77 @@ Public Class frmnominasmarinos
                 hoja.Cell(sep + 2, 3).Value = "IVA"
                 hoja.Cell(sep + 3, 3).Value = "TOTAL DEPOSITO DRUPP"
 
-                hoja.Cell(sep, 4).FormulaA1 = "=Q" & tajin & "+S" & tajin & "+V" & tajin & "+Y" & tajin
-                hoja.Cell(sep + 1, 4).FormulaA1 = "=D" & sep & "*16%"
-                hoja.Cell(sep + 2, 4).FormulaA1 = "=D100+D" & sep + 1
+                hoja.Cell(sep + 1, 4).FormulaA1 = "=Q" & tajin & "+S" & tajin & "+V" & tajin & "+Y" & tajin
+                hoja.Cell(sep + 2, 4).FormulaA1 = "=D" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 4).FormulaA1 = "=D" & sep + 1 & "+D" & sep + 2
+                hoja.Range(sep + 3, 3, sep + 3, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
+
+                hoja.Cell(sep, 6).Value = "TULA"
+                hoja.Cell(sep + 1, 6).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 6).Value = "IVA"
+                hoja.Cell(sep + 3, 6).Value = "TOTAL DEPOSITO DRUPP"
+
+                hoja.Cell(sep + 5, 6).Value = "DEPOSITO SPROUL BANAMEX"
+
+                hoja.Cell(sep + 1, 8).FormulaA1 = "=Q" & tula & "+S" & tula & "+V" & tula & "+Y" & tula
+                hoja.Cell(sep + 2, 8).FormulaA1 = "=H" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 8).FormulaA1 = "=H" & sep + 1 & "+H" & sep + 2
+                hoja.Range(sep + 3, 6, sep + 3, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                hoja.Cell(sep + 5, 8).FormulaA1 = "=N" & tula + 1 & "+R" & tula + 1 & "+W" & tula + 1
+
+
+                hoja.Cell(sep, 10).Value = "DURANGO"
+                hoja.Cell(sep + 1, 10).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 10).Value = "IVA"
+                hoja.Cell(sep + 3, 10).Value = "TOTAL DEPOSITO DRUPP"
+
+                hoja.Cell(sep + 1, 12).FormulaA1 = "=Q" & durango & "+S" & durango & "+V" & durango & "+Y" & durango
+                hoja.Cell(sep + 2, 12).FormulaA1 = "=L" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 12).FormulaA1 = "=L" & sep + 1 & "+L" & sep + 2
+                hoja.Range(sep + 3, 10, sep + 3, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                hoja.Cell(sep, 14).Value = "VERACRUZ"
+                hoja.Cell(sep + 1, 14).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 14).Value = "IVA"
+                hoja.Cell(sep + 3, 14).Value = "TOTAL DEPOSITO DRUPP"
+
+                hoja.Cell(sep + 1, 17).FormulaA1 = "=Q" & durango & "+S" & durango & "+V" & durango & "+Y" & durango
+                hoja.Cell(sep + 2, 17).FormulaA1 = "=Q" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 17).FormulaA1 = "=Q" & sep + 1 & "+Q" & sep + 2
+                hoja.Range(sep + 3, 14, sep + 3, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+                ''<<<<<<<<<<<<<<<FACTURACION>>>>>>>>>>>>>>>>>>
+
+
+                hoja4.Cell(7, 6).FormulaA1 = "=TMM!D" & sep + 3
+                hoja4.Cell(8, 6).FormulaA1 = "=TMM!H" & sep + 3
+                hoja4.Cell(9, 6).FormulaA1 = "=TMM!Q" & sep + 3
+                hoja4.Cell(10, 6).FormulaA1 = "=TMM!L" & sep + 3
+
+                hoja4.Cell(7, 7).FormulaA1 = "=F7*0.16"
+                hoja4.Cell(8, 7).FormulaA1 = "=F8*0.16"
+                hoja4.Cell(9, 7).FormulaA1 = "=F9*0.16"
+                hoja4.Cell(10, 7).FormulaA1 = "=F10*0.16"
+
+                hoja4.Cell(7, 8).FormulaA1 = "=F7+G7"
+                hoja4.Cell(8, 8).FormulaA1 = "=F8+G8"
+                hoja4.Cell(9, 8).FormulaA1 = "=F9+G9"
+                hoja4.Cell(1, 8).FormulaA1 = "=F10+G10"
+
+
+                hoja4.Cell(7, 7).FormulaA1 = "=F17*0.16"
+                hoja4.Cell(8, 7).FormulaA1 = "=F18*0.16"
+                hoja4.Cell(9, 7).FormulaA1 = "=F19*0.16"
+                hoja4.Cell(10, 7).FormulaA1 = "=F20*0.16"
+
+                hoja4.Cell(7, 8).FormulaA1 = "=F17+G17"
+                hoja4.Cell(8, 8).FormulaA1 = "=F18+G18"
+                hoja4.Cell(9, 8).FormulaA1 = "=F19+G19"
+                hoja4.Cell(1, 8).FormulaA1 = "=F20+G20"
 
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MAECCO>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -3601,24 +3730,6 @@ Public Class frmnominasmarinos
 
 
 
-                ''<<<<<<<<<<<<<<<FACTURACION>>>>>>>>>>>>>>>>>>
-
-
-                hoja4.Cell(7, 6).FormulaA1 = "=TMM!D101"
-                hoja4.Cell(8, 6).FormulaA1 = "=TMM!H101"
-                hoja4.Cell(9, 6).FormulaA1 = "=TMM!Q101"
-                hoja4.Cell(10, 6).FormulaA1 = "=TMM!L101"
-
-
-                hoja4.Cell(7, 7).FormulaA1 = "=F17*0.16"
-                hoja4.Cell(8, 7).FormulaA1 = "=F18*0.16"
-                hoja4.Cell(9, 7).FormulaA1 = "=F19*0.16"
-                hoja4.Cell(10, 7).FormulaA1 = "=F20*0.16"
-
-                hoja4.Cell(7, 8).FormulaA1 = "=F17+G17"
-                hoja4.Cell(8, 8).FormulaA1 = "=F18+G18"
-                hoja4.Cell(9, 8).FormulaA1 = "=F19+G19"
-                hoja4.Cell(1, 8).FormulaA1 = "=F20+G20"
 
 
                 'Titulo
@@ -3628,7 +3739,7 @@ Public Class frmnominasmarinos
 
 
                 'dialogo.FileName = "TMM " + MonthString(month).ToUpper + " " + year.ToString
-                dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " " + Date.Now.Minute.ToString
+                dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " " + Date.Now.Hour.ToString & ":" & Date.Now.Minute.ToString
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
