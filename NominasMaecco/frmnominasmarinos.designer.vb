@@ -33,7 +33,6 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
-        Me.btnReporte = New System.Windows.Forms.Button()
         Me.cboTipoNomina = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cboserie = New System.Windows.Forms.ComboBox()
@@ -45,7 +44,6 @@ Partial Class frmnominasmarinos
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.cmdreiniciar = New System.Windows.Forms.Button()
         Me.cmdincidencias = New System.Windows.Forms.Button()
-        Me.cmdexcel = New System.Windows.Forms.Button()
         Me.cmdlayouts = New System.Windows.Forms.Button()
         Me.cmdrecibosA = New System.Windows.Forms.Button()
         Me.cmdguardarfinal = New System.Windows.Forms.Button()
@@ -55,6 +53,8 @@ Partial Class frmnominasmarinos
         Me.cmdverdatos = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboperiodo = New System.Windows.Forms.ComboBox()
+        Me.btnReporte = New System.Windows.Forms.Button()
+        Me.cmdexcel = New System.Windows.Forms.Button()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
@@ -62,6 +62,7 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reporteSindicato = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -152,7 +153,6 @@ Partial Class frmnominasmarinos
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlCatalogo.Controls.Add(Me.btnReporte)
         Me.pnlCatalogo.Controls.Add(Me.cboTipoNomina)
         Me.pnlCatalogo.Controls.Add(Me.Label4)
         Me.pnlCatalogo.Controls.Add(Me.cboserie)
@@ -164,7 +164,6 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.chkAll)
         Me.pnlCatalogo.Controls.Add(Me.cmdreiniciar)
         Me.pnlCatalogo.Controls.Add(Me.cmdincidencias)
-        Me.pnlCatalogo.Controls.Add(Me.cmdexcel)
         Me.pnlCatalogo.Controls.Add(Me.cmdlayouts)
         Me.pnlCatalogo.Controls.Add(Me.cmdrecibosA)
         Me.pnlCatalogo.Controls.Add(Me.cmdguardarfinal)
@@ -178,16 +177,6 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 431)
         Me.pnlCatalogo.TabIndex = 26
-        '
-        'btnReporte
-        '
-        Me.btnReporte.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReporte.Location = New System.Drawing.Point(1002, 34)
-        Me.btnReporte.Name = "btnReporte"
-        Me.btnReporte.Size = New System.Drawing.Size(103, 28)
-        Me.btnReporte.TabIndex = 24
-        Me.btnReporte.Text = "Reporte a Excel"
-        Me.btnReporte.UseVisualStyleBackColor = True
         '
         'cboTipoNomina
         '
@@ -301,16 +290,6 @@ Partial Class frmnominasmarinos
         Me.cmdincidencias.Text = "Excel Incidencias"
         Me.cmdincidencias.UseVisualStyleBackColor = True
         '
-        'cmdexcel
-        '
-        Me.cmdexcel.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdexcel.Location = New System.Drawing.Point(1012, 3)
-        Me.cmdexcel.Name = "cmdexcel"
-        Me.cmdexcel.Size = New System.Drawing.Size(93, 27)
-        Me.cmdexcel.TabIndex = 12
-        Me.cmdexcel.Text = "Enviar a Excel"
-        Me.cmdexcel.UseVisualStyleBackColor = True
-        '
         'cmdlayouts
         '
         Me.cmdlayouts.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -402,6 +381,28 @@ Partial Class frmnominasmarinos
         Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
         Me.cboperiodo.TabIndex = 3
         '
+        'btnReporte
+        '
+        Me.btnReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnReporte.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReporte.Location = New System.Drawing.Point(111, 493)
+        Me.btnReporte.Name = "btnReporte"
+        Me.btnReporte.Size = New System.Drawing.Size(130, 28)
+        Me.btnReporte.TabIndex = 24
+        Me.btnReporte.Text = "Reporte Contador"
+        Me.btnReporte.UseVisualStyleBackColor = True
+        '
+        'cmdexcel
+        '
+        Me.cmdexcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdexcel.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdexcel.Location = New System.Drawing.Point(12, 493)
+        Me.cmdexcel.Name = "cmdexcel"
+        Me.cmdexcel.Size = New System.Drawing.Size(93, 28)
+        Me.cmdexcel.TabIndex = 12
+        Me.cmdexcel.Text = "Enviar a Excel"
+        Me.cmdexcel.UseVisualStyleBackColor = True
+        '
         'pnlProgreso
         '
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -453,13 +454,27 @@ Partial Class frmnominasmarinos
         Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
         '
+        'reporteSindicato
+        '
+        Me.reporteSindicato.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.reporteSindicato.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reporteSindicato.Location = New System.Drawing.Point(247, 493)
+        Me.reporteSindicato.Name = "reporteSindicato"
+        Me.reporteSindicato.Size = New System.Drawing.Size(130, 28)
+        Me.reporteSindicato.TabIndex = 25
+        Me.reporteSindicato.Text = "Reporte Sindicato"
+        Me.reporteSindicato.UseVisualStyleBackColor = True
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 533)
+        Me.Controls.Add(Me.reporteSindicato)
+        Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.cmdexcel)
         Me.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "frmnominasmarinos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -516,4 +531,5 @@ Partial Class frmnominasmarinos
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
+    Friend WithEvents reporteSindicato As System.Windows.Forms.Button
 End Class
