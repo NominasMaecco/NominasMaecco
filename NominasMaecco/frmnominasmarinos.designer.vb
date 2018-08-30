@@ -63,6 +63,7 @@ Partial Class frmnominasmarinos
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.reporteSindicato = New System.Windows.Forms.Button()
+        Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -465,10 +466,22 @@ Partial Class frmnominasmarinos
         Me.reporteSindicato.Text = "Reporte Sindicato"
         Me.reporteSindicato.UseVisualStyleBackColor = True
         '
+        'layoutTimbrado
+        '
+        Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.layoutTimbrado.Location = New System.Drawing.Point(383, 493)
+        Me.layoutTimbrado.Name = "layoutTimbrado"
+        Me.layoutTimbrado.Size = New System.Drawing.Size(130, 28)
+        Me.layoutTimbrado.TabIndex = 28
+        Me.layoutTimbrado.Text = "Layout Timbrado"
+        Me.layoutTimbrado.UseVisualStyleBackColor = True
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 533)
+        Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.reporteSindicato)
         Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.pnlProgreso)
@@ -532,4 +545,5 @@ Partial Class frmnominasmarinos
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
     Friend WithEvents reporteSindicato As System.Windows.Forms.Button
+    Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
 End Class
