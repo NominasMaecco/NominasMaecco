@@ -1153,4 +1153,7 @@ Public Class frmExcel
 
     End Function
 
+    Private Sub lblRuta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblRuta.Click
+
+    End Sub
 End Class
