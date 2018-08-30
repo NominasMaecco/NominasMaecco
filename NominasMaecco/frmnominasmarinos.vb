@@ -3350,6 +3350,13 @@ Public Class frmnominasmarinos
 
 
                 ''<<<<<<<<<<<<<<<<<<<<<<TMM>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                'pnlProgreso.Visible = True
+
+                'Application.DoEvents()
+                'pnlCatalogo.Enabled = False
+                'pgbProgreso.Minimum = 0
+                'pgbProgreso.Value = 0
+                'pgbProgreso.Maximum = dtgDatos.Rows.Count
 
 
                 filaExcel = 11
@@ -3454,7 +3461,7 @@ Public Class frmnominasmarinos
 
 
                     Else
-                        recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 500, 500, "sin relleno")
+                        recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 200, 200, "sin relleno")
                         recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "bold false")
 
                         contadorexcelbuquefinal = filaExcel + x
@@ -3679,8 +3686,11 @@ Public Class frmnominasmarinos
                 hoja.Cell(tula + 1, 3).Value = ("TOTAL TULA").ToUpper
                 hoja.Cell(veracruz + 1, 3).Value = ("TOTAL VERACRUZ").ToUpper
 
-                Dim sep As Integer = filaExcel + total + 8
+                hoja.Range(11, 8, filaExcel + total + 30, 31).Style.NumberFormat.NumberFormatId = 4
 
+
+                Dim sep As Integer = filaExcel + total + 8
+                hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
 
                 'Tajin
                 hoja.Cell(sep, 3).Value = "DURANGO"
