@@ -2,6 +2,7 @@
 Imports System.IO
 
 Public Class frmnominasmarinos
+    Dim direccioncarpeta As String
     Private m_currentControl As Control = Nothing
     Public gIdEmpresa As String
     Public gIdTipoPeriodo As String
@@ -64,7 +65,7 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message)
         End Try
 
-        
+
 
 
     End Sub
@@ -80,8 +81,8 @@ Public Class frmnominasmarinos
             Me.dtgDatos.ContextMenuStrip = Me.cMenu
             cboserie.SelectedIndex = 0
             cboTipoNomina.SelectedIndex = 0
-            Sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
-            Dim rwPeriodo As DataRow() = nConsulta(Sql)
+            sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+            Dim rwPeriodo As DataRow() = nConsulta(sql)
             If rwPeriodo Is Nothing = False Then
 
                 aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
@@ -89,7 +90,7 @@ Public Class frmnominasmarinos
             End If
 
             campoordenamiento = "Nomina.Buque,cNombreLargo"
-            
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -119,8 +120,8 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    
-    
+
+
 
     Private Sub cmdverdatos_Click(sender As Object, e As EventArgs) Handles cmdverdatos.Click
         Try
@@ -147,7 +148,7 @@ Public Class frmnominasmarinos
                 llenargrid()
 
             End If
-            
+
 
 
 
@@ -291,7 +292,7 @@ Public Class frmnominasmarinos
             dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
 
 
-           
+
 
             'verificamos que no sea una nomina ya guardada como final
             sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
@@ -771,7 +772,7 @@ Public Class frmnominasmarinos
 
 
 
-                
+
 
                 MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -2092,7 +2093,7 @@ Public Class frmnominasmarinos
                         End If
                     End If
 
-                    
+
 
                 Next
                 If contador = 2 Then
@@ -3287,7 +3288,7 @@ Public Class frmnominasmarinos
 
     Private Sub dtgDatos_CellMouseDown(sender As Object, e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dtgDatos.CellMouseDown
         Try
-            If e.RowIndex > -1 Then
+            If e.RowIndex > -1 And e.ColumnIndex > -1 Then
                 dtgDatos.CurrentCell = dtgDatos.Rows(e.RowIndex).Cells(e.ColumnIndex)
 
 
@@ -3318,7 +3319,7 @@ Public Class frmnominasmarinos
     Private Sub cmdexcel_Click(sender As Object, e As EventArgs) Handles cmdexcel.Click
         Try
 
-           
+
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
             Dim periodo As String
@@ -3943,7 +3944,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    
+
     Private Sub btnReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReporte.Click
         Try
 
@@ -4555,7 +4556,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub tsbImportar_Click(sender As Object, e As EventArgs) Handles tsbImportar.Click
+    Private Sub tsbImportar_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -4609,7 +4610,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub tsbIEmpleados_Click(sender As Object, e As EventArgs) Handles tsbIEmpleados.Click
+    Private Sub tsbIEmpleados_Click(sender As Object, e As EventArgs)
         Try
             Dim Forma As New frmEmpleados
             Forma.gIdEmpresa = gIdEmpresa
@@ -4996,7 +4997,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub tsbEmpleados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbEmpleados.Click
+    Private Sub tsbEmpleados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim frm As New frmImportarEmpleadosAlta
         frm.ShowDialog()
     End Sub
@@ -5034,7 +5035,265 @@ Public Class frmnominasmarinos
     End Sub
 
     Private Sub cmdrecibosA_Click(sender As System.Object, e As System.EventArgs) Handles cmdrecibosA.Click
+        Try
+            Dim SQL As String
 
+            Dim ISRRECIBO As Double
+            Dim NETORECIBO As Double
+            Dim PRESTAMORECIBO As Double
+            Dim DESCUENTOINFRECIBO As Double
+            Dim DIFINFONAVITRECIBO As Double
+            Dim TOTALRECIBO As Double
+
+
+
+            Dim propuesta As Double
+            Dim bruto As Double
+            Dim excendente As Double
+            Dim isr As Double
+            Dim perpecionneta As Double
+            Dim impuestonomina As Double
+            Dim comision As Double
+            Dim diferencia As Double
+            Dim calculado As Double
+
+            If dtgDatos.RowCount > 0 Then
+                Dim mensaje As String
+
+
+                pnlProgreso.Visible = True
+                pnlCatalogo.Enabled = False
+                Application.DoEvents()
+
+
+                Dim IdProducto As Long
+                Dim i As Integer = 0
+                Dim conta As Integer = 0
+                Dim percepciones As Double
+                Dim deducciones As Double
+                Dim neto As Double
+                'Dim isr As Double
+
+                Dim subsidio As Double
+                Dim totalp As Double
+                Dim totald As Double
+
+
+
+
+                pgbProgreso.Minimum = 0
+                pgbProgreso.Value = 0
+                pgbProgreso.Maximum = dtgDatos.RowCount - 1
+
+
+                'Dim fila As New DataRow
+
+                'Dim fiscaltmm As New frmReciboTMM
+
+                Dim dsReporte As New DataSet
+
+                dsReporte.Tables.Add("Tabla")
+                dsReporte.Tables("Tabla").Columns.Add("numtrabajador")
+                dsReporte.Tables("Tabla").Columns.Add("nombre")
+                dsReporte.Tables("Tabla").Columns.Add("buque")
+                dsReporte.Tables("Tabla").Columns.Add("puesto")
+                dsReporte.Tables("Tabla").Columns.Add("periodo")
+                dsReporte.Tables("Tabla").Columns.Add("Sueldobase")
+                dsReporte.Tables("Tabla").Columns.Add("Tefijo")
+                dsReporte.Tables("Tabla").Columns.Add("Teadicional")
+                dsReporte.Tables("Tabla").Columns.Add("bonoseguridad")
+                dsReporte.Tables("Tabla").Columns.Add("tiporecibo")
+                dsReporte.Tables("Tabla").Columns.Add("mespago")
+                dsReporte.Tables("Tabla").Columns.Add("diastrabajados")
+                dsReporte.Tables("Tabla").Columns.Add("diasviajando")
+                dsReporte.Tables("Tabla").Columns.Add("fechaelaboracion")
+                dsReporte.Tables("Tabla").Columns.Add("vacaciones")
+                dsReporte.Tables("Tabla").Columns.Add("alimentovac")
+                dsReporte.Tables("Tabla").Columns.Add("bonoxbuque")
+                dsReporte.Tables("Tabla").Columns.Add("bonoespecial")
+                dsReporte.Tables("Tabla").Columns.Add("tpercepciones")
+                dsReporte.Tables("Tabla").Columns.Add("tdeducciones")
+                dsReporte.Tables("Tabla").Columns.Add("neto")
+
+                dsReporte.Tables.Add("Percepciones")
+                dsReporte.Tables("Percepciones").Columns.Add("numtrabajador")
+                dsReporte.Tables("Percepciones").Columns.Add("dias")
+                dsReporte.Tables("Percepciones").Columns.Add("concepto")
+                dsReporte.Tables("Percepciones").Columns.Add("monto")
+
+                dsReporte.Tables.Add("Deducciones")
+                dsReporte.Tables("Deducciones").Columns.Add("numtrabajador")
+                dsReporte.Tables("Deducciones").Columns.Add("dias")
+                dsReporte.Tables("Deducciones").Columns.Add("concepto")
+                dsReporte.Tables("Deducciones").Columns.Add("monto")
+
+                'Seleccionar carpeta donde guardar los archivos
+                Dim Carpeta = New FolderBrowserDialog
+                If Carpeta.ShowDialog() = DialogResult.OK Then
+                    direccioncarpeta = Carpeta.SelectedPath
+                Else
+                    Exit Sub
+                End If
+
+
+
+
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+
+
+                    If dtgDatos.Rows(x).Cells(0).Value Then
+                        If Double.Parse(IIf(dtgDatos.Rows(x).Cells(51).Value = "", "0", dtgDatos.Rows(x).Cells(51).Value)) > 0 Then
+                            '###### CALCULAMOS EL ISR ##################
+
+
+                            NETORECIBO = Double.Parse(dtgDatos.Rows(x).Cells(51).Value)
+                            PRESTAMORECIBO = Double.Parse(IIf(dtgDatos.Rows(x).Cells(48).Value = "", 0, dtgDatos.Rows(x).Cells(48).Value))
+                            DESCUENTOINFRECIBO = Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", 0, dtgDatos.Rows(x).Cells(49).Value))
+                            DIFINFONAVITRECIBO = Double.Parse(IIf(dtgDatos.Rows(x).Cells(50).Value = "", 0, dtgDatos.Rows(x).Cells(50).Value))
+                            TOTALRECIBO = NETORECIBO + PRESTAMORECIBO + DESCUENTOINFRECIBO + DIFINFONAVITRECIBO
+
+
+
+                            totald = 0
+                            totalp = 0
+
+                            dsReporte.Clear()
+
+
+
+                            'percepciones = Val(IIf(Trim(producto.SubItems(20).Text) = "", "0", Trim(producto.SubItems(20).Text)))
+                            'deducciones = Val(IIf(Trim(producto.SubItems(21).Text) = "", "0", Trim(producto.SubItems(21).Text)))
+                            'neto = Val(IIf(Trim(producto.SubItems(22).Text) = "", "0", Trim(producto.SubItems(22).Text)))
+
+                            Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
+                            fila.Item("numtrabajador") = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                            fila.Item("nombre") = Trim(dtgDatos.Rows(x).Cells(4).Value)
+                            fila.Item("buque") = dtgDatos.Rows(x).Cells(12).FormattedValue
+                            fila.Item("periodo") = cboperiodo.SelectedText
+                            fila.Item("puesto") = dtgDatos.Rows(x).Cells(11).FormattedValue
+                            fila.Item("Sueldobase") = "0"
+                            fila.Item("Tefijo") = "0"
+                            fila.Item("Teadicional") = "0"
+                            fila.Item("bonoseguridad") = "0"
+                            fila.Item("tiporecibo") = "Detalle de pago. Depósito"
+                            fila.Item("mespago") = Date.Parse(cboperiodo.Text.Substring(0, 10)).Month
+                            fila.Item("diastrabajados") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                            fila.Item("diasviajando") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                            fila.Item("fechaelaboracion") = cboperiodo.Text.Substring(13, 10)
+                            fila.Item("vacaciones") = "0"
+                            fila.Item("alimentovac") = "0"
+                            fila.Item("bonoxbuque") = "0"
+                            fila.Item("bonoespecial") = "0"
+                            fila.Item("tpercepciones") = Math.Round(TOTALRECIBO, 2).ToString("#,###,##0.00")
+                            fila.Item("tdeducciones") = Math.Round(PRESTAMORECIBO + DESCUENTOINFRECIBO + DIFINFONAVITRECIBO, 2).ToString("#,###,##0.00")
+
+                            fila.Item("neto") = Math.Round(TOTALRECIBO - PRESTAMORECIBO - DESCUENTOINFRECIBO - DIFINFONAVITRECIBO, 2).ToString("#,###,##0.00")
+
+                            dsReporte.Tables("Tabla").Rows.Add(fila)
+
+
+                            'HONORARIOS ASIMILABLES
+
+                            Dim ASIMILABLES As DataRow = dsReporte.Tables("Percepciones").NewRow
+                            ASIMILABLES.Item("numtrabajador") = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                            ASIMILABLES.Item("dias") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                            ASIMILABLES.Item("concepto") = "BENEFICIO SOCIAL, PROMOCION Y DIFUSIÓN SINDICAL"
+                            ASIMILABLES.Item("monto") = Math.Round(TOTALRECIBO, 2).ToString("#,###,##0.00")
+                            dsReporte.Tables("Percepciones").Rows.Add(ASIMILABLES)
+
+
+
+
+                            If PRESTAMORECIBO > 0 Then
+                                'DEDUCCIONES
+                                'PRESTAMORECIBO
+                                Dim PRESTAMO As DataRow = dsReporte.Tables("Deducciones").NewRow
+                                PRESTAMO.Item("numtrabajador") = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                                PRESTAMO.Item("dias") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                                PRESTAMO.Item("concepto") = "PRESTAMO"
+                                PRESTAMO.Item("monto") = Math.Round(PRESTAMORECIBO, 2).ToString("#,###,##0.00")
+                                dsReporte.Tables("Deducciones").Rows.Add(PRESTAMO)
+
+
+                            End If
+
+                            If DESCUENTOINFRECIBO > 0 Then
+                                'DESCUENTOINFRECIBO
+
+                                Dim DSCTOINF As DataRow = dsReporte.Tables("Deducciones").NewRow
+                                DSCTOINF.Item("numtrabajador") = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                                DSCTOINF.Item("dias") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                                DSCTOINF.Item("concepto") = "AJUSTE INFONAVIT"
+                                DSCTOINF.Item("monto") = Math.Round(DESCUENTOINFRECIBO, 2).ToString("#,###,##0.00")
+                                dsReporte.Tables("Deducciones").Rows.Add(DSCTOINF)
+
+
+                            End If
+
+
+                            If DIFINFONAVITRECIBO > 0 Then
+                                'DIFINFONAVITRECIBO
+
+                                Dim DIFINFONAVIT As DataRow = dsReporte.Tables("Deducciones").NewRow
+                                DIFINFONAVIT.Item("numtrabajador") = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                                DIFINFONAVIT.Item("dias") = Trim(dtgDatos.Rows(x).Cells(18).Value)
+                                DIFINFONAVIT.Item("concepto") = "DIFERENCIA BIMESTRE ANTERIOR INFONAVIT"
+                                DIFINFONAVIT.Item("monto") = Math.Round(DIFINFONAVITRECIBO, 2).ToString("#,###,##0.00")
+                                dsReporte.Tables("Deducciones").Rows.Add(DIFINFONAVIT)
+
+
+
+                            End If
+
+
+
+
+
+                            pgbProgreso.Value += 1
+                            Application.DoEvents()
+                            'mandar el reporte
+                            ''Dim reporte = New ReportDocument
+                            'Dim oReporte As ReportDocument = Nothing
+
+                            'reporte.FileName = "tmm"
+
+                            'reporte.FileName = Application.StartupPath & "\Reportes\tmm.rpt"
+                            Dim oReporte As New simplemaeccosindicato
+                            oReporte.SetDataSource(dsReporte)
+                            oReporte.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, direccioncarpeta & "\" & Date.Parse(cboperiodo.Text.Substring(0, 10)).Month.ToString("00") & Date.Parse(cboperiodo.Text.Substring(0, 10)).Year.ToString() & Trim(dtgDatos.Rows(x).Cells(3).Value) & "SIM.pdf")
+                            ''reporte.Load(Application.StartupPath & "\reportes\asitmm.rpt")
+                            ''reporte.SetDataSource(dsReporte)
+                            ''reporte.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, direccioncarpeta & "\" & CDate(dtpfecha.Value).Month.ToString("00") & CDate(dtpfecha.Value).Year.ToString() & Trim(producto.SubItems(1).Text) & "ASIM.pdf")
+
+
+                        End If
+                    End If
+                Next
+
+
+                '###### FIN CALCULO ISR #######
+
+
+
+
+
+                'Dim Archivo As String = IO.Path.GetTempFileName.Replace(".tmp", ".xml")
+                'dsReporte.WriteXml(Archivo, XmlWriteMode.WriteSchema)
+
+                'fiscaltmm.ShowDialog()
+                'tsbCancelar_Click(sender, e)
+                pnlProgreso.Visible = False
+                MessageBox.Show("Proceso terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Else
+
+                MessageBox.Show("Por favor seleccione al menos un trabajador para generar el recibo.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+            pnlCatalogo.Enabled = True
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub cboTipoNomina_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboTipoNomina.SelectedIndexChanged
@@ -6241,6 +6500,218 @@ Public Class frmnominasmarinos
 
 
     Private Sub EditarEmpleadoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EditarEmpleadoToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub cmdEmpleados_Click(sender As System.Object, e As System.EventArgs) Handles cmdEmpleados.Click
+        Try
+            Dim Forma As New frmEmpleados
+            Forma.gIdEmpresa = gIdEmpresa
+            Forma.gIdPeriodo = cboperiodo.SelectedValue
+            Forma.gIdTipoPuesto = 1
+            Forma.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmdSindicato_Click(sender As System.Object, e As System.EventArgs) Handles cmdSindicato.Click
+        Try
+            Dim Forma As New frmSindicato
+
+            Dim iTipo As Integer
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                If dtgDatos.Rows.Count > 0 Then
+                    Dim mensaje As String
+
+
+                    pnlProgreso.Visible = True
+                    pnlCatalogo.Enabled = False
+                    Application.DoEvents()
+
+
+                    Dim IdProducto As Long
+                    Dim i As Integer = 0
+                    Dim conta As Integer = 0
+                    Dim bGenerar As Boolean
+
+                    pgbProgreso.Minimum = 0
+                    pgbProgreso.Value = 0
+                    pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+                    Dim dsReporte As New DataSet
+
+                    dsReporte.Tables.Add("Tabla")
+
+
+                    dsReporte.Tables("Tabla").Columns.Add("nombre")
+                    dsReporte.Tables("Tabla").Columns.Add("cantidad")
+                    dsReporte.Tables("Tabla").Columns.Add("letra")
+                    dsReporte.Tables("Tabla").Columns.Add("Fecha")
+                    dsReporte.Tables("Tabla").Columns.Add("Lugar")
+
+                    'Seleccionar carpeta donde guardar los archivos
+                    Dim Carpeta = New FolderBrowserDialog
+                    If Carpeta.ShowDialog() = DialogResult.OK Then
+                        direccioncarpeta = Carpeta.SelectedPath
+                    Else
+                        Exit Sub
+                    End If
+
+
+                    For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                        dsReporte.Clear()
+                        bGenerar = False
+
+                        If dtgDatos.Rows(x).Cells(0).Value Then
+                            If Double.Parse(IIf(dtgDatos.Rows(x).Cells(51).Value = "", "0", dtgDatos.Rows(x).Cells(51).Value)) > 0 Then
+
+                                Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
+                                fila.Item("nombre") = Trim(dtgDatos.Rows(x).Cells(4).Value)
+                                fila.Item("cantidad") = Math.Round(CDbl(dtgDatos.Rows(x).Cells(51).Value), 2).ToString("##,###,###.00")
+                                fila.Item("letra") = ImprimeLetra(Math.Round(CDbl(dtgDatos.Rows(x).Cells(51).Value), 2))
+
+                                fila.Item("fecha") = Forma.gfecha
+
+                                fila.Item("Lugar") = Forma.gExpedicion
+
+
+
+                                dsReporte.Tables("Tabla").Rows.Add(fila)
+                                bGenerar = True
+                            End If
+
+                            pgbProgreso.Value += 1
+                            Application.DoEvents()
+
+                            'mandar el reporte
+                            If bGenerar Then
+                                Dim oReporte As New tmmsindicato
+                                oReporte.SetDataSource(dsReporte)
+                                oReporte.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, direccioncarpeta & "\" & CDate(Forma.gfechaCorta).Month.ToString("00") & CDate(Forma.gfechaCorta).Year.ToString() & Trim(dtgDatos.Rows(x).Cells(3).Value) & "S.pdf")
+
+
+                            End If
+                        End If
+                        
+                    Next
+
+
+                    'Dim Archivo As String = IO.Path.GetTempFileName.Replace(".tmp", ".xml")
+                    'forma2.dsReporte.WriteXml(Archivo, XmlWriteMode.WriteSchema)
+
+
+                    pnlProgreso.Visible = False
+                    pnlCatalogo.Enabled = True
+                    MessageBox.Show("Archivos Guardado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No hay registros para procesar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+
+            End If
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub cmdSindicatoTodos_Click(sender As System.Object, e As System.EventArgs) Handles cmdSindicatoTodos.Click
+        Try
+            Dim Forma As New frmSindicato
+
+            Dim iTipo As Integer
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                If dtgDatos.Rows.Count > 0 Then
+                    Dim mensaje As String
+
+
+                    pnlProgreso.Visible = True
+                    pnlCatalogo.Enabled = False
+                    Application.DoEvents()
+
+
+                    Dim IdProducto As Long
+                    Dim i As Integer = 0
+                    Dim conta As Integer = 0
+                    Dim bGenerar As Boolean
+
+                    pgbProgreso.Minimum = 0
+                    pgbProgreso.Value = 0
+                    pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+                    Dim forma2 As New frmRecibosLupita
+
+
+                    forma2.dsReporte.Tables.Add("Tabla")
+                    forma2.opcion = 5
+
+                    forma2.dsReporte.Tables("Tabla").Columns.Add("nombre")
+                    forma2.dsReporte.Tables("Tabla").Columns.Add("cantidad")
+                    forma2.dsReporte.Tables("Tabla").Columns.Add("letra")
+                    forma2.dsReporte.Tables("Tabla").Columns.Add("Fecha")
+                    forma2.dsReporte.Tables("Tabla").Columns.Add("Lugar")
+
+                    'Seleccionar carpeta donde guardar los archivos
+                    'Dim Carpeta = New FolderBrowserDialog
+                    'If Carpeta.ShowDialog() = DialogResult.OK Then
+                    '    direccioncarpeta = Carpeta.SelectedPath
+                    'Else
+                    '    Exit Sub
+                    'End If
+
+
+                    For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                        'dsReporte.Clear()
+                        bGenerar = False
+
+                        If dtgDatos.Rows(x).Cells(0).Value Then
+                            If Double.Parse(IIf(dtgDatos.Rows(x).Cells(51).Value = "", "0", dtgDatos.Rows(x).Cells(51).Value)) > 0 Then
+
+                                Dim fila As DataRow = forma2.dsReporte.Tables("Tabla").NewRow
+                                fila.Item("nombre") = Trim(dtgDatos.Rows(x).Cells(4).Value)
+                                fila.Item("cantidad") = Math.Round(CDbl(dtgDatos.Rows(x).Cells(51).Value), 2).ToString("##,###,###.00")
+                                fila.Item("letra") = ImprimeLetra(Math.Round(CDbl(dtgDatos.Rows(x).Cells(51).Value), 2))
+
+                                fila.Item("fecha") = Forma.gfecha
+
+                                fila.Item("Lugar") = Forma.gExpedicion
+
+
+
+                                forma2.dsReporte.Tables("Tabla").Rows.Add(fila)
+                                bGenerar = True
+                            End If
+
+                            pgbProgreso.Value += 1
+                            Application.DoEvents()
+
+
+                            
+                        End If
+
+                    Next
+
+
+                    'Dim Archivo As String = IO.Path.GetTempFileName.Replace(".tmp", ".xml")
+                    'forma2.dsReporte.WriteXml(Archivo, XmlWriteMode.WriteSchema)
+
+                    forma2.ShowDialog()
+
+                    pnlProgreso.Visible = False
+                    pnlCatalogo.Enabled = True
+                    'MessageBox.Show("Archivos Guardado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No hay registros para procesar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+
+            End If
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 End Class
