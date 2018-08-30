@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>D:\Publicados\NomMaecco\</PublishUrl>
     <Install>true</Install>
@@ -80,6 +81,11 @@
     <Reference Include="ClosedXML">
       <HintPath>..\..\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\ClosedXML.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -89,6 +95,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -186,6 +193,12 @@
     <Compile Include="frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSindicato.designer.vb">
+      <DependentUpon>frmSindicato.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSindicato.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="General\frmAcceso.designer.vb">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </Compile>
@@ -223,6 +236,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reportes\frmRecibosLupita.designer.vb">
+      <DependentUpon>frmRecibosLupita.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\frmRecibosLupita.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\simplemaeccosindicato.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>simplemaeccosindicato.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\tmmsindicato.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tmmsindicato.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ucVisor.designer.vb">
+      <DependentUpon>ucVisor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ucVisor.vb">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +302,9 @@
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSindicato.resx">
+      <DependentUpon>frmSindicato.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="General\frmAcceso.resx">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </EmbeddedResource>
@@ -277,8 +317,23 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\frmRecibosLupita.resx">
+      <DependentUpon>frmRecibosLupita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\simplemaeccosindicato.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>simplemaeccosindicato.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\tmmsindicato.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>tmmsindicato.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ucVisor.resx">
+      <DependentUpon>ucVisor.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -301,6 +356,20 @@
     <Content Include="Resources\escala-de-la-justicia.png" />
     <Content Include="Resources\familia %282%29.png" />
     <Content Include="Resources\familia.png" />
+    <None Include="Resources\if_document-save_118916.png" />
+    <None Include="Resources\if_calculator_1055102.png" />
+    <None Include="Resources\if_magnifier-data_532758.png" />
+    <None Include="Resources\if_personal_1447.png" />
+    <None Include="Resources\if_receipt_3583272.png" />
+    <None Include="Resources\if_floppy_disk_save_103863.png" />
+    <None Include="Resources\if_receipt_3339034.png" />
+    <None Include="Resources\if_excel_272697.png" />
+    <None Include="Resources\if_data-filter_532775.png" />
+    <None Include="Resources\if_rebuild_18879.png" />
+    <None Include="Resources\if_icon-68_667365.png" />
+    <None Include="Resources\if_choose_2_job_seeker_employee_unemployee_work_2620528.png" />
+    <None Include="Resources\if_choose_2_job_seeker_employee_unemployee_work_2620528%281%29.png" />
+    <None Include="Resources\if_rotation_job_seeker_employee_unemployee_work_2620504.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>
@@ -325,6 +394,10 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,6 @@ C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.pdb
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.xml
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\ClosedXML.dll
-C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmAgregarEmpleado.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmBuscarEmpleado.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmDocumentos.resources
@@ -50,4 +49,12 @@ D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.app
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.xml
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.pdb
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe.manifest
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.application
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe.manifest
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.application
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe.config
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmSindicato.resources
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmRecibosLupita.resources
+C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.ucVisor.resources
