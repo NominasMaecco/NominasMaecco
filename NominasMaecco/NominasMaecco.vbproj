@@ -378,6 +378,15 @@
     <None Include="Resources\if_receipt_3583272.jpg" />
     <None Include="Resources\if_receipt_3339034.jpg" />
     <None Include="Resources\if_excel_272697.jpg" />
+    <None Include="Resources\if_magnifier-data_5327581.png" />
+    <None Include="Resources\if_calculator_10551021.png" />
+    <None Include="Resources\if_calculator_10551022.png" />
+    <None Include="Resources\if_floppy_disk_save_1038631.png" />
+    <None Include="Resources\if_personal_14471.png" />
+    <None Include="Resources\if_receipt_35832721.png" />
+    <None Include="Resources\if_receipt_33390341.png" />
+    <None Include="Resources\if_excel_2726971.png" />
+    <None Include="Resources\if_data-filter_5327751.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>

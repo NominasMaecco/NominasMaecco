@@ -83,6 +83,26 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property if_calculator_10551022() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_calculator_10551022", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property if_calculator_10551023() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_calculator_10551023", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property if_choose_2_job_seeker_employee_unemployee_work_2620528() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_choose_2_job_seeker_employee_unemployee_work_2620528", resourceCulture)
@@ -106,6 +126,16 @@ Namespace My.Resources
         Friend ReadOnly Property if_data_filter_532775() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_data-filter_532775", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property if_data_filter_5327751() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_data-filter_5327751", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -143,6 +173,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property if_excel_2726972() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_excel_2726972", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property if_floppy_disk_save_103863() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_floppy_disk_save_103863", resourceCulture)
@@ -156,6 +196,16 @@ Namespace My.Resources
         Friend ReadOnly Property if_floppy_disk_save_1038631() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_floppy_disk_save_1038631", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property if_floppy_disk_save_1038632() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_floppy_disk_save_1038632", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -193,6 +243,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property if_magnifier_data_5327582() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_magnifier-data_5327582", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property if_personal_1447() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_personal_1447", resourceCulture)
@@ -206,6 +266,16 @@ Namespace My.Resources
         Friend ReadOnly Property if_personal_14471() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_personal_14471", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property if_personal_14472() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_personal_14472", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -243,6 +313,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property if_receipt_33390342() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_receipt_33390342", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property if_receipt_3583272() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_receipt_3583272", resourceCulture)
@@ -256,6 +336,16 @@ Namespace My.Resources
         Friend ReadOnly Property if_receipt_35832721() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("if_receipt_35832721", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property if_receipt_35832722() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("if_receipt_35832722", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
