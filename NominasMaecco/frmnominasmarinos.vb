@@ -3316,7 +3316,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub cmdexcel_Click(sender As Object, e As EventArgs) Handles cmdexcel.Click
+    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs)
         Try
 
 
@@ -4295,14 +4295,153 @@ Public Class frmnominasmarinos
     Private Sub layoutTimbrado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles layoutTimbrado.Click
 
         '<<<<FUNCION1>>>>
-        ' ExisteEnLista()
+        ExisteEnLista()
         '<<<<<<<<>>>>>>
 
+        'Dim dialogo As New SaveFileDialog()
+        'Dim libro, libro2 As New ClosedXML.Excel.XLWorkbook
+        'Dim contador As Integer
+
+
+        'Dim Posicion1, Posicion2, Posicion3, Posicion4 As Integer
+
+
+        'Dim mesperiodo As String
+        'Dim mesid As String
+        'Dim fechapagoletra As String
+
+        'Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+        'If rwPeriodo0 Is Nothing = False Then
+
+        '    mesperiodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+        '    mesid = rwPeriodo0(0).Item("iMes")
+
+        '    fechapagoletra = Date.Parse(rwPeriodo0(0).Item("dFechaFin")).ToLongDateString()
+
+        '    'fechadepago = rwPeriodo0(0).Item("dFechaFin")
+        'End If
+
+        ''FUNCION2
+
+
+        'Dim str As New List(Of String)
+        'Dim value As String
+
+        'dialogo.DefaultExt = "*.xlsx"
+        'Dim fechita() As String = fechapagoletra.Split(",")
+        'dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO NOMINA"
+        'dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+
+
+
+        'If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+
+
+        '    For x As Integer = 0 To dtgDatos.Rows.Count - 1
+        '        contador = 0
+        '        str.Add(dtgDatos.Rows(x).Cells(3).Value)
+
+
+
+
+        '        For y As Integer = 0 To dtgDatos.Rows.Count - 1
+        '            'If str.Contains(value) Then
+        '            If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+        '                value = dtgDatos.Rows(y).Cells(3).Value
+        '                contador = contador + 1
+
+        '                'dtgDatos.Rows(y).Selected = True
+
+        '                If contador = 1 Then
+        '                    Posicion1 = y
+        '                End If
+        '                If contador = 2 Then
+        '                    Posicion2 = y
+        '                End If
+        '                If contador = 3 Then
+        '                    Posicion3 = y
+        '                End If
+        '                If contador = 4 Then
+        '                    Posicion4 = y
+        '                End If
+        '            End If
+        '            'Fin busqueda
+        '            '  End If
+
+        '        Next
+
+
+        '        If contador = 1 Then
+
+        '            'Libo1
+
+        '            'dialogo.DefaultExt = "*.xlsx"
+        '            'Dim fechita() As String = fechapagoletra.Split(",")
+        '            'dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO NOMINA"
+        '            'dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+
+
+
+        '            'If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        '            ' OK button pressed
+        '            libro = generarLayout3(Posicion1, dialogo.FileName)
+        '            '    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '            'Else
+        '            '    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        '            'End If
+
+        '        End If
+        '        If contador = 2 Then
+        '            'Libro1, 2
+        '            'dialogo.DefaultExt = "*.xlsx"
+        '            'Dim fechita() As String = fechapagoletra.Split(",")
+        '            'dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO NOMINA"
+        '            'dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+
+        '            'If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        '            '    ' OK button pressed
+        '            libro = generarLayout3(Posicion1, dialogo.FileName)
+        '            ' path = generarLayout()
+        '            libro2 = generarLayout3(Posicion2, dialogo.FileName.Replace(".xlsx", " B.xlsx"))
+        '            '    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '            'Else
+        '            '    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        '            'End If
+
+
+        '        End If
+        '        If contador = 3 Then
+
+        '        End If
+        '        If contador = 4 Then
+
+
+        '        End If
+
+        '    Next
+
+        '    libro.SaveAs(dialogo.FileName)
+        '    libro = Nothing
+        '    libro2.SaveAs(dialogo.FileName)
+        '    libro2 = Nothing
+        '    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'Else
+        '    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        'End If
+
+    End Sub
+    Public Function ExisteEnLista()
         Dim dialogo As New SaveFileDialog()
 
-        Dim contador As Integer
-        Dim pos1, pos2, pos3, pos4 As Integer
-
+        Dim filas, filas2 As Integer
+        Dim contador As Integer = 0
+        Dim pos, pos2 As Integer
+        Dim dtgDupl As New DataGridView
+        Dim MiDataSet As New DataSet()
 
         Dim mesperiodo As String
         Dim mesid As String
@@ -4318,152 +4457,16 @@ Public Class frmnominasmarinos
 
             'fechadepago = rwPeriodo0(0).Item("dFechaFin")
         End If
-
-        'FUNCION2
-        contador = 0
-
-        For x As Integer = 0 To dtgDatos.Rows.Count - 1
-            Dim str As New List(Of String)
-            Dim value As String
-            str.Add(dtgDatos.Rows(x).Cells(3).Value)
-
-           
-            
-
-                For Y As Integer = 0 To dtgDatos.Rows.Count - 1
-                    
-                value = dtgDatos.Rows(Y).Cells(3).Value
+        dialogo.DefaultExt = "*.xlsx"
+        Dim fechita() As String = fechapagoletra.Split(",")
+        dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO NOMINA"
+        dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
 
 
 
-                If dtgDatos.Rows(x).Cells(3).Value = dtgDatos.Rows(Y).Cells(3).Value Then
-                    contador = contador + 1
-                    If contador = 1 Then
-                        pos1 = Y
-                    End If
-                    If contador = 2 Then
-                        pos2 = Y
-                    End If
-                    If contador = 3 Then
-                        pos3 = Y
-                    End If
-                    If contador = 4 Then
-                        pos4 = Y
-                    End If
-                End If
-             
+        If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
 
-            Next Y
-            If str.Contains(value) = True Then
-
-                Dim path As String
-                If contador = 1 Then
-                    'Libo1
-
-                    dialogo.DefaultExt = "*.xlsx"
-                    Dim fechita() As String = fechapagoletra.Split(",")
-                    dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO " &
-                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-
-
-
-                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                        ' OK button pressed
-                        generarLayout2(pos1, dialogo.FileName)
-                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                    End If
-
-                    ' generarLayout()
-
-
-                End If
-                If contador = 2 Then
-                    'Libro1, 2
-                    dialogo.DefaultExt = "*.xlsx"
-                    Dim fechita() As String = fechapagoletra.Split(",")
-                    dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO " &
-                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-
-
-
-                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                        ' OK button pressed
-                        generarLayout2(pos1, dialogo.FileName)
-                        ' path = generarLayout()
-                        generarLayout2(pos2, dialogo.FileName.Replace(".xlsx", " B.xlsx"))
-                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                    End If
-
-
-                End If
-                If contador = 3 Then
-                    'Libro1, 2, 3
-                    dialogo.DefaultExt = "*.xlsx"
-                    Dim fechita() As String = fechapagoletra.Split(",")
-                    dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO " &
-                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-
-
-
-                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                        ' OK button pressed
-
-                        generarLayout2(pos1, dialogo.FileName)
-                        generarLayout2(pos2, dialogo.FileName.Replace(".xlsx", " B.xlsx"))
-                        generarLayout2(pos2, dialogo.FileName.Replace(".xlsx", " C.xlsx"))
-
-                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                    End If
-
-                End If
-                If contador = 4 Then
-                    'Libro1, 2, 3, 4
-                    dialogo.DefaultExt = "*.xlsx"
-                    Dim fechita() As String = fechapagoletra.Split(",")
-                    dialogo.FileName = fechita(1).ToUpper & " " & " MAECCO " &
-                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-
-
-
-                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                        ' OK button pressed
-
-                        generarLayout2(pos1, dialogo.FileName)
-                        generarLayout2(pos2, dialogo.FileName.Replace(".xlsx", " B.xlsx"))
-                        generarLayout2(pos3, dialogo.FileName.Replace(".xlsx", " C.xlsx"))
-                        generarLayout2(pos4, dialogo.FileName.Replace(".xlsx", " D.xlsx"))
-
-                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                    End If
-
-
-                End If
-            End If
-
-
-        Next x
-
-
-    End Sub
-    Public Function ExisteEnLista()
-
-        Dim filas, filas2 As Integer
-        Dim contador As Integer = 0
-        Dim pos, pos2 As Integer
-        Dim dtgDupl As New DataGridView
-        Dim MiDataSet As New DataSet()
+        
 
         dtgDupl.ColumnCount = dtgDatos.ColumnCount
 
@@ -4495,34 +4498,112 @@ Public Class frmnominasmarinos
 
             End If
         Next
-        For Each Seleccion As DataGridViewRow In dtgDatos.SelectedRows
+            Dim path As String = dialogo.FileName
+            '   revisar(dtgDupl, dialogo.FileName)
+            For Each Seleccion As DataGridViewRow In dtgDatos.SelectedRows
 
 
-            dtgDupl.Rows.Add(ObtenerValoresFila(Seleccion))
+                dtgDupl.Rows.Add(ObtenerValoresFila(Seleccion))
+                ' MiDataSet.Tables(0).Rows.Add(ObtenerValoresFila(Seleccion))
+                dtgDatos.Rows.Remove(Seleccion)
+                dtgDupl.ClearSelection()
+            Next
+
+
+            If dtgDupl.Rows.Count - 1 <= 0 Then
+                'generarLayout()
+                generarLayout2(dtgDatos, path) '.Replace(".xlsx", " A .xlsx"))
+                'MsgBox(contador.ToString & " Datos repetidos")
+            Else
+                generarLayout2(dtgDatos, path.Replace(".xlsx", " A .xlsx"))
+
+                If ExisteEnLista2(dtgDupl, path) = False Then
+                    'Dim Ruta As String = generarLayout()
+                    'generarLayout2(dtgDupl, path.Replace(".xlsx", " A .xlsx"))
+
+                    generarLayout2(dtgDupl, path.Replace(".xlsx", " B.xlsx"))
+                End If
+            End If
+
+            dtgDupl.Rows.Clear()
+
+            MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        End If
+    End Function
+    Public Function ExisteEnLista2(ByRef dtgTercer As DataGridView, ByVal path As String) As Boolean
+
+        Dim filas, filas2 As Integer
+        Dim contador As Integer = 0
+        Dim pos, pos2 As Integer
+        Dim dtgDupl2 As New DataGridView
+        Dim MiDataSet As New DataSet()
+
+        dtgDupl2.ColumnCount = dtgTercer.ColumnCount
+
+        For filas = 0 To dtgTercer.Rows.Count - 1
+            For filas2 = 1 + filas To dtgTercer.Rows.Count - 1
+                ''MsgBox(lsvLista.Items.Item(filas).SubItems(1).Text)
+
+                If dtgTercer.Rows(filas).Cells(3).Value = dtgTercer.Rows(filas2).Cells(3).Value Then
+                    '  lsvLista.Items(filas2).BackColor = Color.GreenYellow
+                    'dtgDatos.Rows(filas2).DefaultCellStyle.BackColor = Color.BlueViolet
+                    dtgTercer.Rows(filas2).Selected = True
+                    contador = contador + 1
+
+
+                End If
+
+
+
+                If filas2 = dtgTercer.Rows.Count Then
+                    Exit For
+                End If
+
+            Next
+
+
+            If filas = dtgTercer.Rows.Count Then
+
+                Exit Function
+
+            End If
+        Next
+
+        For Each Seleccion As DataGridViewRow In dtgTercer.SelectedRows
+
+
+            dtgDupl2.Rows.Add(ObtenerValoresFila(Seleccion))
             ' MiDataSet.Tables(0).Rows.Add(ObtenerValoresFila(Seleccion))
-            dtgDatos.Rows.Remove(Seleccion)
-            dtgDupl.ClearSelection()
+            dtgTercer.Rows.Remove(Seleccion)
+            dtgDupl2.ClearSelection()
         Next
 
 
-        If dtgDupl.Rows.Count - 1 <= 0 Then
-            generarLayout()
+        If dtgDupl2.Rows.Count - 1 <= 0 Then
+            generarLayout2(dtgTercer, path)
+            Return False
             'MsgBox(contador.ToString & " Datos repetidos")
         Else
-            Dim Ruta As String = generarLayout()
+            ' este seria para un tercero
+            ' ExisteEnLista3(dtgDupl)
+            'Dim Ruta As String = generarLayout()
+            generarLayout2(dtgTercer, path.Replace(".xlsx", " B.xlsx"))
+            generarLayout2(dtgDupl2, path.Replace(".xlsx", " C.xlsx"))
+            Return True
 
-            generarLayout2(dtgDupl, Ruta)
-
-            'dtgDupl.Rows.Clear()
-
-            'MsgBox(contador.ToString & " Datos repetidos")
         End If
 
-        dtgDupl.Rows.Clear()
+        dtgDupl2.Rows.Clear()
+
 
     End Function
+    'Function revisar(ByVal dtgDupl As DataGridView, ByVal path As String)
 
-  
+    'End Function
+ 
     Public Function generarLayout() As String
         Try
             Dim tipo As String = "NOMINA"
@@ -4569,8 +4650,6 @@ Public Class frmnominasmarinos
 
 
 
-
-<<<<<<< HEAD
                 hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
                 hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
                 hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
@@ -4624,14 +4703,14 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel, 30).Value = mesid
                     hoja.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'BUQUE
 
-                    pgbProgreso.Value += 1
+                    ' pgbProgreso.Value += 1
                     't = t + 1
                     filaExcel = filaExcel + 1
                 Next x
 
 
 
-                pgbProgreso.Value = 0
+                'pgbProgreso.Value = 0
 
                 filaExcel = 4
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -4696,16 +4775,17 @@ Public Class frmnominasmarinos
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
 
 
-                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    ' OK button pressed
-                    libro.SaveAs(dialogo.FileName)
-                    Return dialogo.FileName
-                    libro = Nothing
-                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                '   If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                ' OK button pressed
+                libro.SaveAs(dialogo.FileName)
 
-                End If
+                libro = Nothing
+                ' MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return dialogo.FileName
+                'Else
+                '    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                'End If
 
 
             Else
@@ -4824,12 +4904,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel, 30).Value = mesid
                     hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue 'BUQUE
 
-                    pgbProgreso.Value += 1
+                    'pgbProgreso.Value += 1
                     't = t + 1
                     filaExcel = filaExcel + 1
                 Next x
 
-                pgbProgreso.Value = 0
+                ' pgbProgreso.Value = 0
 
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
@@ -4896,7 +4976,7 @@ Public Class frmnominasmarinos
                 ' OK button pressed
                 libro.SaveAs(path)
                 libro = Nothing
-                'MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ''Else
                 'MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -4916,7 +4996,7 @@ Public Class frmnominasmarinos
         End Try
     End Function
 
-    Function generarLayout2(ByVal z As Integer, ByVal path As String)
+    Function generarLayout3(ByVal z As Integer, ByVal path As String) As ClosedXML.Excel.XLWorkbook
         Try
             Dim tipo As String = "NOMINA"
             Dim ejercicio As String
@@ -4972,109 +5052,109 @@ Public Class frmnominasmarinos
 
 
 
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                    Dim cuenta, clavebanco As String
+                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                Dim cuenta, clavebanco As String
 
-                    If (dtgDatos.Rows(z).Cells(3).Value Is Nothing = False) Then
-                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(z).Cells(3).Value)
-                        If rwEmpleado Is Nothing = False Then
+                If (dtgDatos.Rows(z).Cells(3).Value Is Nothing = False) Then
+                    Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(z).Cells(3).Value)
+                    If rwEmpleado Is Nothing = False Then
 
-                            cuenta = rwEmpleado(0).Item("Clabe")
-                            Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
+                        cuenta = rwEmpleado(0).Item("Clabe")
+                        Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
 
-                            clavebanco = rwBanco(0).Item("clave")
-                        End If
+                        clavebanco = rwBanco(0).Item("clave")
                     End If
+                End If
 
 
-                    ''Generales
-                    hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'N Empleado
-                    hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(6).Value 'RFC
-                    hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
-                    hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(z).Cells(7).Value 'CURP
-                    hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(8).Value 'IMSS
-                    hoja.Cell(filaExcel, 6).Value = cuenta 'CUENTA BANCARIA
-                    hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(z).Cells(15).Value 'SBC
-                    hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(z).Cells(16).Value 'SDI
-                    hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
-                    hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
-                    hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value 'DIAS PAGADOS
-                    hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
-                    hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
-                    hoja.Cell(filaExcel, 14).Value = ""
-                    hoja.Cell(filaExcel, 15).Value = ""  ''SINDICALIZADO
-                    hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO DE JORNADA
-                    hoja.Cell(filaExcel, 17).Value = ""
-                    hoja.Cell(filaExcel, 18).Value = "2"  ''TIPO REGIMEN
-                    hoja.Cell(filaExcel, 19).Value = ""   ''
-                    hoja.Cell(filaExcel, 20).Value = ""   '' DEPARTAMENTO
-                    hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(z).Cells(11).FormattedValue  '' PUESTO
-                    hoja.Cell(filaExcel, 22).Value = "4"  ''RIESGO PUESTO
-                    hoja.Cell(filaExcel, 23).Value = "Clase IV"  ''
-                    hoja.Cell(filaExcel, 24).Value = "5"  ''PERIODICIDAD
-                    hoja.Cell(filaExcel, 25).Value = "MENSUAL"
-                    hoja.Cell(filaExcel, 26).Value = clavebanco ''CLAVE BANCO
-                    hoja.Cell(filaExcel, 27).Value = ""
-                    hoja.Cell(filaExcel, 28).Value = "" ''SUBCONTRATACION
-                    hoja.Cell(filaExcel, 29).Value = "NOMINA" '' TIPO
-                    hoja.Cell(filaExcel, 30).Value = mesid
-                    hoja.Cell(filaExcel, 31).Value = dtgDatos.Rows(z).Cells(12).FormattedValue 'BUQUE
+                ''Generales
+                hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'N Empleado
+                hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(6).Value 'RFC
+                hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
+                hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(z).Cells(7).Value 'CURP
+                hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(8).Value 'IMSS
+                hoja.Cell(filaExcel, 6).Value = cuenta 'CUENTA BANCARIA
+                hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(z).Cells(15).Value 'SBC
+                hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(z).Cells(16).Value 'SDI
+                hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
+                hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
+                hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value 'DIAS PAGADOS
+                hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
+                hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
+                hoja.Cell(filaExcel, 14).Value = ""
+                hoja.Cell(filaExcel, 15).Value = ""  ''SINDICALIZADO
+                hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO DE JORNADA
+                hoja.Cell(filaExcel, 17).Value = ""
+                hoja.Cell(filaExcel, 18).Value = "2"  ''TIPO REGIMEN
+                hoja.Cell(filaExcel, 19).Value = ""   ''
+                hoja.Cell(filaExcel, 20).Value = ""   '' DEPARTAMENTO
+                hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(z).Cells(11).FormattedValue  '' PUESTO
+                hoja.Cell(filaExcel, 22).Value = "4"  ''RIESGO PUESTO
+                hoja.Cell(filaExcel, 23).Value = "Clase IV"  ''
+                hoja.Cell(filaExcel, 24).Value = "5"  ''PERIODICIDAD
+                hoja.Cell(filaExcel, 25).Value = "MENSUAL"
+                hoja.Cell(filaExcel, 26).Value = clavebanco ''CLAVE BANCO
+                hoja.Cell(filaExcel, 27).Value = ""
+                hoja.Cell(filaExcel, 28).Value = "" ''SUBCONTRATACION
+                hoja.Cell(filaExcel, 29).Value = "NOMINA" '' TIPO
+                hoja.Cell(filaExcel, 30).Value = mesid
+                hoja.Cell(filaExcel, 31).Value = dtgDatos.Rows(z).Cells(12).FormattedValue 'BUQUE
 
-                    pgbProgreso.Value += 1
-                    't = t + 1
-                    filaExcel = filaExcel + 1
-                Next x
+                pgbProgreso.Value += 1
+                't = t + 1
+                filaExcel = filaExcel + 1
+                'Next x
 
                 pgbProgreso.Value = 0
 
                 filaExcel = 4
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
 
 
-                    ''Deducciones
-                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
-                    hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
-                    hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(25).Value ''VACACIONES PROPORCIONALES
-                    hoja2.Cell(filaExcel, 4).Value = ""
-                    hoja2.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(24).Value  ''DESC. SEM OBLIGATORIO
-                    hoja2.Cell(filaExcel, 6).Value = ""
-                    hoja2.Cell(filaExcel, 7).Value = dtgDatos.Rows(z).Cells(23).Value   ''TIEMPO EXTRA OCASIONAL
-                    hoja2.Cell(filaExcel, 8).Value = ""
-                    hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(z).Cells(22).Value  ''TIEMPO EXTRA FIJO
-                    hoja2.Cell(filaExcel, 10).Value = ""
-                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value ''SUELDO BASE
-                    hoja2.Cell(filaExcel, 12).Value = ""
-                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(z).Cells(27).Value ''AGUINALDO GRAVADO
-                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(z).Cells(28).Value ''AGUINALDO EXENTO
-                    hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(z).Cells(30).Value 'PRIMA VACACIONAL
-                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(z).Cells(31).Value
-                    hoja2.Cell(filaExcel, 17).Value = " " '' dato.SubItems(27).Text ''PRIMA DE ANTIGËDAD
-                    hoja2.Cell(filaExcel, 18).Value = " "
+                ''Deducciones
+                hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
+                hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
+                hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(25).Value ''VACACIONES PROPORCIONALES
+                hoja2.Cell(filaExcel, 4).Value = ""
+                hoja2.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(24).Value  ''DESC. SEM OBLIGATORIO
+                hoja2.Cell(filaExcel, 6).Value = ""
+                hoja2.Cell(filaExcel, 7).Value = dtgDatos.Rows(z).Cells(23).Value   ''TIEMPO EXTRA OCASIONAL
+                hoja2.Cell(filaExcel, 8).Value = ""
+                hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(z).Cells(22).Value  ''TIEMPO EXTRA FIJO
+                hoja2.Cell(filaExcel, 10).Value = ""
+                hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value ''SUELDO BASE
+                hoja2.Cell(filaExcel, 12).Value = ""
+                hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(z).Cells(27).Value ''AGUINALDO GRAVADO
+                hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(z).Cells(28).Value ''AGUINALDO EXENTO
+                hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(z).Cells(30).Value 'PRIMA VACACIONAL
+                hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(z).Cells(31).Value
+                hoja2.Cell(filaExcel, 17).Value = " " '' dato.SubItems(27).Text ''PRIMA DE ANTIGËDAD
+                hoja2.Cell(filaExcel, 18).Value = " "
 
-                    ''Percepciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
-                    hoja3.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
-                    hoja3.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(37).Value 'IMSS
-                    hoja3.Cell(filaExcel, 4).Value = dtgDatos.Rows(z).Cells(36).Value 'ISR 
-                    hoja3.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(43).Value 'PRESTAMOS
-                    hoja3.Cell(filaExcel, 6).Value = ""
-                    hoja3.Cell(filaExcel, 7).Value = ""
-                    hoja3.Cell(filaExcel, 8).Value = dtgDatos.Rows(z).Cells(35).Value 'INCAPACIDAD *IMPORTE*
-                    hoja3.Cell(filaExcel, 9).Value = dtgDatos.Rows(z).Cells(42).Value  'PENSION ALIMENTICIA
-                    hoja3.Cell(filaExcel, 10).Value = dtgDatos.Rows(z).Cells(38).Value 'INFONAVIT
-                    hoja3.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(44).Value 'FONACOT
-                    hoja3.Cell(filaExcel, 12).Value = dtgDatos.Rows(z).Cells(41).Value 'CUOTA SINDICAL
+                ''Percepciones
+                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
+                hoja3.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
+                hoja3.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(37).Value 'IMSS
+                hoja3.Cell(filaExcel, 4).Value = dtgDatos.Rows(z).Cells(36).Value 'ISR 
+                hoja3.Cell(filaExcel, 5).Value = dtgDatos.Rows(z).Cells(43).Value 'PRESTAMOS
+                hoja3.Cell(filaExcel, 6).Value = ""
+                hoja3.Cell(filaExcel, 7).Value = ""
+                hoja3.Cell(filaExcel, 8).Value = dtgDatos.Rows(z).Cells(35).Value 'INCAPACIDAD *IMPORTE*
+                hoja3.Cell(filaExcel, 9).Value = dtgDatos.Rows(z).Cells(42).Value  'PENSION ALIMENTICIA
+                hoja3.Cell(filaExcel, 10).Value = dtgDatos.Rows(z).Cells(38).Value 'INFONAVIT
+                hoja3.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(44).Value 'FONACOT
+                hoja3.Cell(filaExcel, 12).Value = dtgDatos.Rows(z).Cells(41).Value 'CUOTA SINDICAL
 
-                    filaExcel = filaExcel + 1
+                filaExcel = filaExcel + 1
 
-                Next x
-
-
+                ' Next x
 
 
-                libro.SaveAs(path)
-                libro = Nothing
+
+                Return libro
+                'libro.SaveAs(path)
+                'libro = Nothing
 
 
             Else
@@ -5104,10 +5184,9 @@ Public Class frmnominasmarinos
         Return Contenido
 
     End Function
-    Private Sub tsbImportar_Click(sender As Object, e As EventArgs) Handles tsbImportar.Click
-=======
-    Private Sub tsbImportar_Click(sender As Object, e As EventArgs)
->>>>>>> origin/master
+  
+    Private Sub tsbImportar_Click(ByVal sender As Object, ByVal e As EventArgs)
+
 
     End Sub
 
@@ -7049,11 +7128,7 @@ Public Class frmnominasmarinos
     End Function
 
 
-<<<<<<< HEAD
-   
-    
-  
-=======
+
     Private Sub EditarEmpleadoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EditarEmpleadoToolStripMenuItem.Click
 
     End Sub
@@ -7269,7 +7344,8 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
->>>>>>> origin/master
+
+    
 End Class
 
 

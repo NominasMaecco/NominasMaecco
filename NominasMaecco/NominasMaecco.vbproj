@@ -298,6 +298,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmnominasmarinos.resx">
       <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
@@ -370,6 +371,13 @@
     <None Include="Resources\if_choose_2_job_seeker_employee_unemployee_work_2620528.png" />
     <None Include="Resources\if_choose_2_job_seeker_employee_unemployee_work_2620528%281%29.png" />
     <None Include="Resources\if_rotation_job_seeker_employee_unemployee_work_2620504.png" />
+    <None Include="Resources\if_magnifier-data_532758.jpg" />
+    <None Include="Resources\if_calculator_1055102.jpg" />
+    <None Include="Resources\if_floppy_disk_save_103863.jpg" />
+    <None Include="Resources\if_personal_1447.jpg" />
+    <None Include="Resources\if_receipt_3583272.jpg" />
+    <None Include="Resources\if_receipt_3339034.jpg" />
+    <None Include="Resources\if_excel_272697.jpg" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>
