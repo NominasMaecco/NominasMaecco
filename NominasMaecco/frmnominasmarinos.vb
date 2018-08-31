@@ -4497,7 +4497,8 @@ Public Class frmnominasmarinos
                 Exit Function
 
             End If
-        Next
+            Next
+
             Dim path As String = dialogo.FileName
             '   revisar(dtgDupl, dialogo.FileName)
             For Each Seleccion As DataGridViewRow In dtgDatos.SelectedRows
@@ -4583,7 +4584,7 @@ Public Class frmnominasmarinos
 
 
         If dtgDupl2.Rows.Count - 1 <= 0 Then
-            generarLayout2(dtgTercer, path)
+            generarLayout2(dtgTercer, path.Replace(".xlsx", " B.xlsx"))
             Return False
             'MsgBox(contador.ToString & " Datos repetidos")
         Else
