@@ -47,6 +47,7 @@ Partial Class frmnominasmarinos
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.reporteSindicato = New System.Windows.Forms.Button()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
+        Me.cmdexcel = New System.Windows.Forms.Button()
         Me.cmdPersonalNomina = New System.Windows.Forms.Button()
         Me.cmdSindicatoTodos = New System.Windows.Forms.Button()
         Me.cmdEmpleados = New System.Windows.Forms.Button()
@@ -58,7 +59,6 @@ Partial Class frmnominasmarinos
         Me.cmdguardarnomina = New System.Windows.Forms.Button()
         Me.cmdcalcular = New System.Windows.Forms.Button()
         Me.cmdverdatos = New System.Windows.Forms.Button()
-        Me.cmdexcel = New System.Windows.Forms.Button()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
@@ -68,8 +68,8 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.cmdexcel)
         Me.pnlCatalogo.Controls.Add(Me.cmdPersonalNomina)
@@ -154,7 +154,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.AutoSize = True
         Me.chkinter.BackColor = System.Drawing.Color.Transparent
         Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkinter.Location = New System.Drawing.Point(433, 86)
+        Me.chkinter.Location = New System.Drawing.Point(426, 86)
         Me.chkinter.Name = "chkinter"
         Me.chkinter.Size = New System.Drawing.Size(110, 22)
         Me.chkinter.TabIndex = 18
@@ -209,8 +209,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 128)
         Me.dtgDatos.Name = "dtgDatos"
@@ -318,6 +318,19 @@ Partial Class frmnominasmarinos
         Me.layoutTimbrado.Text = "Layout Timbrado"
         Me.layoutTimbrado.UseVisualStyleBackColor = True
         '
+        'cmdexcel
+        '
+        Me.cmdexcel.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdexcel.Image = Global.NominasMaecco.My.Resources.Resources.if_excel_2726972
+        Me.cmdexcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdexcel.Location = New System.Drawing.Point(871, 3)
+        Me.cmdexcel.Name = "cmdexcel"
+        Me.cmdexcel.Size = New System.Drawing.Size(93, 58)
+        Me.cmdexcel.TabIndex = 29
+        Me.cmdexcel.Text = "Enviar a Excel"
+        Me.cmdexcel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdexcel.UseVisualStyleBackColor = True
+        '
         'cmdPersonalNomina
         '
         Me.cmdPersonalNomina.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -347,7 +360,7 @@ Partial Class frmnominasmarinos
         'cmdEmpleados
         '
         Me.cmdEmpleados.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdEmpleados.Image = Global.NominasMaecco.My.Resources.Resources.if_personal_14471
+        Me.cmdEmpleados.Image = Global.NominasMaecco.My.Resources.Resources.if_personal_14472
         Me.cmdEmpleados.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdEmpleados.Location = New System.Drawing.Point(566, 3)
         Me.cmdEmpleados.Name = "cmdEmpleados"
@@ -360,7 +373,7 @@ Partial Class frmnominasmarinos
         'cmdSindicato
         '
         Me.cmdSindicato.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSindicato.Image = Global.NominasMaecco.My.Resources.Resources.if_receipt_35832721
+        Me.cmdSindicato.Image = Global.NominasMaecco.My.Resources.Resources.if_receipt_35832722
         Me.cmdSindicato.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdSindicato.Location = New System.Drawing.Point(639, 3)
         Me.cmdSindicato.Name = "cmdSindicato"
@@ -386,7 +399,7 @@ Partial Class frmnominasmarinos
         'cmdincidencias
         '
         Me.cmdincidencias.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdincidencias.Image = Global.NominasMaecco.My.Resources.Resources.if_data_filter_532775
+        Me.cmdincidencias.Image = Global.NominasMaecco.My.Resources.Resources.if_data_filter_5327751
         Me.cmdincidencias.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdincidencias.Location = New System.Drawing.Point(961, 3)
         Me.cmdincidencias.Name = "cmdincidencias"
@@ -399,7 +412,7 @@ Partial Class frmnominasmarinos
         'cmdrecibosA
         '
         Me.cmdrecibosA.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdrecibosA.Image = Global.NominasMaecco.My.Resources.Resources.if_receipt_33390341
+        Me.cmdrecibosA.Image = Global.NominasMaecco.My.Resources.Resources.if_receipt_33390342
         Me.cmdrecibosA.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdrecibosA.Location = New System.Drawing.Point(729, 3)
         Me.cmdrecibosA.Name = "cmdrecibosA"
@@ -425,7 +438,7 @@ Partial Class frmnominasmarinos
         'cmdguardarnomina
         '
         Me.cmdguardarnomina.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarnomina.Image = Global.NominasMaecco.My.Resources.Resources.if_floppy_disk_save_1038631
+        Me.cmdguardarnomina.Image = Global.NominasMaecco.My.Resources.Resources.if_floppy_disk_save_1038632
         Me.cmdguardarnomina.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdguardarnomina.Location = New System.Drawing.Point(415, 3)
         Me.cmdguardarnomina.Name = "cmdguardarnomina"
@@ -438,7 +451,7 @@ Partial Class frmnominasmarinos
         'cmdcalcular
         '
         Me.cmdcalcular.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdcalcular.Image = Global.NominasMaecco.My.Resources.Resources.if_calculator_10551021
+        Me.cmdcalcular.Image = Global.NominasMaecco.My.Resources.Resources.if_calculator_10551023
         Me.cmdcalcular.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdcalcular.Location = New System.Drawing.Point(355, 3)
         Me.cmdcalcular.Name = "cmdcalcular"
@@ -451,7 +464,7 @@ Partial Class frmnominasmarinos
         'cmdverdatos
         '
         Me.cmdverdatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdverdatos.Image = Global.NominasMaecco.My.Resources.Resources.if_magnifier_data_5327581
+        Me.cmdverdatos.Image = Global.NominasMaecco.My.Resources.Resources.if_magnifier_data_5327582
         Me.cmdverdatos.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.cmdverdatos.Location = New System.Drawing.Point(290, 3)
         Me.cmdverdatos.Name = "cmdverdatos"
@@ -460,19 +473,6 @@ Partial Class frmnominasmarinos
         Me.cmdverdatos.Text = "Ver datos"
         Me.cmdverdatos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.cmdverdatos.UseVisualStyleBackColor = True
-        '
-        'cmdexcel
-        '
-        Me.cmdexcel.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdexcel.Image = Global.NominasMaecco.My.Resources.Resources.if_excel_2726971
-        Me.cmdexcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdexcel.Location = New System.Drawing.Point(871, 3)
-        Me.cmdexcel.Name = "cmdexcel"
-        Me.cmdexcel.Size = New System.Drawing.Size(93, 58)
-        Me.cmdexcel.TabIndex = 29
-        Me.cmdexcel.Text = "Enviar a Excel"
-        Me.cmdexcel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdexcel.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '
