@@ -164,7 +164,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.AutoSize = True
         Me.chkinter.BackColor = System.Drawing.Color.Transparent
         Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkinter.Location = New System.Drawing.Point(433, 86)
+        Me.chkinter.Location = New System.Drawing.Point(426, 86)
         Me.chkinter.Name = "chkinter"
         Me.chkinter.Size = New System.Drawing.Size(110, 22)
         Me.chkinter.TabIndex = 18
