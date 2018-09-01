@@ -900,4 +900,14 @@ Public Class frmEmpleados
         End If
 
     End Sub
+
+    Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
+        Dim forma As New frmImss
+
+        forma.gIdEmpleado = gIdEmpleado
+        forma.gIdCliente = gIdCliente
+        forma.gIdEmpresa = 1
+        forma.ShowDialog()
+       
+    End Sub
 End Class
