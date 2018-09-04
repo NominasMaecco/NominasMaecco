@@ -211,6 +211,12 @@
     <Compile Include="General\frmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="imss\frmImss.Designer.vb">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="imss\frmImss.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modulos\GenPass.vb" />
     <Compile Include="Modulos\mdoFunciones.vb" />
     <Compile Include="Modulos\mdoInicio.vb" />
@@ -312,6 +318,9 @@
     <EmbeddedResource Include="General\frmUsuarios.resx">
       <DependentUpon>frmUsuarios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="imss\frmImss.resx">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -378,15 +387,6 @@
     <None Include="Resources\if_receipt_3583272.jpg" />
     <None Include="Resources\if_receipt_3339034.jpg" />
     <None Include="Resources\if_excel_272697.jpg" />
-    <None Include="Resources\if_magnifier-data_5327581.png" />
-    <None Include="Resources\if_calculator_10551021.png" />
-    <None Include="Resources\if_calculator_10551022.png" />
-    <None Include="Resources\if_floppy_disk_save_1038631.png" />
-    <None Include="Resources\if_personal_14471.png" />
-    <None Include="Resources\if_receipt_35832721.png" />
-    <None Include="Resources\if_receipt_33390341.png" />
-    <None Include="Resources\if_excel_2726971.png" />
-    <None Include="Resources\if_data-filter_5327751.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>

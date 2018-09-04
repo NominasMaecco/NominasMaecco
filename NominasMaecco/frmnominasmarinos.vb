@@ -3316,613 +3316,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs)
-        Try
-
-
-            Dim filaExcel As Integer = 0
-            Dim dialogo As New SaveFileDialog()
-            Dim periodo As String
-            Dim mesperiodo As String
-
-            Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
-
-            If dtgDatos.Rows.Count > 0 Then
-                Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\tmmMaecco.xlsx"
-                'ruta = My.Application.Info.DirectoryPath() & "\Archivos\TMM.xlsx"
-
-                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
-
-
-                Dim libro As New ClosedXML.Excel.XLWorkbook
-
-                book.Worksheet(1).CopyTo(libro, "TMM")
-                book.Worksheet(2).CopyTo(libro, "MAECCO")
-                book.Worksheet(3).CopyTo(libro, "SINDICATO")
-                book.Worksheet(4).CopyTo(libro, "FACTURACION")
-
-
-                Dim hoja As IXLWorksheet = libro.Worksheets(0)
-                Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
-                Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
-                Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
-
-
-                ''<<<<<<<<<<<<<<<<<<<<<<TMM>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                'pnlProgreso.Visible = True
-
-                'Application.DoEvents()
-                'pnlCatalogo.Enabled = False
-                'pgbProgreso.Minimum = 0
-                'pgbProgreso.Value = 0
-                'pgbProgreso.Maximum = dtgDatos.Rows.Count
-
-
-                filaExcel = 11
-                Dim nombrebuque As String
-                Dim inicio As Integer = 0
-                Dim contadorexcelbuqueinicial As Integer = 0
-                Dim contadorexcelbuquefinal As Integer = 0
-                Dim total As Integer = dtgDatos.Rows.Count - 1
-                Dim filatmp As Integer = 12
-
-                Dim tula, tajin, durango, veracruz As Integer
-                'Periodo en plantilla
-                Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
-                If rwPeriodo0 Is Nothing = False Then
-                    Dim fechita As Date = Date.Parse((rwPeriodo0(0).Item("dFechaFin")))
-
-                    periodo = "01-" & fechita.Day & " " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
-
-                    mesperiodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
-
-                    hoja.Cell(8, 1).Style.Font.SetBold(True)
-                    hoja.Cell(8, 1).Style.NumberFormat.Format = "@"
-                    hoja.Cell(8, 1).Value = periodo
-
-                End If
-
-
-
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                    recorrerFilasColumnas(hoja, 1, (total + filaExcel) + 1000, 500, "sin relleno", 32)
-                    recorrerFilasColumnas(hoja, 2, 8, 33, "sin relleno", 29)
-
-                    recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 500, 500, "sin relleno")
-                    recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "bold false")
-
-                    If inicio = x Then
-                        contadorexcelbuqueinicial = filaExcel + x
-                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
-
-                        'recorrerFilasColumnas(hoja, 1, (total + filaExcel) + 1000, 500, "sin relleno", 32)
-                        'recorrerFilasColumnas(hoja, 2, 8, 33, "sin relleno", 29)
-                    End If
-                    If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
-
-                        hoja.Cell(filaExcel + x, 1).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(10).Value
-                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(5).Value
-                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value 'Puesto
-                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias laborados
-                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
-                        hoja.Cell(filaExcel + x, 9).FormulaA1 = "=MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x
-                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=MAECCO!AG" & filatmp + x
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = "=MAECCO!AH" & filatmp + x
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "=MAECCO!AI" & filatmp + x
-                        hoja.Cell(filaExcel + x, 14).Value = " " ' Prestamo complemento
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "=+H" & filaExcel + x & "-I" & filaExcel + x & "-J" & filaExcel + x & "-K" & filaExcel + x & "-L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 16).Value = ""
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=MAECCO!AM" & filatmp + x
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "=O" & filaExcel + x & "-Q" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 20).Value = ""
-                        hoja.Cell(filaExcel + x, 21).Value = "2%" 'comision
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=+((Q" & filaExcel + x & "+S" & filaExcel + x & ")*U" & filaExcel + x & ")"
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 24).Value = ""
-                        hoja.Cell(filaExcel + x, 25).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
-                        hoja.Cell(9, 29).Clear()
-                        hoja.Cell(10, 29).Clear()
-                        hoja.Cell(filaExcel + x, 29).Value = " "
-                        hoja.Cell(filaExcel + x, 30).FormulaA1 = "=Y" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 31).FormulaA1 = "30.00"
-
-
-                        '<<<<SINDICATO>>>>
-                        hoja3.Cell((filaExcel + x) - 6, 7).Style.NumberFormat.Format = "##################"
-                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "############"
-                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "@"
-
-                        hoja.Range(5, 7, filaExcel + x - 6, 7).Style.NumberFormat.Format = "@"
-                        hoja.Range(5, 8, filaExcel + x - 6, 8).Style.NumberFormat.Format = "@"
-
-                        Dim datos As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado='" & dtgDatos.Rows(x).Cells(3).Value & "'")
-                        Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco=" & datos(0).Item("fkiIdBanco"))
-                        hoja3.Cell((filaExcel + x) - 6, 2).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja3.Cell((filaExcel + x) - 6, 3).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja3.Cell((filaExcel + x) - 6, 4).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja3.Cell((filaExcel + x) - 6, 5).Value = dtgDatos.Rows(x).Cells(6).Value
-                        hoja3.Cell((filaExcel + x) - 6, 6).Value = banco(0).Item("cBanco")
-                        hoja3.Cell((filaExcel + x) - 6, 7).Value = datos(0).Item("NumCuenta")
-                        hoja3.Cell((filaExcel + x) - 6, 8).Value = datos(0).Item("Clabe")
-                        hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!Q" & filaExcel + x
-                        hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!R" & filaExcel + x
-
-
-
-
-                    Else
-                        recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 200, 200, "sin relleno")
-                        recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "bold false")
-
-                        contadorexcelbuquefinal = filaExcel + x
-
-                        Select Case nombrebuque
-                            Case "TULA"
-                                tula = contadorexcelbuquefinal
-                            Case "TAJIN"
-                                tajin = contadorexcelbuquefinal
-                            Case "DURANGO"
-                                durango = contadorexcelbuquefinal
-                            Case "VERACRUZ"
-                                veracruz = contadorexcelbuquefinal
-
-                        End Select
-
-                        hoja.Cell(filaExcel + x, 3).Value = "GASTOS ADMINISTRATIVOS"
-                        hoja.Cell(filaExcel + x, 17).Value = "3,000.00"
-                        hoja.Cell(filaExcel + x, 21).Value = "2%"
-                        hoja.Cell(filaExcel + x, 22).Value = "60.00"
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
-
-                        'hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
-                        'hoja.Cell(filaExcel + x, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                        'hoja.Cell(filaExcel + total + 1, 3).Value = ("Total " & nombrebuque).ToUpper
-                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Font.SetBold(True)
-
-                        hoja.Cell(filaExcel + x + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 24).Value = " " '"=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
-                        hoja.Cell(filaExcel + x + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
-
-
-                        H += " +" & "H" & filaExcel + x + 1
-                        I += " +" & "I" & filaExcel + x + 1
-                        J += " +" & "J" & filaExcel + x + 1
-                        K += " +" & "K" & filaExcel + x + 1
-                        L += " +" & "L" & filaExcel + x + 1
-                        M += " +" & "M" & filaExcel + x + 1
-                        N += " +" & "N" & filaExcel + x + 1
-                        O += " +" & "O" & filaExcel + x + 1
-                        P += " +" & "P" & filaExcel + x + 1
-                        Q += " +" & "Q" & filaExcel + x + 1
-                        R += " +" & "R" & filaExcel + x + 1
-                        S += " +" & "S" & filaExcel + x + 1
-                        T += " +" & "T" & filaExcel + x + 1
-                        U += " +" & "U" & filaExcel + x + 1
-                        V += " +" & "V" & filaExcel + x + 1
-                        W += " +" & "W" & filaExcel + x + 1
-                        X2 += " +" & "X" & filaExcel + x + 1
-                        Y += " +" & "Y" & filaExcel + x + 1
-                        Z += " +" & "Z" & filaExcel + x + 1
-                        AA += " +" & "AA" & filaExcel + x + 1
-                        AB += " +" & "AB" & filaExcel + x + 1
-
-                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
-                        filaExcel = filaExcel + 2
-                        contadorexcelbuqueinicial = filaExcel + x
-                        'contadorexcelbuquefinal = 0
-
-                        hoja.Cell(filaExcel + x, 1).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(10).Value
-                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(5).Value
-                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value 'Puesto
-                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias laborados
-                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
-                        hoja.Cell(filaExcel + x, 9).FormulaA1 = "=MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x
-                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=MAECCO!AG" & filatmp + x
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = "=MAECCO!AH" & filatmp + x
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "=MAECCO!AI" & filatmp + x
-                        hoja.Cell(filaExcel + x, 14).Value = " " ' Prestamo complemento
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "=+H" & filaExcel + x & "-I" & filaExcel + x & "-J" & filaExcel + x & "-K" & filaExcel + x & "-L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 16).Value = ""
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=MAECCO!AM" & filatmp + x
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "=O" & filaExcel + x & "-Q" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 20).Value = ""
-                        hoja.Cell(filaExcel + x, 21).Value = "2%" 'comision
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=+((Q" & filaExcel + x & "+S" & filaExcel + x & ")*U" & filaExcel + x & ")"
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 24).Value = ""
-                        hoja.Cell(filaExcel + x, 25).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filatmp + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filatmp + x & "+AA" & filatmp + x
-                        hoja.Cell(filaExcel + x, 29).Value = " "
-                        hoja.Cell(filaExcel + x, 30).FormulaA1 = "=Y" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 31).FormulaA1 = "30.00"
-
-
-                        '<<<<SINDICATO>>>>
-
-                        'Style
-                        hoja3.Cell((filaExcel + x) - 6, 7).Style.NumberFormat.Format = "##################"
-                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "@"
-
-                        hoja.Range(5, 7, filaExcel + x - 6, 7).Style.NumberFormat.Format = "@"
-                        hoja.Range(5, 8, filaExcel + x - 6, 8).Style.NumberFormat.Format = "@"
-                        'Value
-                        Dim datos As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado='" & dtgDatos.Rows(x).Cells(3).Value & "'")
-                        Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco=" & datos(0).Item("fkiIdBanco"))
-                        hoja3.Cell((filaExcel + x) - 6, 2).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja3.Cell((filaExcel + x) - 6, 3).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja3.Cell((filaExcel + x) - 6, 4).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja3.Cell((filaExcel + x) - 6, 5).Value = dtgDatos.Rows(x).Cells(6).Value
-                        hoja3.Cell((filaExcel + x) - 6, 6).Value = banco(0).Item("cBanco")
-                        hoja3.Cell((filaExcel + x) - 6, 7).Value = datos(0).Item("NumCuenta")
-
-                        hoja3.Cell((filaExcel + x) - 6, 8).Value = datos(0).Item("Clabe")
-                        hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!Q" & filaExcel + x
-                        hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!R" & filaExcel + x
-
-
-
-
-
-                    End If
-                Next x
-                filaExcel = filaExcel + 1
-                contadorexcelbuquefinal = filaExcel + total ' - 1
-                veracruz = contadorexcelbuquefinal '+ 1
-                hoja.Cell(filaExcel + total, 3).Value = "GASTOS ADMINISTRATIVOS"
-                hoja.Cell(filaExcel + total, 17).Value = "3,000.00"
-                hoja.Cell(filaExcel + total, 21).Value = "2%"
-                hoja.Cell(filaExcel + total, 22).Value = "60.00"
-                hoja.Cell(filaExcel + total, 23).FormulaA1 = "=+(R" & filaExcel + total & "+N" & filaExcel + total & ")*U" & filaExcel + total
-                hoja.Cell(filaExcel + total, 26).FormulaA1 = "=+N" & filaExcel + total & "+Q" & filaExcel + total & "+R" & filaExcel + total & "+S" & filaExcel + total & "+V" & filaExcel + total & "+Y" & filaExcel + total & "+W" & filaExcel + total
-                hoja.Cell(filaExcel + total, 27).FormulaA1 = "=+Z" & filaExcel + total & "*0.16"
-                hoja.Cell(filaExcel + total, 28).FormulaA1 = "=+Z" & filaExcel + total & "+AA" & filaExcel + total
-
-
-                hoja.Cell(filaExcel + total + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 24).Value = " " '"=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
-                hoja.Cell(filaExcel + total + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
-
-
-
-
-                'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Font.SetBold(True)
-
-                hoja.Cell(filaExcel + total + 4, 3).Value = "TOTAL FINAL DURANGO, TAJIN, TULA Y VERACRUZ"
-                hoja.Cell(filaExcel + total + 4, 8).FormulaA1 = "=" & H
-                hoja.Cell(filaExcel + total + 4, 9).FormulaA1 = "=" & I
-                hoja.Cell(filaExcel + total + 4, 10).FormulaA1 = "=" & J
-                hoja.Cell(filaExcel + total + 4, 11).FormulaA1 = "=" & K
-                hoja.Cell(filaExcel + total + 4, 12).FormulaA1 = "=" & L
-                hoja.Cell(filaExcel + total + 4, 13).FormulaA1 = "=" & M
-                hoja.Cell(filaExcel + total + 4, 14).FormulaA1 = "=" & N
-                hoja.Cell(filaExcel + total + 4, 15).FormulaA1 = "=" & O
-                hoja.Cell(filaExcel + total + 4, 16).FormulaA1 = "=" & P
-                hoja.Cell(filaExcel + total + 4, 17).FormulaA1 = "=" & Q
-                hoja.Cell(filaExcel + total + 4, 18).FormulaA1 = "=" & R
-                hoja.Cell(filaExcel + total + 4, 19).FormulaA1 = "=" & S
-                hoja.Cell(filaExcel + total + 4, 20).FormulaA1 = "=" & T
-                hoja.Cell(filaExcel + total + 4, 21).FormulaA1 = "=" & U
-                hoja.Cell(filaExcel + total + 4, 22).FormulaA1 = "=" & V
-                hoja.Cell(filaExcel + total + 4, 23).FormulaA1 = "=" & W
-                hoja.Cell(filaExcel + total + 4, 24).FormulaA1 = "=" & X2
-                hoja.Cell(filaExcel + total + 4, 25).FormulaA1 = "=" & Y
-                hoja.Cell(filaExcel + total + 4, 26).FormulaA1 = "=" & Z
-                hoja.Cell(filaExcel + total + 4, 27).FormulaA1 = "=" & AA
-                hoja.Cell(filaExcel + total + 4, 28).FormulaA1 = "=" & AB
-
-                hoja.Range(filaExcel + total + 4, 3, filaExcel + total + 4, 31).Style.Fill.BackgroundColor = XLColor.PeachOrange
-                recorrerFilasColumnas(hoja, 11, (total + filaExcel + 30), 31, "text black")
-
-                'Style
-                hoja.Range(tajin + 1, 3, tajin + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(tula + 1, 3, tula + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(durango + 1, 3, durango + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(veracruz + 1, 3, veracruz + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Cell(durango, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(tajin, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(tula, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(veracruz, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-
-                hoja.Cell(durango + 1, 3).Value = ("TOTAL DURANGO").ToUpper
-                hoja.Cell(tajin + 1, 3).Value = ("TOTAL TAJIN").ToUpper
-                hoja.Cell(tula + 1, 3).Value = ("TOTAL TULA").ToUpper
-                hoja.Cell(veracruz + 1, 3).Value = ("TOTAL VERACRUZ").ToUpper
-
-                hoja.Range(11, 8, filaExcel + total + 30, 31).Style.NumberFormat.NumberFormatId = 4
-
-
-                Dim sep As Integer = filaExcel + total + 8
-                hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
-
-                'Tajin
-                hoja.Cell(sep, 3).Value = "DURANGO"
-                hoja.Cell(sep + 1, 3).Value = "DEPOSITO DRUPP BAJIO"
-                hoja.Cell(sep + 2, 3).Value = "IVA"
-                hoja.Cell(sep + 3, 3).Value = "TOTAL DEPOSITO DRUPP"
-                hoja.Cell(sep + 5, 3).Value = "DEPOSITO SPROUL BANAMEX"
-                hoja.Cell(sep + 6, 3).Value = "IVA"
-                hoja.Cell(sep + 7, 3).Value = "TOTAL DEPOSITO SPROUL"
-
-                hoja.Cell(sep + 1, 4).FormulaA1 = "=Q" & durango + 1 & "+S" & durango + 1 & "+V" & durango + 1 & "+Y" & durango + 1
-                hoja.Cell(sep + 2, 4).FormulaA1 = "=D" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 4).FormulaA1 = "=D" & sep + 1 & "+D" & sep + 2
-                hoja.Range(sep + 3, 3, sep + 3, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-                hoja.Cell(sep + 5, 4).FormulaA1 = "=N" & durango + 1 & "+R" & durango + 1 & "+W" & durango + 1
-                hoja.Cell(sep + 6, 4).FormulaA1 = "=D" & sep + 5 & "*16%"
-                hoja.Cell(sep + 7, 4).FormulaA1 = "=D" & sep + 5 & "+D" & sep + 6
-                hoja.Range(sep + 7, 3, sep + 7, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-                'Tula
-                hoja.Cell(sep, 6).Value = "TAJIN"
-                hoja.Cell(sep + 1, 6).Value = "DEPOSITO DRUPP BAJIO"
-                hoja.Cell(sep + 2, 6).Value = "IVA"
-                hoja.Cell(sep + 3, 6).Value = "TOTAL DEPOSITO DRUPP"
-                hoja.Cell(sep + 5, 6).Value = "DEPOSITO SPROUL BANAMEX"
-                hoja.Cell(sep + 6, 6).Value = "IVA"
-                hoja.Cell(sep + 7, 6).Value = "TOTAL DEPOSITO SPROUL"
-
-                hoja.Cell(sep + 1, 8).FormulaA1 = "=Q" & tajin + 1 & "+S" & tajin + 1 & "+V" & tajin + 1 & "+Y" & tajin + 1
-                hoja.Cell(sep + 2, 8).FormulaA1 = "=H" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 8).FormulaA1 = "=H" & sep + 1 & "+H" & sep + 2
-                hoja.Range(sep + 3, 6, sep + 3, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-                hoja.Cell(sep + 5, 8).FormulaA1 = "=N" & tajin + 1 & "+R" & tajin + 1 & "+W" & tajin + 1
-                hoja.Cell(sep + 6, 8).FormulaA1 = "=H" & sep + 5 & "*16%"
-                hoja.Cell(sep + 7, 8).FormulaA1 = "=H" & sep + 5 & "+H" & sep + 6
-                hoja.Range(sep + 7, 6, sep + 7, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-                'Durango
-                hoja.Cell(sep, 10).Value = "TULA"
-                hoja.Cell(sep + 1, 10).Value = "DEPOSITO DRUPP BAJIO"
-                hoja.Cell(sep + 2, 10).Value = "IVA"
-                hoja.Cell(sep + 3, 10).Value = "TOTAL DEPOSITO DRUPP"
-                hoja.Cell(sep + 5, 10).Value = "DEPOSITO SPROUL BANAMEX"
-                hoja.Cell(sep + 6, 10).Value = "IVA"
-                hoja.Cell(sep + 7, 10).Value = "TOTAL DEPOSITO SPROUL"
-
-                hoja.Cell(sep + 1, 12).FormulaA1 = "=Q" & tula + 1 & "+S" & tula + 1 & "+V" & tula + 1 & "+Y" & tula + 1
-                hoja.Cell(sep + 2, 12).FormulaA1 = "=L" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 12).FormulaA1 = "=L" & sep + 1 & "+L" & sep + 2
-                hoja.Range(sep + 3, 10, sep + 3, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Cell(sep + 5, 12).FormulaA1 = "=N" & tula + 1 & "+R" & tula + 1 & "+W" & tula + 1
-                hoja.Cell(sep + 6, 12).FormulaA1 = "=L" & sep + 5 & "*16%"
-                hoja.Cell(sep + 7, 12).FormulaA1 = "=L" & sep + 5 & "+L" & sep + 6
-                hoja.Range(sep + 7, 10, sep + 7, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-                'Veracruz
-                hoja.Cell(sep, 14).Value = "VERACRUZ"
-                hoja.Cell(sep + 1, 14).Value = "DEPOSITO DRUPP BAJIO"
-                hoja.Cell(sep + 2, 14).Value = "IVA"
-                hoja.Cell(sep + 3, 14).Value = "TOTAL DEPOSITO DRUPP"
-                hoja.Cell(sep + 5, 14).Value = "DEPOSITO SPROUL BANAMEX"
-                hoja.Cell(sep + 6, 14).Value = "IVA"
-                hoja.Cell(sep + 7, 14).Value = "TOTAL DEPOSITO SPROUL"
-
-
-                hoja.Cell(sep + 1, 17).FormulaA1 = "=Q" & veracruz + 1 & "+S" & veracruz + 1 & "+V" & veracruz + 1 & "+Y" & veracruz + 1
-                hoja.Cell(sep + 2, 17).FormulaA1 = "=Q" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 17).FormulaA1 = "=Q" & sep + 1 & "+Q" & sep + 2
-                hoja.Range(sep + 3, 14, sep + 3, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Cell(sep + 5, 17).FormulaA1 = "=N" & veracruz + 1 & "+R" & veracruz + 1 & "+W" & veracruz + 1
-                hoja.Cell(sep + 6, 17).FormulaA1 = "=Q" & sep + 5 & "*16%"
-                hoja.Cell(sep + 7, 17).FormulaA1 = "=Q" & sep + 5 & "+Q" & sep + 6
-                hoja.Range(sep + 7, 14, sep + 7, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
-
-                ''<<<<<<<<<<<<<<<FACTURACION>>>>>>>>>>>>>>>>>>
-
-
-                hoja4.Cell(7, 6).FormulaA1 = "=TMM!D" & sep + 1
-                hoja4.Cell(8, 6).FormulaA1 = "=TMM!H" & sep + 1
-                hoja4.Cell(9, 6).FormulaA1 = "=TMM!Q" & sep + 1
-                hoja4.Cell(10, 6).FormulaA1 = "=TMM!L" & sep + 1
-
-                hoja4.Cell(7, 7).FormulaA1 = "=F7*0.16"
-                hoja4.Cell(8, 7).FormulaA1 = "=F8*0.16"
-                hoja4.Cell(9, 7).FormulaA1 = "=F9*0.16"
-                hoja4.Cell(10, 7).FormulaA1 = "=F10*0.16"
-
-                hoja4.Cell(7, 8).FormulaA1 = "=F7+G7"
-                hoja4.Cell(8, 8).FormulaA1 = "=F8+G8"
-                hoja4.Cell(9, 8).FormulaA1 = "=F9+G9"
-                hoja4.Cell(1, 8).FormulaA1 = "=F10+G10"
-
-                hoja4.Cell(17, 6).FormulaA1 = "=TMM!D" & sep + 5
-                hoja4.Cell(18, 6).FormulaA1 = "=TMM!H" & sep + 5
-                hoja4.Cell(19, 6).FormulaA1 = "=TMM!Q" & sep + 5
-                hoja4.Cell(20, 6).FormulaA1 = "=TMM!L" & sep + 5
-
-                hoja4.Cell(17, 7).FormulaA1 = "=F17*0.16"
-                hoja4.Cell(18, 7).FormulaA1 = "=F18*0.16"
-                hoja4.Cell(19, 7).FormulaA1 = "=F19*0.16"
-                hoja4.Cell(20, 7).FormulaA1 = "=F20*0.16"
-
-                hoja4.Cell(17, 8).FormulaA1 = "=F17+G17"
-                hoja4.Cell(18, 8).FormulaA1 = "=F18+G18"
-                hoja4.Cell(19, 8).FormulaA1 = "=F19+G19"
-                hoja4.Cell(20, 8).FormulaA1 = "=F20+G20"
-
-                '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MAECCO>>>>>>>>>>>>>>>>>>>>>>>>
-
-                Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio, iNumeroPeriodo, iDiasPago from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
-                If rwPeriodo Is Nothing = False Then
-                    hoja2.Cell(7, 2).Value = "Periodo " & rwPeriodo(0).Item("iDiasPago") & " al " & rwPeriodo(0).Item("iDiasPago") & " MENSUAL DEL " & rwPeriodo(0).Item("dFechaInicio")
-
-                End If
-
-                'MAECCO
-                filaExcel = 12
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                    ' dtgDatos.Rows(x).Cells(11).FormattedValue
-
-
-                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value
-                    hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value
-                    hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(5).Value
-                    hoja2.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(12).Value
-                    hoja2.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(6).Value
-                    hoja2.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(7).Value
-                    hoja2.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(8).Value
-                    hoja2.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(9).Value
-                    hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(10).FormattedValue
-                    hoja2.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
-                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'SALARIO DIARO
-                    hoja2.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
-                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS TRABAJADOS
-                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(21).Value 'SUELDO BRUTO
-                    hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(22).Value
-                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(23).Value
-                    hoja2.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(24).Value 'DESC. SEM OBLIGATORIO
-                    hoja2.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(25).Value 'VACACIONES PROPORCIONALES
-                    hoja2.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(26).Value 'SUELDO BASE MENSUAL
-                    hoja2.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(27).Value ' AGUINALDO GRAVADO
-                    hoja2.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(28).Value ' AGUINALDO EXENTO
-                    hoja2.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(29).Value 'TOTAL AGINALDO
-                    hoja2.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(30).Value ' PRIMA VACIONA
-                    hoja2.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(31).Value ' EXENTA
-                    hoja2.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(32).Value ' TOTLA PRIMAS
-                    hoja2.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(33).Value ''TOTAL PERCEPCIONES
-                    hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPCIONES /ISR
-                    hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
-                    hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR
-                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMS
-                    hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
-                    hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
-                    hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
-                    hoja2.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(42).Value 'PENSION ALIMENT
-                    hoja2.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(43).Value ' PRESTAMO
-                    hoja2.Cell(filaExcel, 36).FormulaA1 = "=AB" & filaExcel & "+AC" & filaExcel & "+AD" & filaExcel & "+AE" & filaExcel & "+AF" & filaExcel & "+AG" & filaExcel & "+AH" & filaExcel & "+AI" & filaExcel
-                    hoja2.Cell(filaExcel, 37).FormulaA1 = "=Z" & filaExcel & "-AJ" & filaExcel
-                    hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
-                    hoja2.Cell(filaExcel, 39).FormulaA1 = "=AK" & filaExcel & "-AL" & filaExcel
-
-                    filaExcel = filaExcel + 1
-
-                Next x
-
-
-
-
-                'MAECCO FORMULAS Y ESTILOS
-
-                recorrerFilasColumnas(hoja2, 12, filaExcel, 39, "bold")
-                hoja2.Range(filaExcel + 4, 20, filaExcel + 4, 39).Style.Font.SetBold(True)
-
-                'hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S9:S" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T9:T" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 21).FormulaA1 = "=SUM(U9:U" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 22).FormulaA1 = "=SUM(V9:V" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 23).FormulaA1 = "=SUM(W9:W" & filaExcel & ")"
-
-                'hoja2.Cell(filaExcel + 4, 24).FormulaA1 = "=SUM(X9:X" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 25).FormulaA1 = "=SUM(Y9:Y" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 26).FormulaA1 = "=SUM(Z9:Z" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 27).FormulaA1 = "=SUM(AA9:AA" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 28).FormulaA1 = "=SUM(AB9:AB" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 29).FormulaA1 = "=SUM(AC12:AC" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 30).FormulaA1 = "=SUM(AD12:AD" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 31).FormulaA1 = "=SUM(AE12:AE" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 32).FormulaA1 = "=SUM(AF12:AF" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 33).FormulaA1 = "=SUM(AG12:AG" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 34).FormulaA1 = "=SUM(AH12:AH" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 35).FormulaA1 = "=SUM(AI12:AI" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 36).FormulaA1 = "=SUM(AJ12:AJ" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 37).FormulaA1 = "=SUM(AK12:AK" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL12:AL" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 4, 39).FormulaA1 = "=SUM(AM12:AL" & filaExcel & ")"
-
-
-
-
-                'Titulo
-                Dim moment As Date = Date.Now()
-                Dim month As Integer = moment.Month
-                Dim year As Integer = moment.Year
-
-
-                dialogo.FileName = "TMM NOMINA MAECCO " + mesperiodo + " " + year.ToString
-                'dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " "
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                ''  dialogo.ShowDialog()
-
-                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    ' OK button pressed
-                    libro.SaveAs(dialogo.FileName)
-                    libro = Nothing
-                    MessageBox.Show("Archivo Generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                End If
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        End Try
-
-    End Sub
+  
 
     Public Sub recorrerFilasColumnas(ByRef hoja As IXLWorksheet, ByRef filainicio As Integer, ByRef filafinal As Integer, ByRef colTotal As Integer, ByRef tipo As String, Optional ByVal inicioCol As Integer = 1)
 
@@ -4441,7 +3835,6 @@ Public Class frmnominasmarinos
         Dim contador As Integer = 0
         Dim pos, pos2 As Integer
         Dim dtgDupl As New DataGridView
-        Dim MiDataSet As New DataSet()
 
         Dim mesperiodo As String
         Dim mesid As String
@@ -4497,7 +3890,8 @@ Public Class frmnominasmarinos
                 Exit Function
 
             End If
-        Next
+            Next
+
             Dim path As String = dialogo.FileName
             '   revisar(dtgDupl, dialogo.FileName)
             For Each Seleccion As DataGridViewRow In dtgDatos.SelectedRows
@@ -4583,7 +3977,7 @@ Public Class frmnominasmarinos
 
 
         If dtgDupl2.Rows.Count - 1 <= 0 Then
-            generarLayout2(dtgTercer, path)
+            generarLayout2(dtgTercer, path.Replace(".xlsx", " B.xlsx"))
             Return False
             'MsgBox(contador.ToString & " Datos repetidos")
         Else
@@ -7319,8 +6713,6 @@ Public Class frmnominasmarinos
                             pgbProgreso.Value += 1
                             Application.DoEvents()
 
-
-                            
                         End If
 
                     Next
@@ -7345,6 +6737,756 @@ Public Class frmnominasmarinos
 
     End Sub
 
+    Private Sub cmdexcel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdexcel.Click
+        Try
+
+
+            Dim filaExcel As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim periodo As String
+            Dim mesperiodo As String
+
+
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+
+            Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
+
+            If dtgDatos.Rows.Count > 0 Then
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\tmmMaecco.xlsx"
+                'ruta = My.Application.Info.DirectoryPath() & "\Archivos\TMM.xlsx"
+
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+
+
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+
+                book.Worksheet(1).CopyTo(libro, "TMM")
+                book.Worksheet(2).CopyTo(libro, "MAECCO")
+                book.Worksheet(3).CopyTo(libro, "SINDICATO")
+                book.Worksheet(4).CopyTo(libro, "FACTURACION")
+
+
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+                Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
+                Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
+                Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
+
+
+                ''<<<<<<<<<<<<<<<<<<<<<<TMM>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                'pnlProgreso.Visible = True
+
+                'Application.DoEvents()
+                'pnlCatalogo.Enabled = False
+                'pgbProgreso.Minimum = 0
+                'pgbProgreso.Value = 0
+                'pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+
+                filaExcel = 11
+                Dim nombrebuque As String
+                Dim inicio As Integer = 0
+                Dim contadorexcelbuqueinicial As Integer = 0
+                Dim contadorexcelbuquefinal As Integer = 0
+                Dim total As Integer = dtgDatos.Rows.Count - 1
+                Dim filatmp As Integer = 12
+
+                Dim tula, tajin, durango, veracruz As Integer
+                'Periodo en plantilla
+                Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+                If rwPeriodo0 Is Nothing = False Then
+                    Dim fechita As Date = Date.Parse((rwPeriodo0(0).Item("dFechaFin")))
+
+                    periodo = "01-" & fechita.Day & " " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+
+                    mesperiodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+
+                    hoja.Cell(8, 1).Style.Font.SetBold(True)
+                    hoja.Cell(8, 1).Style.NumberFormat.Format = "@"
+                    hoja.Cell(8, 1).Value = periodo
+
+                End If
+
+
+
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    recorrerFilasColumnas(hoja, 1, (total + filaExcel) + 1000, 500, "sin relleno", 32)
+                    recorrerFilasColumnas(hoja, 2, 8, 33, "sin relleno", 29)
+
+                    recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 500, 500, "sin relleno")
+                    recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "bold false")
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
+                    If inicio = x Then
+                        contadorexcelbuqueinicial = filaExcel + x
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+
+                        'recorrerFilasColumnas(hoja, 1, (total + filaExcel) + 1000, 500, "sin relleno", 32)
+                        'recorrerFilasColumnas(hoja, 2, 8, 33, "sin relleno", 29)
+                    End If
+                    If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
+
+                        hoja.Cell(filaExcel + x, 1).Value = dtgDatos.Rows(x).Cells(3).Value
+                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(10).Value
+                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(5).Value
+                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(12).Value
+                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value 'Puesto
+                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias laborados
+                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
+                        hoja.Cell(filaExcel + x, 9).FormulaA1 = "=MAECCO!AL" & filatmp + x
+                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x
+                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=MAECCO!AG" & filatmp + x
+                        hoja.Cell(filaExcel + x, 12).FormulaA1 = "=MAECCO!AH" & filatmp + x
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "=MAECCO!AI" & filatmp + x
+                        hoja.Cell(filaExcel + x, 14).Value = " " ' Prestamo complemento
+                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "=+H" & filaExcel + x & "-I" & filaExcel + x & "-J" & filaExcel + x & "-K" & filaExcel + x & "-L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 16).Value = ""
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=MAECCO!AM" & filatmp + x
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "=O" & filaExcel + x & "-Q" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
+                        hoja.Cell(filaExcel + x, 20).Value = ""
+                        hoja.Cell(filaExcel + x, 21).Value = "2%" 'comision
+                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=+((Q" & filaExcel + x & "+S" & filaExcel + x & ")*U" & filaExcel + x & ")"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 24).Value = ""
+                        hoja.Cell(filaExcel + x, 25).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
+                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
+                        hoja.Cell(9, 29).Clear()
+                        hoja.Cell(10, 29).Clear()
+                        hoja.Cell(filaExcel + x, 29).Value = " "
+                        hoja.Cell(filaExcel + x, 30).FormulaA1 = "=Y" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 31).FormulaA1 = "30.00"
+
+
+                        '<<<<SINDICATO>>>>
+                        hoja3.Cell((filaExcel + x) - 6, 7).Style.NumberFormat.Format = "##################"
+                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "############"
+                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "@"
+
+                        hoja.Range(5, 7, filaExcel + x - 6, 7).Style.NumberFormat.Format = "@"
+                        hoja.Range(5, 8, filaExcel + x - 6, 8).Style.NumberFormat.Format = "@"
+
+                        Dim datos As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado='" & dtgDatos.Rows(x).Cells(3).Value & "'")
+                        Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco=" & datos(0).Item("fkiIdBanco"))
+                        hoja3.Cell((filaExcel + x) - 6, 2).Value = dtgDatos.Rows(x).Cells(3).Value
+                        hoja3.Cell((filaExcel + x) - 6, 3).Value = dtgDatos.Rows(x).Cells(12).Value
+                        hoja3.Cell((filaExcel + x) - 6, 4).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja3.Cell((filaExcel + x) - 6, 5).Value = dtgDatos.Rows(x).Cells(6).Value
+                        hoja3.Cell((filaExcel + x) - 6, 6).Value = banco(0).Item("cBanco")
+                        hoja3.Cell((filaExcel + x) - 6, 7).Value = datos(0).Item("NumCuenta")
+                        hoja3.Cell((filaExcel + x) - 6, 8).Value = datos(0).Item("Clabe")
+                        hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!Q" & filaExcel + x
+                        hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!R" & filaExcel + x
+
+
+
+
+                    Else
+                        recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 200, 200, "sin relleno")
+                        recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 31, "bold false")
+
+                        contadorexcelbuquefinal = filaExcel + x
+
+                        Select Case nombrebuque
+                            Case "TULA"
+                                tula = contadorexcelbuquefinal
+                            Case "TAJIN"
+                                tajin = contadorexcelbuquefinal
+                            Case "DURANGO"
+                                durango = contadorexcelbuquefinal
+                            Case "VERACRUZ"
+                                veracruz = contadorexcelbuquefinal
+
+                        End Select
+
+                        hoja.Cell(filaExcel + x, 3).Value = "GASTOS ADMINISTRATIVOS"
+                        hoja.Cell(filaExcel + x, 17).Value = "3,000.00"
+                        hoja.Cell(filaExcel + x, 21).Value = "2%"
+                        hoja.Cell(filaExcel + x, 22).Value = "60.00"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
+                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
+
+                        'hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                        'hoja.Cell(filaExcel + x, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                        'hoja.Cell(filaExcel + total + 1, 3).Value = ("Total " & nombrebuque).ToUpper
+                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                        ''hoja.Range(filaExcel + total + 1, 3, filaExcel + total, 28).Style.Font.SetBold(True)
+
+                        hoja.Cell(filaExcel + x + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 24).Value = " " '"=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
+
+
+                        H += " +" & "H" & filaExcel + x + 1
+                        I += " +" & "I" & filaExcel + x + 1
+                        J += " +" & "J" & filaExcel + x + 1
+                        K += " +" & "K" & filaExcel + x + 1
+                        L += " +" & "L" & filaExcel + x + 1
+                        M += " +" & "M" & filaExcel + x + 1
+                        N += " +" & "N" & filaExcel + x + 1
+                        O += " +" & "O" & filaExcel + x + 1
+                        P += " +" & "P" & filaExcel + x + 1
+                        Q += " +" & "Q" & filaExcel + x + 1
+                        R += " +" & "R" & filaExcel + x + 1
+                        S += " +" & "S" & filaExcel + x + 1
+                        T += " +" & "T" & filaExcel + x + 1
+                        U += " +" & "U" & filaExcel + x + 1
+                        V += " +" & "V" & filaExcel + x + 1
+                        W += " +" & "W" & filaExcel + x + 1
+                        X2 += " +" & "X" & filaExcel + x + 1
+                        Y += " +" & "Y" & filaExcel + x + 1
+                        Z += " +" & "Z" & filaExcel + x + 1
+                        AA += " +" & "AA" & filaExcel + x + 1
+                        AB += " +" & "AB" & filaExcel + x + 1
+
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+                        filaExcel = filaExcel + 2
+                        contadorexcelbuqueinicial = filaExcel + x
+                        'contadorexcelbuquefinal = 0
+
+                        hoja.Cell(filaExcel + x, 1).Value = dtgDatos.Rows(x).Cells(3).Value
+                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(10).Value
+                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(5).Value
+                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(12).Value
+                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value 'Puesto
+                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias laborados
+                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
+                        hoja.Cell(filaExcel + x, 9).FormulaA1 = "=MAECCO!AL" & filatmp + x
+                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x
+                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=MAECCO!AG" & filatmp + x
+                        hoja.Cell(filaExcel + x, 12).FormulaA1 = "=MAECCO!AH" & filatmp + x
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "=MAECCO!AI" & filatmp + x
+                        hoja.Cell(filaExcel + x, 14).Value = " " ' Prestamo complemento
+                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "=+H" & filaExcel + x & "-I" & filaExcel + x & "-J" & filaExcel + x & "-K" & filaExcel + x & "-L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 16).Value = ""
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=MAECCO!AM" & filatmp + x 'maecco
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "=O" & filaExcel + x & "-Q" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
+                        hoja.Cell(filaExcel + x, 20).Value = ""
+                        hoja.Cell(filaExcel + x, 21).Value = "2%" 'comision
+                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=+((Q" & filaExcel + x & "+S" & filaExcel + x & ")*U" & filaExcel + x & ")"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=+(R" & filaExcel + x & "+N" & filaExcel + x & ")*U" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 24).Value = ""
+                        hoja.Cell(filaExcel + x, 25).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filatmp + x & "*0.16"
+                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filatmp + x & "+AA" & filatmp + x
+                        hoja.Cell(filaExcel + x, 29).Value = " "
+                        hoja.Cell(filaExcel + x, 30).FormulaA1 = "=Y" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 31).FormulaA1 = "30.00"
+
+
+                        '<<<<SINDICATO>>>>
+
+                        'Style
+                        hoja3.Cell((filaExcel + x) - 6, 7).Style.NumberFormat.Format = "##################"
+                        hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "@"
+
+                        hoja.Range(5, 7, filaExcel + x - 6, 7).Style.NumberFormat.Format = "@"
+                        hoja.Range(5, 8, filaExcel + x - 6, 8).Style.NumberFormat.Format = "@"
+                        'Value
+                        Dim datos As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado='" & dtgDatos.Rows(x).Cells(3).Value & "'")
+                        Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco=" & datos(0).Item("fkiIdBanco"))
+                        hoja3.Cell((filaExcel + x) - 6, 2).Value = dtgDatos.Rows(x).Cells(3).Value
+                        hoja3.Cell((filaExcel + x) - 6, 3).Value = dtgDatos.Rows(x).Cells(12).Value
+                        hoja3.Cell((filaExcel + x) - 6, 4).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja3.Cell((filaExcel + x) - 6, 5).Value = dtgDatos.Rows(x).Cells(6).Value
+                        hoja3.Cell((filaExcel + x) - 6, 6).Value = banco(0).Item("cBanco")
+                        hoja3.Cell((filaExcel + x) - 6, 7).Value = datos(0).Item("NumCuenta")
+
+                        hoja3.Cell((filaExcel + x) - 6, 8).Value = datos(0).Item("Clabe")
+                        hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!Q" & filaExcel + x
+                        hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!R" & filaExcel + x
+
+
+
+
+
+                    End If
+                Next x
+                filaExcel = filaExcel + 1
+                contadorexcelbuquefinal = filaExcel + total ' - 1
+                veracruz = contadorexcelbuquefinal '+ 1
+                hoja.Cell(filaExcel + total, 3).Value = "GASTOS ADMINISTRATIVOS"
+                hoja.Cell(filaExcel + total, 17).Value = "3,000.00"
+                hoja.Cell(filaExcel + total, 21).Value = "2%"
+                hoja.Cell(filaExcel + total, 22).Value = "60.00"
+                hoja.Cell(filaExcel + total, 23).FormulaA1 = "=+(R" & filaExcel + total & "+N" & filaExcel + total & ")*U" & filaExcel + total
+                hoja.Cell(filaExcel + total, 26).FormulaA1 = "=+N" & filaExcel + total & "+Q" & filaExcel + total & "+R" & filaExcel + total & "+S" & filaExcel + total & "+V" & filaExcel + total & "+Y" & filaExcel + total & "+W" & filaExcel + total
+                hoja.Cell(filaExcel + total, 27).FormulaA1 = "=+Z" & filaExcel + total & "*0.16"
+                hoja.Cell(filaExcel + total, 28).FormulaA1 = "=+Z" & filaExcel + total & "+AA" & filaExcel + total
+
+
+                hoja.Cell(filaExcel + total + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 10).FormulaA1 = "=SUM(J" & contadorexcelbuqueinicial & ":J" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 11).FormulaA1 = "=SUM(K" & contadorexcelbuqueinicial & ":K" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 15).FormulaA1 = "=SUM(O" & contadorexcelbuqueinicial & ":O" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 16).FormulaA1 = "=SUM(P" & contadorexcelbuqueinicial & ":P" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 17).FormulaA1 = "=SUM(Q" & contadorexcelbuqueinicial & ":Q" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 18).FormulaA1 = "=SUM(R" & contadorexcelbuqueinicial & ":R" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 19).FormulaA1 = "=SUM(S" & contadorexcelbuqueinicial & ":S" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 20).FormulaA1 = "=SUM(T" & contadorexcelbuqueinicial & ":T" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 21).FormulaA1 = "=SUM(U" & contadorexcelbuqueinicial & ":U" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 22).FormulaA1 = "=SUM(V" & contadorexcelbuqueinicial & ":V" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 23).FormulaA1 = "=SUM(W" & contadorexcelbuqueinicial & ":W" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 24).Value = " " '"=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
+
+
+
+
+                'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Font.SetBold(True)
+
+                hoja.Cell(filaExcel + total + 4, 3).Value = "TOTAL FINAL DURANGO, TAJIN, TULA Y VERACRUZ"
+                hoja.Cell(filaExcel + total + 4, 8).FormulaA1 = "=" & H
+                hoja.Cell(filaExcel + total + 4, 9).FormulaA1 = "=" & I
+                hoja.Cell(filaExcel + total + 4, 10).FormulaA1 = "=" & J
+                hoja.Cell(filaExcel + total + 4, 11).FormulaA1 = "=" & K
+                hoja.Cell(filaExcel + total + 4, 12).FormulaA1 = "=" & L
+                hoja.Cell(filaExcel + total + 4, 13).FormulaA1 = "=" & M
+                hoja.Cell(filaExcel + total + 4, 14).FormulaA1 = "=" & N
+                hoja.Cell(filaExcel + total + 4, 15).FormulaA1 = "=" & O
+                hoja.Cell(filaExcel + total + 4, 16).FormulaA1 = "=" & P
+                hoja.Cell(filaExcel + total + 4, 17).FormulaA1 = "=" & Q
+                hoja.Cell(filaExcel + total + 4, 18).FormulaA1 = "=" & R
+                hoja.Cell(filaExcel + total + 4, 19).FormulaA1 = "=" & S
+                hoja.Cell(filaExcel + total + 4, 20).FormulaA1 = "=" & T
+                hoja.Cell(filaExcel + total + 4, 21).FormulaA1 = "=" & U
+                hoja.Cell(filaExcel + total + 4, 22).FormulaA1 = "=" & V
+                hoja.Cell(filaExcel + total + 4, 23).FormulaA1 = "=" & W
+                hoja.Cell(filaExcel + total + 4, 24).FormulaA1 = "=" & X2
+                hoja.Cell(filaExcel + total + 4, 25).FormulaA1 = "=" & Y
+                hoja.Cell(filaExcel + total + 4, 26).FormulaA1 = "=" & Z
+                hoja.Cell(filaExcel + total + 4, 27).FormulaA1 = "=" & AA
+                hoja.Cell(filaExcel + total + 4, 28).FormulaA1 = "=" & AB
+
+                hoja.Range(filaExcel + total + 4, 3, filaExcel + total + 4, 31).Style.Fill.BackgroundColor = XLColor.PeachOrange
+                recorrerFilasColumnas(hoja, 11, (total + filaExcel + 30), 31, "text black")
+
+                'Style
+                hoja.Range(tajin + 1, 3, tajin + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(tula + 1, 3, tula + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(durango + 1, 3, durango + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(veracruz + 1, 3, veracruz + 1, 31).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(durango, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(tajin, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(tula, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(veracruz, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+
+                hoja.Cell(durango + 1, 3).Value = ("TOTAL DURANGO").ToUpper
+                hoja.Cell(tajin + 1, 3).Value = ("TOTAL TAJIN").ToUpper
+                hoja.Cell(tula + 1, 3).Value = ("TOTAL TULA").ToUpper
+                hoja.Cell(veracruz + 1, 3).Value = ("TOTAL VERACRUZ").ToUpper
+
+                hoja.Range(11, 8, filaExcel + total + 30, 31).Style.NumberFormat.NumberFormatId = 4
+
+
+                Dim sep As Integer = filaExcel + total + 8
+                hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
+
+                'Tajin
+                hoja.Cell(sep, 3).Value = "DURANGO"
+                hoja.Cell(sep + 1, 3).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 3).Value = "IVA"
+                hoja.Cell(sep + 3, 3).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 5, 3).Value = "DEPOSITO SPROUL BANAMEX"
+                hoja.Cell(sep + 6, 3).Value = "IVA"
+                hoja.Cell(sep + 7, 3).Value = "TOTAL DEPOSITO SPROUL"
+
+                hoja.Cell(sep + 1, 4).FormulaA1 = "=Q" & durango + 1 & "+S" & durango + 1 & "+V" & durango + 1 & "+Y" & durango + 1
+                hoja.Cell(sep + 2, 4).FormulaA1 = "=D" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 4).FormulaA1 = "=D" & sep + 1 & "+D" & sep + 2
+                hoja.Range(sep + 3, 3, sep + 3, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                hoja.Cell(sep + 5, 4).FormulaA1 = "=N" & durango + 1 & "+R" & durango + 1 & "+W" & durango + 1
+                hoja.Cell(sep + 6, 4).FormulaA1 = "=D" & sep + 5 & "*16%"
+                hoja.Cell(sep + 7, 4).FormulaA1 = "=D" & sep + 5 & "+D" & sep + 6
+                hoja.Range(sep + 7, 3, sep + 7, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                'Tula
+                hoja.Cell(sep, 6).Value = "TAJIN"
+                hoja.Cell(sep + 1, 6).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 6).Value = "IVA"
+                hoja.Cell(sep + 3, 6).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 5, 6).Value = "DEPOSITO SPROUL BANAMEX"
+                hoja.Cell(sep + 6, 6).Value = "IVA"
+                hoja.Cell(sep + 7, 6).Value = "TOTAL DEPOSITO SPROUL"
+
+                hoja.Cell(sep + 1, 8).FormulaA1 = "=Q" & tajin + 1 & "+S" & tajin + 1 & "+V" & tajin + 1 & "+Y" & tajin + 1
+                hoja.Cell(sep + 2, 8).FormulaA1 = "=H" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 8).FormulaA1 = "=H" & sep + 1 & "+H" & sep + 2
+                hoja.Range(sep + 3, 6, sep + 3, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                hoja.Cell(sep + 5, 8).FormulaA1 = "=N" & tajin + 1 & "+R" & tajin + 1 & "+W" & tajin + 1
+                hoja.Cell(sep + 6, 8).FormulaA1 = "=H" & sep + 5 & "*16%"
+                hoja.Cell(sep + 7, 8).FormulaA1 = "=H" & sep + 5 & "+H" & sep + 6
+                hoja.Range(sep + 7, 6, sep + 7, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                'Durango
+                hoja.Cell(sep, 10).Value = "TULA"
+                hoja.Cell(sep + 1, 10).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 10).Value = "IVA"
+                hoja.Cell(sep + 3, 10).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 5, 10).Value = "DEPOSITO SPROUL BANAMEX"
+                hoja.Cell(sep + 6, 10).Value = "IVA"
+                hoja.Cell(sep + 7, 10).Value = "TOTAL DEPOSITO SPROUL"
+
+                hoja.Cell(sep + 1, 12).FormulaA1 = "=Q" & tula + 1 & "+S" & tula + 1 & "+V" & tula + 1 & "+Y" & tula + 1
+                hoja.Cell(sep + 2, 12).FormulaA1 = "=L" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 12).FormulaA1 = "=L" & sep + 1 & "+L" & sep + 2
+                hoja.Range(sep + 3, 10, sep + 3, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 5, 12).FormulaA1 = "=N" & tula + 1 & "+R" & tula + 1 & "+W" & tula + 1
+                hoja.Cell(sep + 6, 12).FormulaA1 = "=L" & sep + 5 & "*16%"
+                hoja.Cell(sep + 7, 12).FormulaA1 = "=L" & sep + 5 & "+L" & sep + 6
+                hoja.Range(sep + 7, 10, sep + 7, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+                'Veracruz
+                hoja.Cell(sep, 14).Value = "VERACRUZ"
+                hoja.Cell(sep + 1, 14).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 2, 14).Value = "IVA"
+                hoja.Cell(sep + 3, 14).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 5, 14).Value = "DEPOSITO SPROUL BANAMEX"
+                hoja.Cell(sep + 6, 14).Value = "IVA"
+                hoja.Cell(sep + 7, 14).Value = "TOTAL DEPOSITO SPROUL"
+
+
+                hoja.Cell(sep + 1, 17).FormulaA1 = "=Q" & veracruz + 1 & "+S" & veracruz + 1 & "+V" & veracruz + 1 & "+Y" & veracruz + 1
+                hoja.Cell(sep + 2, 17).FormulaA1 = "=Q" & sep + 1 & "*16%"
+                hoja.Cell(sep + 3, 17).FormulaA1 = "=Q" & sep + 1 & "+Q" & sep + 2
+                hoja.Range(sep + 3, 14, sep + 3, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 5, 17).FormulaA1 = "=N" & veracruz + 1 & "+R" & veracruz + 1 & "+W" & veracruz + 1
+                hoja.Cell(sep + 6, 17).FormulaA1 = "=Q" & sep + 5 & "*16%"
+                hoja.Cell(sep + 7, 17).FormulaA1 = "=Q" & sep + 5 & "+Q" & sep + 6
+                hoja.Range(sep + 7, 14, sep + 7, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+                ''<<<<<<<<<<<<<<<FACTURACION>>>>>>>>>>>>>>>>>>
+
+
+                hoja4.Cell(7, 6).FormulaA1 = "=TMM!D" & sep + 1
+                hoja4.Cell(8, 6).FormulaA1 = "=TMM!H" & sep + 1
+                hoja4.Cell(9, 6).FormulaA1 = "=TMM!Q" & sep + 1
+                hoja4.Cell(10, 6).FormulaA1 = "=TMM!L" & sep + 1
+
+                hoja4.Cell(7, 7).FormulaA1 = "=F7*0.16"
+                hoja4.Cell(8, 7).FormulaA1 = "=F8*0.16"
+                hoja4.Cell(9, 7).FormulaA1 = "=F9*0.16"
+                hoja4.Cell(10, 7).FormulaA1 = "=F10*0.16"
+
+                hoja4.Cell(7, 8).FormulaA1 = "=F7+G7"
+                hoja4.Cell(8, 8).FormulaA1 = "=F8+G8"
+                hoja4.Cell(9, 8).FormulaA1 = "=F9+G9"
+                hoja4.Cell(1, 8).FormulaA1 = "=F10+G10"
+
+                hoja4.Cell(17, 6).FormulaA1 = "=TMM!D" & sep + 5
+                hoja4.Cell(18, 6).FormulaA1 = "=TMM!H" & sep + 5
+                hoja4.Cell(19, 6).FormulaA1 = "=TMM!Q" & sep + 5
+                hoja4.Cell(20, 6).FormulaA1 = "=TMM!L" & sep + 5
+
+                hoja4.Cell(17, 7).FormulaA1 = "=F17*0.16"
+                hoja4.Cell(18, 7).FormulaA1 = "=F18*0.16"
+                hoja4.Cell(19, 7).FormulaA1 = "=F19*0.16"
+                hoja4.Cell(20, 7).FormulaA1 = "=F20*0.16"
+
+                hoja4.Cell(17, 8).FormulaA1 = "=F17+G17"
+                hoja4.Cell(18, 8).FormulaA1 = "=F18+G18"
+                hoja4.Cell(19, 8).FormulaA1 = "=F19+G19"
+                hoja4.Cell(20, 8).FormulaA1 = "=F20+G20"
+
+                '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MAECCO>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio, iNumeroPeriodo, iDiasPago from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+                If rwPeriodo Is Nothing = False Then
+                    hoja2.Cell(7, 2).Value = "Periodo " & rwPeriodo(0).Item("iDiasPago") & " al " & rwPeriodo(0).Item("iDiasPago") & " MENSUAL DEL " & rwPeriodo(0).Item("dFechaInicio")
+
+                End If
+
+                'MAECCO
+                filaExcel = 12
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    ' dtgDatos.Rows(x).Cells(11).FormattedValue
+
+
+                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value
+                    hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value
+                    hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(5).Value
+                    hoja2.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(12).Value
+                    hoja2.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(6).Value
+                    hoja2.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(7).Value
+                    hoja2.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(8).Value
+                    hoja2.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(9).Value
+                    hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(10).FormattedValue
+                    hoja2.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
+                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'SALARIO DIARO
+                    hoja2.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
+                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS TRABAJADOS
+                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(21).Value 'SUELDO BRUTO
+                    hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(22).Value
+                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(23).Value
+                    hoja2.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(24).Value 'DESC. SEM OBLIGATORIO
+                    hoja2.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(25).Value 'VACACIONES PROPORCIONALES
+                    hoja2.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(26).Value 'SUELDO BASE MENSUAL
+                    hoja2.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(27).Value ' AGUINALDO GRAVADO
+                    hoja2.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(28).Value ' AGUINALDO EXENTO
+                    hoja2.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(29).Value 'TOTAL AGINALDO
+                    hoja2.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(30).Value ' PRIMA VACIONA
+                    hoja2.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(31).Value ' EXENTA
+                    hoja2.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(32).Value ' TOTLA PRIMAS
+                    hoja2.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(33).Value ''TOTAL PERCEPCIONES
+                    hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPCIONES /ISR
+                    hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
+                    hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR
+                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMS
+                    hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
+                    hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
+                    hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
+                    hoja2.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(42).Value 'PENSION ALIMENT
+                    hoja2.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(43).Value ' PRESTAMO
+                    hoja2.Cell(filaExcel, 36).FormulaA1 = "=AB" & filaExcel & "+AC" & filaExcel & "+AD" & filaExcel & "+AE" & filaExcel & "+AF" & filaExcel & "+AG" & filaExcel & "+AH" & filaExcel & "+AI" & filaExcel ' TOTAL DEDUCCIONES
+                    hoja2.Cell(filaExcel, 37).FormulaA1 = "=Z" & filaExcel & "-AJ" & filaExcel 'NETO A PAGAR
+                    hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
+                    hoja2.Cell(filaExcel, 39).FormulaA1 = "=AK" & filaExcel & "-AL" & filaExcel 'NETO A DISPERSAR
+
+                    filaExcel = filaExcel + 1
+                  
+
+                Next x
+
+
+
+
+                'MAECCO FORMULAS Y ESTILOS
+
+                recorrerFilasColumnas(hoja2, 12, filaExcel, 39, "bold")
+                hoja2.Range(filaExcel + 4, 20, filaExcel + 4, 39).Style.Font.SetBold(True)
+
+                'hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S9:S" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T9:T" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 21).FormulaA1 = "=SUM(U9:U" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 22).FormulaA1 = "=SUM(V9:V" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 23).FormulaA1 = "=SUM(W9:W" & filaExcel & ")"
+
+                'hoja2.Cell(filaExcel + 4, 24).FormulaA1 = "=SUM(X9:X" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 25).FormulaA1 = "=SUM(Y9:Y" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 26).FormulaA1 = "=SUM(Z9:Z" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 27).FormulaA1 = "=SUM(AA9:AA" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 28).FormulaA1 = "=SUM(AB9:AB" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 29).FormulaA1 = "=SUM(AC12:AC" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 30).FormulaA1 = "=SUM(AD12:AD" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 31).FormulaA1 = "=SUM(AE12:AE" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 32).FormulaA1 = "=SUM(AF12:AF" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 33).FormulaA1 = "=SUM(AG12:AG" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 34).FormulaA1 = "=SUM(AH12:AH" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 35).FormulaA1 = "=SUM(AI12:AI" & filaExcel & ")"
+                'hoja2.Cell(filaExcel + 4, 36).FormulaA1 = "=SUM(AJ12:AJ" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 37).FormulaA1 = "=SUM(AK12:AK" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL12:AL" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 39).FormulaA1 = "=SUM(AM12:AL" & filaExcel & ")"
+
+
+
+
+                'Titulo
+                Dim moment As Date = Date.Now()
+                Dim month As Integer = moment.Month
+                Dim year As Integer = moment.Year
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+
+                dialogo.FileName = "TMM NOMINA MAECCO " + mesperiodo + " " + year.ToString
+                'dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " "
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
+
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    
+                    MessageBox.Show("Archivo Generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                End If
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        End Try
+
+    End Sub
+    
+    Private Sub btnKiosko_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKiosko.Click
+
+        Try
+
+            Dim ejercicio, fechadepago As String
+            Dim mes As String
+            Dim fechapagoletra() As String
+            Dim filaExcel As Integer = 2
+            Dim dialogo As New SaveFileDialog()
+
+            If dtgDatos.Rows.Count > 0 Then
+                Dim mensaje As String
+
+                pnlProgreso.Visible = True
+                pnlCatalogo.Enabled = False
+                Application.DoEvents()
+
+                pgbProgreso.Minimum = 0
+                pgbProgreso.Value = 0
+                pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+
+                Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+                If rwPeriodo0 Is Nothing = False Then
+
+                    mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                    ejercicio = rwPeriodo0(0).Item("iEjercicio")
+                    fechapagoletra = Date.Parse(rwPeriodo0(0).Item("iDiasPago") & rwPeriodo0(0).Item("dFechaFin").ToString.Remove(0, 2)).ToLongDateString().ToString.Split(",")
+                    fechadepago = Date.Parse(rwPeriodo0(0).Item("iDiasPago") & rwPeriodo0(0).Item("dFechaFin").ToString.Remove(0, 2))
+                End If
+
+
+
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\kiosko.xlsx"
+
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+
+                book.Worksheet(1).CopyTo(libro, mes)
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+                Dim incapacidad, isr, imss, infonavit, infonavitanterior, fonacot, pension, prestamo As Double
+                Dim totaldeducciones, totalpercepciones As Double
+                Dim netoapagar, netoadispersar, cuotasindical As Double
+                Dim sueldoordinarioneto, sueldoordinariotmm As Double
+
+                Dim prestamopersonalsindicato, adeudoinfonavit, diferenciainfonavit As Double
+                Dim complemento, maecco As Double
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                  
+                    incapacidad = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
+                    isr = dtgDatos.Rows(x).Cells(36).Value 'ISR
+                    imss = dtgDatos.Rows(x).Cells(37).Value 'IMS
+                    infonavit = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
+                    infonavitanterior = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
+                    fonacot = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
+                    pension = dtgDatos.Rows(x).Cells(42).Value 'PENSION ALIMENT
+                    prestamo = dtgDatos.Rows(x).Cells(43).Value ' PRESTAMO
+                    totalpercepciones = dtgDatos.Rows(x).Cells(33).Value 'Total percepciones
+                    cuotasindical = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
+                    sueldoordinariotmm = dtgDatos.Rows(x).Cells(15).Value ' SUELDO ORDINARIO TMM
+
+                    totaldeducciones = incapacidad + isr + imss + infonavit + infonavitanterior + fonacot + pension + prestamo
+                    netoapagar = totalpercepciones - totaldeducciones
+                    netoadispersar = netoapagar - cuotasindical
+                    maecco = netoadispersar
+
+                    sueldoordinarioneto = sueldoordinariotmm - cuotasindical - (infonavit - infonavitanterior) - fonacot - pension - prestamo
+                    complemento = sueldoordinarioneto - maecco
+
+
+
+
+                    hoja.Cell(filaExcel, 1).Value = fechadepago
+                    hoja.Cell(filaExcel, 2).Value = Trim(dtgDatos.Rows(x).Cells(3).Value)
+                    hoja.Cell(filaExcel, 3).Value = Trim(dtgDatos.Rows(x).Cells(4).Value)
+                    hoja.Cell(filaExcel, 4).Value = maecco
+                    'hoja.Cell(filaExcel, 5).Value = Trim(dtgDatos.Rows(x).Cells(4).Value) & fechadepago.Replace(" ", "_")
+                    hoja.Cell(filaExcel, 6).Value = complemento
+
+                    If prestamopersonalsindicato > 0 Or adeudoinfonavit > 0 Or diferenciainfonavit > 0 Then
+                        hoja.Cell(filaExcel, 8).Value = "1"
+                    Else
+                        hoja.Cell(filaExcel, 8).Value = "0"
+                    End If
+
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
+                    filaExcel = filaExcel + 1
+                Next x
+
+
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+
+                dialogo.FileName = "Pago nomina TMM KIOSKO " + mes + " " + ejercicio
+                'dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " "
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
+
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo Generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                End If
+            Else
+                MessageBox.Show("No hay registros para procesar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+
+
+        Catch ex As Exception
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+        End Try
+
+    End Sub
+
+    
+    
+
+  
     
 End Class
 
