@@ -4122,7 +4122,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 8).Value = ""
                     hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(22).Value  ''TIEMPO EXTRA FIJO
                     hoja2.Cell(filaExcel, 10).Value = ""
-                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value ''SUELDO BASE
+                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(21).Value ''SUELDO BASE
                     hoja2.Cell(filaExcel, 12).Value = ""
                     hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(27).Value ''AGUINALDO GRAVADO
                     hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(28).Value ''AGUINALDO EXENTO
@@ -4321,7 +4321,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 8).Value = ""
                     hoja2.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(22).Value  ''TIEMPO EXTRA FIJO
                     hoja2.Cell(filaExcel, 10).Value = ""
-                    hoja2.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(16).Value ''SUELDO BASE
+                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(21).Value ''SUELDO BASE
                     hoja2.Cell(filaExcel, 12).Value = ""
                     hoja2.Cell(filaExcel, 13).Value = dtgD.Rows(x).Cells(27).Value ''AGUINALDO GRAVADO
                     hoja2.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(28).Value ''AGUINALDO EXENTO
@@ -4517,7 +4517,7 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel, 8).Value = ""
                 hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(z).Cells(22).Value  ''TIEMPO EXTRA FIJO
                 hoja2.Cell(filaExcel, 10).Value = ""
-                hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value ''SUELDO BASE
+                hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(21).Value ''SUELDO BASE
                 hoja2.Cell(filaExcel, 12).Value = ""
                 hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(z).Cells(27).Value ''AGUINALDO GRAVADO
                 hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(z).Cells(28).Value ''AGUINALDO EXENTO
