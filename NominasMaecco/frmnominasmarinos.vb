@@ -4112,7 +4112,7 @@ Public Class frmnominasmarinos
 
 
                     ''Deducciones
-                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'No Empleado
+                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
                     hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value 'NOMBRE
                     hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(25).Value ''VACACIONES PROPORCIONALES
                     hoja2.Cell(filaExcel, 4).Value = ""
@@ -4132,7 +4132,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 18).Value = " "
 
                     ''Percepciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'No Empleado
+                    hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
                     hoja3.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value 'NOMBRE
                     hoja3.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(37).Value 'IMSS
                     hoja3.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR 
@@ -4311,7 +4311,7 @@ Public Class frmnominasmarinos
 
 
                     ''Deducciones
-                    hoja2.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
+                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
                     hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
                     hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(25).Value ''VACACIONES PROPORCIONALES
                     hoja2.Cell(filaExcel, 4).Value = ""
@@ -4331,7 +4331,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 18).Value = " "
 
                     ''Percepciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
+                    hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
                     hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
                     hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value 'IMSS
                     hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR 
@@ -4507,7 +4507,7 @@ Public Class frmnominasmarinos
 
 
                 ''Deducciones
-                hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
+                hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(6).Value 'rfc
                 hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
                 hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(25).Value ''VACACIONES PROPORCIONALES
                 hoja2.Cell(filaExcel, 4).Value = ""
@@ -4527,7 +4527,7 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel, 18).Value = " "
 
                 ''Percepciones
-                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(3).Value 'No Empleado
+                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(z).Cells(6).Value 'rfc
                 hoja3.Cell(filaExcel, 2).Value = dtgDatos.Rows(z).Cells(4).Value 'NOMBRE
                 hoja3.Cell(filaExcel, 3).Value = dtgDatos.Rows(z).Cells(37).Value 'IMSS
                 hoja3.Cell(filaExcel, 4).Value = dtgDatos.Rows(z).Cells(36).Value 'ISR 
