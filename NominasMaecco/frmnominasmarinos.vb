@@ -3921,7 +3921,8 @@ Public Class frmnominasmarinos
 
             dtgDupl.Rows.Clear()
 
-            MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            'MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            llenargrid()
         Else
             MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -4202,7 +4203,7 @@ Public Class frmnominasmarinos
             Dim mesid As String
             Dim fechapagoletra As String
             Dim filaExcel As Integer = 2
-            Dim dialogo As New SaveFileDialog()
+            'Dim dialogo As New SaveFileDialog()
 
             Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
             If rwPeriodo0 Is Nothing = False Then
@@ -4331,7 +4332,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 18).Value = " "
 
                     ''Percepciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
+                    hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'rfc
                     hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
                     hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value 'IMSS
                     hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR 
@@ -4340,7 +4341,14 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 7).Value = ""
                     hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'INCAPACIDAD *IMPORTE*
                     hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(42).Value  'PENSION ALIMENTICIA
-                    hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value 'INFONAVIT
+                    If (dtgD.Rows(x).Cells(38).Value = "") Then
+                        hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value
+
+                    Else
+                       hoja3.Cell(filaExcel, 10).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value) 
+                    End If
+
+                    'INFONAVIT
                     hoja3.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(44).Value 'FONACOT
                     hoja3.Cell(filaExcel, 12).Value = dtgD.Rows(x).Cells(41).Value 'CUOTA SINDICAL
 
@@ -4370,7 +4378,11 @@ Public Class frmnominasmarinos
                 ' OK button pressed
                 libro.SaveAs(path)
                 libro = Nothing
-                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+               
+
+
+                'MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ''Else
                 'MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -4563,6 +4575,24 @@ Public Class frmnominasmarinos
         End Try
     End Function
 
+    Public Function validateInfonavit(ByVal diferencia As Object, ByVal infonavit As Object) As String
+        Dim negativo As Integer = diferencia.ToString.IndexOf("-")
+        Dim infonavitcalculado As Double
+        If negativo <> -1 Then
+            Dim diferenciaInfonavit As Double = diferencia
+
+
+            infonavitcalculado = CDbl(infonavit) + CDbl(diferencia)
+            ' Return infonavitcalculado.ToString()
+        Else
+            'Return infonavit.ToString
+            infonavitcalculado = CDbl(infonavit) + CDbl(diferencia)
+        End If
+
+        Return infonavitcalculado.ToString()
+
+
+    End Function
     Function ObtenerValoresFila(ByVal fila As DataGridViewRow) As String()
 
         Dim Contenido(dtgDatos.ColumnCount - 1) As String
