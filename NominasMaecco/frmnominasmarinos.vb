@@ -4075,7 +4075,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(16).Value 'SDI
                     hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
                     hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
-                    hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'DIAS PAGADOS
+                    hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(20).Value 'DIAS PAGADOS
                     hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
                     hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
                     hoja.Cell(filaExcel, 14).Value = ""
@@ -4276,7 +4276,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
                     hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
                     hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
-                    hoja.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(16).Value 'DIAS PAGADOS
+                    hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(20).Value 'DIAS PAGADOS
                     hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
                     hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
                     hoja.Cell(filaExcel, 14).Value = ""
@@ -4472,7 +4472,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(z).Cells(16).Value 'SDI
                 hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
                 hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
-                hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(16).Value 'DIAS PAGADOS
+                hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(z).Cells(20).Value 'DIAS PAGADOS
                 hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
                 hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
                 hoja.Cell(filaExcel, 14).Value = ""
