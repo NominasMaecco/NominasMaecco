@@ -4318,7 +4318,7 @@ Public Class frmnominasmarinos
                     ''Deducciones
 
                     If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
-                        hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
+                        hoja2.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(4).Value 'rfc
                         hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
                         hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(25).Value ''VACACIONES PROPORCIONALES
                         hoja2.Cell(filaExcel, 4).Value = ""
