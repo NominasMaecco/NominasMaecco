@@ -3905,15 +3905,14 @@ Public Class frmnominasmarinos
 
 
             If dtgDupl.Rows.Count - 1 <= 0 Then
-                'generarLayout()
-                generarLayout2(dtgDatos, path) '.Replace(".xlsx", " A .xlsx"))
-                'MsgBox(contador.ToString & " Datos repetidos")
+
+                generarLayout2(dtgDatos, path)
+
             Else
                 generarLayout2(dtgDatos, path.Replace(".xlsx", " A .xlsx"))
 
                 If ExisteEnLista2(dtgDupl, path) = False Then
-                    'Dim Ruta As String = generarLayout()
-                    'generarLayout2(dtgDupl, path.Replace(".xlsx", " A .xlsx"))
+                   
 
                     generarLayout2(dtgDupl, path.Replace(".xlsx", " B.xlsx"))
                 End If
@@ -3921,7 +3920,6 @@ Public Class frmnominasmarinos
 
             dtgDupl.Rows.Clear()
 
-            'MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             llenargrid()
         Else
             MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -4252,52 +4250,58 @@ Public Class frmnominasmarinos
 
 
                 For x As Integer = 0 To dtgD.Rows.Count - 1
-                    Dim cuenta, clavebanco As String
+                    Dim cuenta, clavebanco, fechainiciorelaboral As String
 
                     If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
-                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where iIdEmpleadoC=" & dtgD.Rows(x).Cells(3).Value)
+                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgD.Rows(x).Cells(3).Value)
                         If rwEmpleado Is Nothing = False Then
 
                             cuenta = rwEmpleado(0).Item("Clabe")
+                            fechainiciorelaboral = rwEmpleado(0).Item("dFechaPatrona")
+
                             Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
 
                             clavebanco = rwBanco(0).Item("clave")
                         End If
+
                     End If
 
-
                     ''Generales
-                    hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'N Empleado
-                    hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
-                    hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
-                    hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
-                    hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'IMSS
-                    hoja.Cell(filaExcel, 6).Value = cuenta 'CUENTA BANCARIA
-                    hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(15).Value 'SBC
-                    hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
-                    hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
-                    hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
-                    hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS PAGADOS
-                    hoja.Cell(filaExcel, 12).Value = "" 'FECHA INICIO RELABORAL
-                    hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
-                    hoja.Cell(filaExcel, 14).Value = ""
-                    hoja.Cell(filaExcel, 15).Value = ""  ''SINDICALIZADO
-                    hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO DE JORNADA
-                    hoja.Cell(filaExcel, 17).Value = ""
-                    hoja.Cell(filaExcel, 18).Value = "2"  ''TIPO REGIMEN
-                    hoja.Cell(filaExcel, 19).Value = ""   ''
-                    hoja.Cell(filaExcel, 20).Value = ""   '' DEPARTAMENTO
-                    hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue  '' PUESTO
-                    hoja.Cell(filaExcel, 22).Value = "4"  ''RIESGO PUESTO
-                    hoja.Cell(filaExcel, 23).Value = "Clase IV"  ''
-                    hoja.Cell(filaExcel, 24).Value = "5"  ''PERIODICIDAD
-                    hoja.Cell(filaExcel, 25).Value = "MENSUAL"
-                    hoja.Cell(filaExcel, 26).Value = clavebanco ''CLAVE BANCO
-                    hoja.Cell(filaExcel, 27).Value = ""
-                    hoja.Cell(filaExcel, 28).Value = "" ''SUBCONTRATACION
-                    hoja.Cell(filaExcel, 29).Value = "NOMINA" '' TIPO
-                    hoja.Cell(filaExcel, 30).Value = mesid
-                    hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue 'BUQUE
+                    hoja.Cell(filaExcel, 26).Style.NumberFormat.Format = "@"
+                    hoja.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
+                    If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
+                        hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'N Empleado
+                        hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
+                        hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
+                        hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
+                        hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'IMSS
+                        hoja.Cell(filaExcel, 6).Value = cuenta 'CUENTA BANCARIA
+                        hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(15).Value 'SBC
+                        hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
+                        hoja.Cell(filaExcel, 9).Value = "F2115607102" 'REGISTRO PATTONAL
+                        hoja.Cell(filaExcel, 10).Value = "VER" 'ENT. FEDERATIVA
+                        hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS PAGADOS
+                        hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FECHA INICIO RELABORAL
+                        hoja.Cell(filaExcel, 13).Value = "3" ''TIPO DE CONTRATO 
+                        hoja.Cell(filaExcel, 14).Value = ""
+                        hoja.Cell(filaExcel, 15).Value = ""  ''SINDICALIZADO
+                        hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO DE JORNADA
+                        hoja.Cell(filaExcel, 17).Value = ""
+                        hoja.Cell(filaExcel, 18).Value = "2"  ''TIPO REGIMEN
+                        hoja.Cell(filaExcel, 19).Value = ""   ''
+                        hoja.Cell(filaExcel, 20).Value = ""   '' DEPARTAMENTO
+                        hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue  '' PUESTO
+                        hoja.Cell(filaExcel, 22).Value = "4"  ''RIESGO PUESTO
+                        hoja.Cell(filaExcel, 23).Value = "Clase IV"  ''
+                        hoja.Cell(filaExcel, 24).Value = "5"  ''PERIODICIDAD
+                        hoja.Cell(filaExcel, 25).Value = "MENSUAL"
+                        hoja.Cell(filaExcel, 26).Value = clavebanco ''CLAVE BANCO
+                        hoja.Cell(filaExcel, 27).Value = ""
+                        hoja.Cell(filaExcel, 28).Value = "" ''SUBCONTRATACION
+                        hoja.Cell(filaExcel, 29).Value = "NOMINA" '' TIPO
+                        hoja.Cell(filaExcel, 30).Value = mesid
+                        hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue 'BUQUE
+                    End If
 
                     'pgbProgreso.Value += 1
                     't = t + 1
@@ -4312,46 +4316,48 @@ Public Class frmnominasmarinos
 
 
                     ''Deducciones
-                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
-                    hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
-                    hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(25).Value ''VACACIONES PROPORCIONALES
-                    hoja2.Cell(filaExcel, 4).Value = ""
-                    hoja2.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(24).Value  ''DESC. SEM OBLIGATORIO
-                    hoja2.Cell(filaExcel, 6).Value = ""
-                    hoja2.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(23).Value   ''TIEMPO EXTRA OCASIONAL
-                    hoja2.Cell(filaExcel, 8).Value = ""
-                    hoja2.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(22).Value  ''TIEMPO EXTRA FIJO
-                    hoja2.Cell(filaExcel, 10).Value = ""
-                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(21).Value ''SUELDO BASE
-                    hoja2.Cell(filaExcel, 12).Value = ""
-                    hoja2.Cell(filaExcel, 13).Value = dtgD.Rows(x).Cells(27).Value ''AGUINALDO GRAVADO
-                    hoja2.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(28).Value ''AGUINALDO EXENTO
-                    hoja2.Cell(filaExcel, 15).Value = dtgD.Rows(x).Cells(30).Value 'PRIMA VACACIONAL
-                    hoja2.Cell(filaExcel, 16).Value = dtgD.Rows(x).Cells(31).Value
-                    hoja2.Cell(filaExcel, 17).Value = " " '' dato.SubItems(27).Text ''PRIMA DE ANTIGËDAD
-                    hoja2.Cell(filaExcel, 18).Value = " "
 
-                    ''Percepciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'rfc
-                    hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
-                    hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value 'IMSS
-                    hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR 
-                    hoja3.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(43).Value 'PRESTAMOS
-                    hoja3.Cell(filaExcel, 6).Value = ""
-                    hoja3.Cell(filaExcel, 7).Value = ""
-                    hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'INCAPACIDAD *IMPORTE*
-                    hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(42).Value  'PENSION ALIMENTICIA
-                    If (dtgD.Rows(x).Cells(38).Value = "") Then
-                        hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value
+                    If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
+                        hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'rfc
+                        hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
+                        hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(25).Value ''VACACIONES PROPORCIONALES
+                        hoja2.Cell(filaExcel, 4).Value = ""
+                        hoja2.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(24).Value  ''DESC. SEM OBLIGATORIO
+                        hoja2.Cell(filaExcel, 6).Value = ""
+                        hoja2.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(23).Value   ''TIEMPO EXTRA OCASIONAL
+                        hoja2.Cell(filaExcel, 8).Value = ""
+                        hoja2.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(22).Value  ''TIEMPO EXTRA FIJO
+                        hoja2.Cell(filaExcel, 10).Value = ""
+                        hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(21).Value ''SUELDO BASE
+                        hoja2.Cell(filaExcel, 12).Value = ""
+                        hoja2.Cell(filaExcel, 13).Value = dtgD.Rows(x).Cells(27).Value ''AGUINALDO GRAVADO
+                        hoja2.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(28).Value ''AGUINALDO EXENTO
+                        hoja2.Cell(filaExcel, 15).Value = dtgD.Rows(x).Cells(30).Value 'PRIMA VACACIONAL
+                        hoja2.Cell(filaExcel, 16).Value = dtgD.Rows(x).Cells(31).Value
+                        hoja2.Cell(filaExcel, 17).Value = " " '' dato.SubItems(27).Text ''PRIMA DE ANTIGËDAD
+                        hoja2.Cell(filaExcel, 18).Value = " "
 
-                    Else
-                       hoja3.Cell(filaExcel, 10).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value) 
+                        ''Percepciones
+                        hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'rfc
+                        hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
+                        hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value 'IMSS
+                        hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR 
+                        hoja3.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(43).Value 'PRESTAMOS
+                        hoja3.Cell(filaExcel, 6).Value = ""
+                        hoja3.Cell(filaExcel, 7).Value = ""
+                        hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'INCAPACIDAD *IMPORTE*
+                        hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(42).Value  'PENSION ALIMENTICIA
+                        If (dtgD.Rows(x).Cells(38).Value = "") Then
+                            hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value
+
+                        Else
+                            hoja3.Cell(filaExcel, 10).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value)
+                        End If
+
+                        'INFONAVIT
+                        hoja3.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(44).Value 'FONACOT
+                        hoja3.Cell(filaExcel, 12).Value = dtgD.Rows(x).Cells(41).Value 'CUOTA SINDICAL
                     End If
-
-                    'INFONAVIT
-                    hoja3.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(44).Value 'FONACOT
-                    hoja3.Cell(filaExcel, 12).Value = dtgD.Rows(x).Cells(41).Value 'CUOTA SINDICAL
-
 
                     ''Otros Pagos
                     'hoja4.Columns("A").Width = 20
@@ -4379,7 +4385,7 @@ Public Class frmnominasmarinos
                 libro.SaveAs(path)
                 libro = Nothing
 
-               
+
 
 
                 'MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)

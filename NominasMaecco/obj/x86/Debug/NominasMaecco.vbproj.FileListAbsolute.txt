@@ -43,10 +43,12 @@ D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frm
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmImportarEmpleadosAlta.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmIncapacidad.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmJuridico.resources
+D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmnominasmarinos.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmPrincipal.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmSindicato.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmAcceso.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmUsuarios.resources
+D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmImss.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.Resources.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmRecibosLupita.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.ucVisor.resources
@@ -57,10 +59,8 @@ D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.applica
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.pdb
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.xml
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmnominasmarinos.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe.manifest
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.application
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.xml
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.pdb
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmImss.resources
