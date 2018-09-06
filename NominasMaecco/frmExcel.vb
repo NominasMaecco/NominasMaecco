@@ -663,101 +663,113 @@ Public Class frmExcel
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
                 For Each dato As ListViewItem In lsvLista.CheckedItems
+                    If (dato.SubItems(9).Text = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And tipo = "DESCANSO") Then
 
-                    hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
-                    hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
-                    hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
-                    hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
-                    ''Generales
-                    hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text
-                    hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text
-                    hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text
-                    hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text
-                    hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text
-                    hoja.Cell(filaExcel, 6).Value = dato.SubItems(44).Text
-                    hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text
-                    hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text
-                    hoja.Cell(filaExcel, 9).Value = "G0666980109" ''dato.SubItems(8).Text 
-                    hoja.Cell(filaExcel, 10).Value = "VER" ''dato.SubItems(9).Text  
-                    hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text
+                    Else
 
-                    Dim fecha() As String = dato.SubItems(45).Text.Split(" ")
-                    hoja.Cell(filaExcel, 12).Value = fecha(0) ''dato.SubItems(45).Text
-                    hoja.Cell(filaExcel, 13).Value = "3" ''dato.SubItems(12).Text 
-                    hoja.Cell(filaExcel, 14).Value = ""  ''dato.SubItems(14).Text
-                    hoja.Cell(filaExcel, 15).Value = ""  ''dato.SubItems(15).Text
-                    hoja.Cell(filaExcel, 16).Value = "1"  ''dato.SubItems(16).Text
-                    hoja.Cell(filaExcel, 17).Value = ""  ''dato.SubItems(17).Text
-                    hoja.Cell(filaExcel, 18).Value = "2"  ''dato.SubItems(18).Text
-                    hoja.Cell(filaExcel, 19).Value = ""  ''dato.SubItems(19).Text
-                    hoja.Cell(filaExcel, 20).Value = ""
-                    hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  '' dato.SubItems(21).Text
-                    hoja.Cell(filaExcel, 22).Value = "4"  ''dato.SubItems(22).Text
-                    hoja.Cell(filaExcel, 23).Value = ""  ''dato.SubItems(23).Text
-                    hoja.Cell(filaExcel, 24).Value = "5"  ''dato.SubItems(24).Text
-                    hoja.Cell(filaExcel, 25).Value = ""
-                    hoja.Cell(filaExcel, 26).Value = dato.SubItems(43).Text  ''dato.SubItems(26).Text
-                    hoja.Cell(filaExcel, 27).Value = ""  ''dato.SubItems(27).Text
-                    hoja.Cell(filaExcel, 28).Value = "" ''dato.SubItems(28).Text
-                    hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() '' dato.SubItems(29).Text MES DE PAGO
-                    hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1
-                    hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text
-                    pgbProgreso.Value += 1
-                    't = t + 1
-                    filaExcel = filaExcel + 1
+
+                        hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
+                        ''Generales
+                        hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text
+                        hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text
+                        hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text
+                        hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text
+                        hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text
+                        hoja.Cell(filaExcel, 6).Value = dato.SubItems(44).Text
+                        hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text
+                        hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text
+                        hoja.Cell(filaExcel, 9).Value = "G0666980109" ''dato.SubItems(8).Text 
+                        hoja.Cell(filaExcel, 10).Value = "VER" ''dato.SubItems(9).Text  
+                        hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text
+
+                        Dim fecha() As String = dato.SubItems(45).Text.Split(" ")
+                        hoja.Cell(filaExcel, 12).Value = fecha(0) ''dato.SubItems(45).Text
+                        hoja.Cell(filaExcel, 13).Value = "3" ''dato.SubItems(12).Text 
+                        hoja.Cell(filaExcel, 14).Value = ""  ''dato.SubItems(14).Text
+                        hoja.Cell(filaExcel, 15).Value = ""  ''dato.SubItems(15).Text
+                        hoja.Cell(filaExcel, 16).Value = "1"  ''dato.SubItems(16).Text
+                        hoja.Cell(filaExcel, 17).Value = ""  ''dato.SubItems(17).Text
+                        hoja.Cell(filaExcel, 18).Value = "2"  ''dato.SubItems(18).Text
+                        hoja.Cell(filaExcel, 19).Value = ""  ''dato.SubItems(19).Text
+                        hoja.Cell(filaExcel, 20).Value = ""
+                        hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  '' dato.SubItems(21).Text
+                        hoja.Cell(filaExcel, 22).Value = "4"  ''dato.SubItems(22).Text
+                        hoja.Cell(filaExcel, 23).Value = ""  ''dato.SubItems(23).Text
+                        hoja.Cell(filaExcel, 24).Value = "5"  ''dato.SubItems(24).Text
+                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 26).Value = dato.SubItems(43).Text  ''dato.SubItems(26).Text
+                        hoja.Cell(filaExcel, 27).Value = ""  ''dato.SubItems(27).Text
+                        hoja.Cell(filaExcel, 28).Value = "" ''dato.SubItems(28).Text
+                        hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() '' dato.SubItems(29).Text MES DE PAGO
+                        hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1
+                        hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text
+                        pgbProgreso.Value += 1
+
+
+
+                        't = t + 1
+                        filaExcel = filaExcel + 1
+                    End If
+
                 Next
                 pgbProgreso.Value = 0
 
                 filaExcel = 4
                 For Each dato As ListViewItem In lsvLista.CheckedItems
-                    ''Percepciones
-                    hoja2.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
-                    hoja2.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
-                    hoja2.Cell(filaExcel, 3).Value = dato.SubItems(18).Text
-                    hoja2.Cell(filaExcel, 4).Value = ""
-                    hoja2.Cell(filaExcel, 5).Value = dato.SubItems(19).Text
-                    hoja2.Cell(filaExcel, 6).Value = dato.SubItems(20).Text
-                    hoja2.Cell(filaExcel, 7).Value = dato.SubItems(21).Text
-                    hoja2.Cell(filaExcel, 8).Value = ""
-                    hoja2.Cell(filaExcel, 9).Value = dato.SubItems(22).Text
-                    hoja2.Cell(filaExcel, 10).Value = ""
-                    hoja2.Cell(filaExcel, 11).Value = dato.SubItems(23).Text
-                    hoja2.Cell(filaExcel, 12).Value = ""
-                    hoja2.Cell(filaExcel, 13).Value = dato.SubItems(24).Text
-                    hoja2.Cell(filaExcel, 14).Value = dato.SubItems(25).Text
-                    hoja2.Cell(filaExcel, 15).Value = dato.SubItems(27).Text
-                    hoja2.Cell(filaExcel, 16).Value = dato.SubItems(28).Text
+                    If (dato.SubItems(9).Text = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And tipo = "DESCANSO") Then
 
-                    ''Deducciones
-                    hoja3.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
-                    hoja3.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
-                    hoja3.Cell(filaExcel, 3).Value = dato.SubItems(34).Text
-                    hoja3.Cell(filaExcel, 4).Value = dato.SubItems(33).Text
-                    hoja3.Cell(filaExcel, 5).Value = dato.SubItems(38).Text
-                    hoja3.Cell(filaExcel, 6).Value = ""
-                    hoja3.Cell(filaExcel, 7).Value = ""
-                    hoja3.Cell(filaExcel, 8).Value = dato.SubItems(32).Text
-                    hoja3.Cell(filaExcel, 9).Value = dato.SubItems(37).Text
-                    'hoja3.Cell(filaExcel, 10).Value = dato.SubItems(36).Text
-                    If (dato.SubItems(36).Text = "") Then
-                        hoja3.Cell(filaExcel, 10).Value = dato.SubItems(36).Text
-                        hoja3.Cell(filaExcel, 11).Value = dato.SubItems(35).Text
                     Else
-                        hoja3.Cell(filaExcel, 10).Value = " "
-                        hoja3.Cell(filaExcel, 11).Value = validateInfonavit(dato.SubItems(36).Text, dato.SubItems(35).Text)
+                        ''Percepciones
+                        hoja2.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
+                        hoja2.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
+                        hoja2.Cell(filaExcel, 3).Value = dato.SubItems(18).Text
+                        hoja2.Cell(filaExcel, 4).Value = ""
+                        hoja2.Cell(filaExcel, 5).Value = dato.SubItems(19).Text
+                        hoja2.Cell(filaExcel, 6).Value = dato.SubItems(20).Text
+                        hoja2.Cell(filaExcel, 7).Value = dato.SubItems(21).Text
+                        hoja2.Cell(filaExcel, 8).Value = ""
+                        hoja2.Cell(filaExcel, 9).Value = dato.SubItems(22).Text
+                        hoja2.Cell(filaExcel, 10).Value = ""
+                        hoja2.Cell(filaExcel, 11).Value = dato.SubItems(23).Text
+                        hoja2.Cell(filaExcel, 12).Value = ""
+                        hoja2.Cell(filaExcel, 13).Value = dato.SubItems(24).Text
+                        hoja2.Cell(filaExcel, 14).Value = dato.SubItems(25).Text
+                        hoja2.Cell(filaExcel, 15).Value = dato.SubItems(27).Text
+                        hoja2.Cell(filaExcel, 16).Value = dato.SubItems(28).Text
+
+                        ''Deducciones
+                        hoja3.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
+                        hoja3.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
+                        hoja3.Cell(filaExcel, 3).Value = dato.SubItems(34).Text
+                        hoja3.Cell(filaExcel, 4).Value = dato.SubItems(33).Text
+                        hoja3.Cell(filaExcel, 5).Value = dato.SubItems(38).Text
+                        hoja3.Cell(filaExcel, 6).Value = ""
+                        hoja3.Cell(filaExcel, 7).Value = ""
+                        hoja3.Cell(filaExcel, 8).Value = dato.SubItems(32).Text
+                        hoja3.Cell(filaExcel, 9).Value = dato.SubItems(37).Text
+                        'hoja3.Cell(filaExcel, 10).Value = dato.SubItems(36).Text
+                        If (dato.SubItems(36).Text = "") Then
+                            hoja3.Cell(filaExcel, 10).Value = dato.SubItems(36).Text
+                            hoja3.Cell(filaExcel, 11).Value = dato.SubItems(35).Text
+                        Else
+                            hoja3.Cell(filaExcel, 10).Value = " "
+                            hoja3.Cell(filaExcel, 11).Value = validateInfonavit(dato.SubItems(36).Text, dato.SubItems(35).Text)
+                        End If
+
+
+                        ''Otros Pagos
+                        'hoja4.Columns("A").Width = 20
+                        'hoja4.Columns("B").Width = 20
+                        'hoja4.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
+                        'hoja4.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
+                        'hoja4.Cell(filaExcel, 3).Value = dato.SubItems(37).Text
+                        'hoja4.Cell(filaExcel, 4).Value = dato.SubItems(48).Text
+
+                        filaExcel = filaExcel + 1
                     End If
-
-
-                    ''Otros Pagos
-                    'hoja4.Columns("A").Width = 20
-                    'hoja4.Columns("B").Width = 20
-                    'hoja4.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
-                    'hoja4.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
-                    'hoja4.Cell(filaExcel, 3).Value = dato.SubItems(37).Text
-                    'hoja4.Cell(filaExcel, 4).Value = dato.SubItems(48).Text
-
-                    filaExcel = filaExcel + 1
-
 
                 Next
                 Dim moment As Date = Date.Now()
