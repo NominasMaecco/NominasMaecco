@@ -3460,7 +3460,7 @@ Public Class frmnominasmarinos
                     sql &= " SUM(fDescSemObligatorio) AS fDescSemObligatorio, SUM(fVacacionesProporcionales) AS fVacacionesProporcionales, SUM(fAguinaldoGravado + fAguinaldoExento) AS totalAguinaldo, "
                     sql &= " SUM(fPrimaVacacionalExento+ fPrimaVacacionalGravado) AS totalPrimaVacacional, SUM(fPrestamo) AS fPrestamo, "
                     sql &= "SUM (fPrestamoPerS) as Complemento,"
-                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco) AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
+                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco)+60 AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
                     sql &= " SUM(fImssCS) AS  fImssCS, SUM(fRcvCS) AS  fRcvCS, SUM(fInfonavitCS) AS  fInfonavitCS, SUM(fIsnCS) AS  fIsnCS, SUM(fTotalCostoSocial) AS  fTotalCostoSocial"
                     sql &= " FROM Nomina inner join EmpleadosC ON fkiIdEmpleadoC=iIdEmpleadoC  "
                     sql &= " WHERE Nomina.fkiIdEmpresa =1"
@@ -3480,7 +3480,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filabuque, 9).Value = sumatorias(0).Item("fVacacionesProporcionales")
                         hoja.Cell(filabuque, 10).Value = sumatorias(0).Item("totalAguinaldo")
                         hoja.Cell(filabuque, 11).Value = sumatorias(0).Item("totalPrimaVacacional")
-                        hoja.Cell(filabuque, 12).Value = sumatorias(0).Item("fPrestamo")
+                        hoja.Cell(filabuque, 12).Value = "0.0" 'sumatorias(0).Item("fPrestamo")
                         hoja.Cell(filabuque, 13).FormulaA1 = "=SUM(E" & filabuque & ":L" & filabuque & ")"
                         hoja.Cell(filabuque, 14).Value = sumatorias(0).Item("fComplementoSindicato") ' COMPLEMENTO
                         hoja.Cell(filabuque, 15).Value = sumatorias(0).Item("fComisionMaecco")
@@ -3562,7 +3562,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(29, 9).FormulaA1 = "=SUM(E29:H29)"
 
                         'COMPROBACION
-                        hoja.Cell("I33").FormulaA1 = "=V8-I32"
+                        'hoja.Cell("I33").FormulaA1 = "=V8-I32"
                     End If
 
                     ''Selecciono fila y abandono bucle
@@ -3665,8 +3665,8 @@ Public Class frmnominasmarinos
             filaExcel = filaExcel + 1
 
         Next x
-
-        hoja.Cell(filaExcel + 2, 14).FormulaA1 = "=SUM(N10:N" & filaExcel + 1 & ")"
+            hoja.Cell(filaExcel + 2, 14).Style.NumberFormat.Format = "@"
+            hoja.Cell(filaExcel + 2, 14).FormulaA1 = "=SUM(N10:N" & filaExcel + 1 & ")"
 
         dialogo.FileName = "CUOTA SINDICALES " + mesperiodo.ToUpper + " " + ejercicio
         dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
@@ -7037,8 +7037,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 24).Value = ""
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = "=+N" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+V" & filaExcel + x & "+Y" & filaExcel + x & "+W" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filatmp + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filatmp + x & "+AA" & filatmp + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=+Z" & filaExcel + x & "*0.16"
+                        hoja.Cell(filaExcel + x, 28).FormulaA1 = "=+Z" & filaExcel + x & "+AA" & filaExcel + x
                         hoja.Cell(filaExcel + x, 29).Value = " "
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = "=Y" & filaExcel + x
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "30.00"
@@ -7109,7 +7109,27 @@ Public Class frmnominasmarinos
 
 
 
-
+                H += " +" & "H" & filaExcel + total + 1
+                I += " +" & "I" & filaExcel + total + 1
+                J += " +" & "J" & filaExcel + total + 1
+                K += " +" & "K" & filaExcel + total + 1
+                L += " +" & "L" & filaExcel + total + 1
+                M += " +" & "M" & filaExcel + total + 1
+                N += " +" & "N" & filaExcel + total + 1
+                O += " +" & "O" & filaExcel + total + 1
+                P += " +" & "P" & filaExcel + total + 1
+                Q += " +" & "Q" & filaExcel + total + 1
+                R += " +" & "R" & filaExcel + total + 1
+                S += " +" & "S" & filaExcel + total + 1
+                T += " +" & "T" & filaExcel + total + 1
+                U += " +" & "U" & filaExcel + total + 1
+                V += " +" & "V" & filaExcel + total + 1
+                W += " +" & "W" & filaExcel + total + 1
+                X2 += " +" & "X" & filaExcel + total + 1
+                Y += " +" & "Y" & filaExcel + total + 1
+                Z += " +" & "Z" & filaExcel + total + 1
+                AA += " +" & "AA" & filaExcel + total + 1
+                AB += " +" & "AB" & filaExcel + total + 1
                 'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 'hoja.Range(filaExcel + total + 1, 8, filaExcel + total, 26).Style.Font.SetBold(True)
 
