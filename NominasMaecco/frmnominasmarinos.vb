@@ -4790,11 +4790,13 @@ Public Class frmnominasmarinos
 
 
 
-                'dtgDatos.Columns.Clear()
-                'Dim chk As New DataGridViewCheckBoxColumn()
-                'dtgDatos.Columns.Add(chk)
-                'chk.HeaderText = ""
-                'chk.Name = "chk"
+                'dtgDatos.DefaultCellStyle.Font = New Font("Calibri", 8)
+                dtgDatos.Columns.Clear()
+                dtgDatos.ColumnHeadersDefaultCellStyle.Font = New Font("Calibri", 9)
+                Dim chk As New DataGridViewCheckBoxColumn()
+                dtgDatos.Columns.Add(chk)
+                chk.HeaderText = ""
+                chk.Name = "chk"
                 dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
 
                 dtgDatos.Columns(0).Width = 30
@@ -5137,38 +5139,20 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(63).ReadOnly = True
                 dtgDatos.Columns(63).Width = 150
 
-                'calcular()
 
                 'Cambiamos index del combo en el grid
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-                    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                    sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                    sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     Dim rwFila As DataRow() = nConsulta(sql)
 
 
 
-                    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
+                    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cFuncionesPuesto").ToString()
                 Next
 
-
-
-
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                    'Aguinaldo total
-                    dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(27).Value) + Double.Parse(dtgDatos.Rows(x).Cells(28).Value), 2)
-
-                    '
-                    'Total Prima de vacaciones                    
-                    dtgDatos.Rows(x).Cells(32).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(30).Value) + Double.Parse(dtgDatos.Rows(x).Cells(31).Value), 2)
-
-
-                Next
 
 
                 MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
