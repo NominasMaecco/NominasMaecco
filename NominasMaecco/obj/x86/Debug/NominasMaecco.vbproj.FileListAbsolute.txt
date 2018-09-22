@@ -31,7 +31,6 @@ C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe.c
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmSindicato.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmRecibosLupita.resources
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.ucVisor.resources
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmAgregarEmpleado.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmBuscarEmpleado.resources
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmDocumentos.resources
@@ -64,3 +63,4 @@ D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.app
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.xml
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.pdb
+D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache

@@ -155,6 +155,9 @@
                     txtObservaciones.Text = lsvHistorial.SelectedItems(0).SubItems(4).Text
                     dtpFecha.Value = lsvHistorial.SelectedItems(0).SubItems(2).Text
                     cmdAgregar.Enabled = True
+                    'rbBaja.Enabled = True
+                    'rbBaja.Enabled = True
+
                     Tipo = "1"
                     MessageBox.Show("Alta/Baja lista para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
