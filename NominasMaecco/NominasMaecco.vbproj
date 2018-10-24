@@ -199,6 +199,12 @@
     <Compile Include="frmSindicato.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSubirDatos.Designer.vb">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubirDatos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="General\frmAcceso.designer.vb">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </Compile>
@@ -318,6 +324,9 @@
     <EmbeddedResource Include="frmSindicato.resx">
       <DependentUpon>frmSindicato.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSubirDatos.resx">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="General\frmAcceso.resx">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </EmbeddedResource>
@@ -366,6 +375,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\1361008137_export_excel.png" />
+    <None Include="Resources\32_cerrar.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
     <Content Include="Resources\bloggif_5aa2e2fc58d9a.png" />
