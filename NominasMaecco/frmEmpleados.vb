@@ -1018,4 +1018,18 @@ Public Class frmEmpleados
             MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+    Private Sub cmdPension_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdPension.Click
+        Dim forma As New frmPensionA
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 End Class
