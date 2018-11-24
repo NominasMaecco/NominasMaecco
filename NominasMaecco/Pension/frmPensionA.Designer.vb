@@ -23,6 +23,7 @@ Partial Class frmPensionA
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.nudPorcentaje = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.cboEstatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -44,10 +45,9 @@ Partial Class frmPensionA
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.nudPorcentaje = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.nudPorcentaje, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -70,6 +70,13 @@ Partial Class frmPensionA
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(824, 155)
         Me.Panel1.TabIndex = 7
+        '
+        'nudPorcentaje
+        '
+        Me.nudPorcentaje.Location = New System.Drawing.Point(391, 56)
+        Me.nudPorcentaje.Name = "nudPorcentaje"
+        Me.nudPorcentaje.Size = New System.Drawing.Size(120, 26)
+        Me.nudPorcentaje.TabIndex = 190
         '
         'Label8
         '
@@ -238,13 +245,6 @@ Partial Class frmPensionA
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Beneficiario"
         '
-        'nudPorcentaje
-        '
-        Me.nudPorcentaje.Location = New System.Drawing.Point(391, 56)
-        Me.nudPorcentaje.Name = "nudPorcentaje"
-        Me.nudPorcentaje.Size = New System.Drawing.Size(120, 26)
-        Me.nudPorcentaje.TabIndex = 190
-        '
         'frmPensionA
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -254,12 +254,12 @@ Partial Class frmPensionA
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "frmPensionA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Imss"
+        Me.Text = "Pensión Alimenticia"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.nudPorcentaje, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.nudPorcentaje, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
