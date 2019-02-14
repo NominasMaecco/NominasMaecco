@@ -32,7 +32,3 @@ D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.app
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.xml
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.pdb
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmDeudaInfonavit.resources
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmFonacot.resources
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmPrestamo.resources
-D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbprojResolveAssemblyReference.cache

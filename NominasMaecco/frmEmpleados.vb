@@ -1,5 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
-Imports ClosedXML.Excel
+
 
 Public Class frmEmpleados
     Dim SQL As String
@@ -1019,91 +1019,62 @@ Public Class frmEmpleados
         End If
     End Sub
 
-    Private Sub cmdlista_Click(sender As System.Object, e As System.EventArgs) Handles cmdlista.Click
-        Dim filaExcel As Integer = 5
-        Dim dialogo As New SaveFileDialog()
-        Dim idtipo As Integer
-
-        SQL = "select fkiIdClienteInter,cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
-        SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco"
-        SQL &= " order by cNombreLargo"
-        Dim rwFilas As DataRow() = nConsulta(SQL)
-        If rwFilas Is Nothing = False Then
-            Dim libro As New ClosedXML.Excel.XLWorkbook
-            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Control")
-            hoja.Column("A").Width = 15
-            hoja.Column("B").Width = 50
-            hoja.Column("C").Width = 25
-            hoja.Column("D").Width = 25
-            hoja.Column("E").Width = 25
-            hoja.Column("F").Width = 30
-            hoja.Column("G").Width = 25
-            hoja.Column("H").Width = 30
+    Private Sub cmdPension_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdPension.Click
+        Dim forma As New frmPensionA
+        If gIdEmpleado Is Nothing = False Then
 
 
-            hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
-
-            hoja.Cell(3, 2).Value = "LISTA DE EMPLEADOS"
-            'hoja.Cell(3, 2).Value = ":"
-            'hoja.Cell(3, 3).Value = ""
-
-            hoja.Range(4, 1, 4, 11).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 11).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 11).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 11).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
-
-            'hoja.Cell(4, 1).Value = "Num"
-            hoja.Cell(4, 1).Value = "Id"
-            hoja.Cell(4, 2).Value = "Apellido Paterno"
-            hoja.Cell(4, 3).Value = "Apellido Materno"
-            hoja.Cell(4, 4).Value = "Nombre"
-            hoja.Cell(4, 5).Value = "RFC"
-            hoja.Cell(4, 6).Value = "CURP"
-            hoja.Cell(4, 7).Value = "IMSS"
-            hoja.Cell(4, 8).Value = "BANCO"
-            hoja.Cell(4, 9).Value = "CUENTA"
-            hoja.Cell(4, 10).Value = "CLABE"
-            hoja.Cell(4, 11).Value = "ESTATUS"
-
-
-
-
-
-            filaExcel = 4
-            For Each Fila In rwFilas
-                filaExcel = filaExcel + 1
-                hoja.Cell(filaExcel, 1).Value = "'" & Fila.Item("cCodigoEmpleado").ToString
-                hoja.Cell(filaExcel, 2).Value = Fila.Item("cApellidoP")
-                hoja.Cell(filaExcel, 3).Value = Fila.Item("cApellidoM")
-                hoja.Cell(filaExcel, 4).Value = Fila.Item("cNombre")
-                hoja.Cell(filaExcel, 5).Value = Fila.Item("cRFC")
-                hoja.Cell(filaExcel, 6).Value = Fila.Item("cCURP")
-                hoja.Cell(filaExcel, 7).Value = Fila.Item("cIMSS")
-                hoja.Cell(filaExcel, 8).Value = Fila.Item("cBanco")
-                hoja.Cell(filaExcel, 9).Value = "'" & Fila.Item("NumCuenta")
-                hoja.Cell(filaExcel, 10).Value = "'" & Fila.Item("Clabe")
-                hoja.Cell(filaExcel, 11).Value = IIf(Fila.Item("fkiIdClienteInter") = "-1", "ACTIVO", "INACTIVO")
-
-
-
-            Next
-
-            dialogo.DefaultExt = "*.xlsx"
-            dialogo.FileName = "Lista de Empleados"
-            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            dialogo.ShowDialog()
-            libro.SaveAs(dialogo.FileName)
-            'libro.SaveAs("c:\temp\control.xlsx")
-            'libro.SaveAs(dialogo.FileName)
-            'apExcel.Quit()
-            libro = Nothing
-            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
         Else
-            MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdFonacot.Click
+        Dim forma As New frmFonacot
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdPrestam_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdPrestam.Click
+        Dim forma As New frmPrestamo
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavit.Click
+        Dim forma As New frmDeudaInfonavit
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 End Class

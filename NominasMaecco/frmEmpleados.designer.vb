@@ -149,7 +149,9 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
-        Me.cmdlista = New System.Windows.Forms.Button()
+        Me.cmdInfonavit = New System.Windows.Forms.Button()
+        Me.cmdPrestam = New System.Windows.Forms.Button()
+        Me.cmdFonacot = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -231,7 +233,9 @@ Partial Class frmEmpleados
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.cmdlista)
+        Me.Panel1.Controls.Add(Me.cmdInfonavit)
+        Me.Panel1.Controls.Add(Me.cmdPrestam)
+        Me.Panel1.Controls.Add(Me.cmdFonacot)
         Me.Panel1.Controls.Add(Me.cmdimss)
         Me.Panel1.Controls.Add(Me.cmdPension)
         Me.Panel1.Controls.Add(Me.cmdDocumentos)
@@ -246,16 +250,16 @@ Partial Class frmEmpleados
         Me.Panel1.Controls.Add(Me.cmdguardar)
         Me.Panel1.Location = New System.Drawing.Point(860, 10)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(213, 689)
+        Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
         '
         'cmdimss
         '
         Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
         Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdimss.Location = New System.Drawing.Point(104, 306)
+        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
         Me.cmdimss.Name = "cmdimss"
-        Me.cmdimss.Size = New System.Drawing.Size(95, 72)
+        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
         Me.cmdimss.TabIndex = 47
         Me.cmdimss.Text = "Imss"
         Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -325,7 +329,7 @@ Partial Class frmEmpleados
         '
         Me.cmdprestamo.Image = CType(resources.GetObject("cmdprestamo.Image"), System.Drawing.Image)
         Me.cmdprestamo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdprestamo.Location = New System.Drawing.Point(103, 228)
+        Me.cmdprestamo.Location = New System.Drawing.Point(3, 309)
         Me.cmdprestamo.Name = "cmdprestamo"
         Me.cmdprestamo.Size = New System.Drawing.Size(95, 72)
         Me.cmdprestamo.TabIndex = 42
@@ -1274,23 +1278,46 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
         '
-        'cmdlista
+        'cmdInfonavit
         '
-        Me.cmdlista.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.cmdlista.Image = CType(resources.GetObject("cmdlista.Image"), System.Drawing.Image)
-        Me.cmdlista.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdlista.Location = New System.Drawing.Point(104, 459)
-        Me.cmdlista.Name = "cmdlista"
-        Me.cmdlista.Size = New System.Drawing.Size(95, 72)
-        Me.cmdlista.TabIndex = 49
-        Me.cmdlista.Text = "Empleados"
-        Me.cmdlista.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdlista.UseVisualStyleBackColor = True
+        Me.cmdInfonavit.Image = CType(resources.GetObject("cmdInfonavit.Image"), System.Drawing.Image)
+        Me.cmdInfonavit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdInfonavit.Location = New System.Drawing.Point(103, 3)
+        Me.cmdInfonavit.Name = "cmdInfonavit"
+        Me.cmdInfonavit.Size = New System.Drawing.Size(95, 72)
+        Me.cmdInfonavit.TabIndex = 54
+        Me.cmdInfonavit.Text = "INFONAVIT"
+        Me.cmdInfonavit.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdInfonavit.UseVisualStyleBackColor = True
+        '
+        'cmdPrestam
+        '
+        Me.cmdPrestam.Image = CType(resources.GetObject("cmdPrestam.Image"), System.Drawing.Image)
+        Me.cmdPrestam.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdPrestam.Location = New System.Drawing.Point(101, 81)
+        Me.cmdPrestam.Name = "cmdPrestam"
+        Me.cmdPrestam.Size = New System.Drawing.Size(95, 72)
+        Me.cmdPrestam.TabIndex = 53
+        Me.cmdPrestam.Text = "Prestamo"
+        Me.cmdPrestam.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdPrestam.UseVisualStyleBackColor = True
+        '
+        'cmdFonacot
+        '
+        Me.cmdFonacot.Image = CType(resources.GetObject("cmdFonacot.Image"), System.Drawing.Image)
+        Me.cmdFonacot.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdFonacot.Location = New System.Drawing.Point(103, 157)
+        Me.cmdFonacot.Name = "cmdFonacot"
+        Me.cmdFonacot.Size = New System.Drawing.Size(95, 72)
+        Me.cmdFonacot.TabIndex = 52
+        Me.cmdFonacot.Text = "Fonacot"
+        Me.cmdFonacot.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdFonacot.UseVisualStyleBackColor = True
         '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1101, 705)
+        Me.ClientSize = New System.Drawing.Size(1077, 705)
         Me.Controls.Add(Me.Label56)
         Me.Controls.Add(Me.dtpFinContrato)
         Me.Controls.Add(Me.Label55)
@@ -1531,6 +1558,8 @@ Partial Class frmEmpleados
     Friend WithEvents Label56 As System.Windows.Forms.Label
     Friend WithEvents dtpFinContrato As System.Windows.Forms.DateTimePicker
     Friend WithEvents cmdimss As System.Windows.Forms.Button
-    Friend WithEvents cmdlista As System.Windows.Forms.Button
+    Friend WithEvents cmdInfonavit As System.Windows.Forms.Button
+    Friend WithEvents cmdPrestam As System.Windows.Forms.Button
+    Friend WithEvents cmdFonacot As System.Windows.Forms.Button
 
 End Class
