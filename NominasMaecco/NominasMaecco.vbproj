@@ -77,6 +77,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logomaecco2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML">
       <HintPath>..\..\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\ClosedXML.dll</HintPath>
@@ -255,6 +258,24 @@
     <Compile Include="Pension\frmPensionA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Prestamo\frmDeudaInfonavit.Designer.vb">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Prestamo\frmDeudaInfonavit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prestamo\frmFonacot.Designer.vb">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Prestamo\frmFonacot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prestamo\frmPrestamo.Designer.vb">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Prestamo\frmPrestamo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reportes\frmRecibosLupita.designer.vb">
       <DependentUpon>frmRecibosLupita.vb</DependentUpon>
     </Compile>
@@ -345,6 +366,15 @@
     <EmbeddedResource Include="Pension\frmPensionA.resx">
       <DependentUpon>frmPensionA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Prestamo\frmDeudaInfonavit.resx">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prestamo\frmFonacot.resx">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prestamo\frmPrestamo.resx">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\frmRecibosLupita.resx">
       <DependentUpon>frmRecibosLupita.vb</DependentUpon>
     </EmbeddedResource>
@@ -374,6 +404,7 @@
     <None Include="NominasMaecco_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logomaecco2.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
     <None Include="Resources\32_cerrar.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />

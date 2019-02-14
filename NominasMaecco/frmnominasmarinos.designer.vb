@@ -60,6 +60,8 @@ Partial Class frmnominasmarinos
         Me.reporteSindicato = New System.Windows.Forms.Button()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.btnKiosko = New System.Windows.Forms.Button()
+        Me.cmdReporteMensual = New System.Windows.Forms.Button()
+        Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
@@ -479,17 +481,43 @@ Partial Class frmnominasmarinos
         '
         Me.btnKiosko.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnKiosko.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnKiosko.Location = New System.Drawing.Point(369, 493)
+        Me.btnKiosko.Location = New System.Drawing.Point(548, 493)
         Me.btnKiosko.Name = "btnKiosko"
         Me.btnKiosko.Size = New System.Drawing.Size(111, 28)
         Me.btnKiosko.TabIndex = 29
         Me.btnKiosko.Text = "Layout Kiosko"
         Me.btnKiosko.UseVisualStyleBackColor = True
         '
+        'cmdReporteMensual
+        '
+        Me.cmdReporteMensual.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdReporteMensual.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdReporteMensual.Location = New System.Drawing.Point(675, 494)
+        Me.cmdReporteMensual.Name = "cmdReporteMensual"
+        Me.cmdReporteMensual.Size = New System.Drawing.Size(112, 27)
+        Me.cmdReporteMensual.TabIndex = 44
+        Me.cmdReporteMensual.Text = "Reporte Mensual"
+        Me.cmdReporteMensual.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdReporteMensual.UseVisualStyleBackColor = True
+        '
+        'btnAsimilados
+        '
+        Me.btnAsimilados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnAsimilados.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAsimilados.Location = New System.Drawing.Point(366, 493)
+        Me.btnAsimilados.Name = "btnAsimilados"
+        Me.btnAsimilados.Size = New System.Drawing.Size(176, 27)
+        Me.btnAsimilados.TabIndex = 45
+        Me.btnAsimilados.Text = "Layout Timbrado Asimilados"
+        Me.btnAsimilados.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.btnAsimilados.UseVisualStyleBackColor = True
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 533)
+        Me.Controls.Add(Me.btnAsimilados)
+        Me.Controls.Add(Me.cmdReporteMensual)
         Me.Controls.Add(Me.btnKiosko)
         Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.reporteSindicato)
@@ -550,5 +578,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdPersonalNomina As System.Windows.Forms.Button
     Friend WithEvents cmdexcel As System.Windows.Forms.Button
     Friend WithEvents btnKiosko As System.Windows.Forms.Button
+    Friend WithEvents cmdReporteMensual As System.Windows.Forms.Button
+    Friend WithEvents btnAsimilados As System.Windows.Forms.Button
 
 End Class

@@ -90,7 +90,7 @@ Partial Class frmPensionA
         'cboEstatus
         '
         Me.cboEstatus.FormattingEnabled = True
-        Me.cboEstatus.Items.AddRange(New Object() {"ACTIVO", "INACTIVO"})
+        Me.cboEstatus.Items.AddRange(New Object() {"INACTIVO", "ACTIVO"})
         Me.cboEstatus.Location = New System.Drawing.Point(624, 108)
         Me.cboEstatus.Name = "cboEstatus"
         Me.cboEstatus.Size = New System.Drawing.Size(177, 26)
