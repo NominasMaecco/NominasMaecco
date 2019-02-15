@@ -6,6 +6,9 @@ Public Class frmSubirDatos
     Dim SQL As String
     Dim contacolumna As Integer
     Public dsReporte As New DataSet
+    Private Sub frmSubirDatos_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 
     Private Sub tsbNuevo_Click(sender As System.Object, e As System.EventArgs) Handles tsbNuevo.Click
         tsbNuevo.Enabled = False
@@ -211,6 +214,7 @@ Public Class frmSubirDatos
 
     End Function
 
+
     Private Sub tsbCancelar_Click(sender As System.Object, e As System.EventArgs) Handles tsbCancelar.Click
         pnlCatalogo.Enabled = False
         lsvLista.Items.Clear()
@@ -317,6 +321,8 @@ Public Class frmSubirDatos
                     dsReporte.Tables("Tabla").Columns.Add("Bono")
                     dsReporte.Tables("Tabla").Columns.Add("Refrendo")
                     dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
+                    dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
+                    dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
 
                     Dim mensaje As String
 
@@ -343,12 +349,13 @@ Public Class frmSubirDatos
 
                                 fila.Item("Id_empleado") = rwFilas(0)("iIdEmpleadoC")
                                 fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text)
-                                fila.Item("dias") = Trim(producto.SubItems(10).Text)
-                                fila.Item("Salario") = Trim(producto.SubItems(12).Text)
-                                fila.Item("Bono") = Trim(producto.SubItems(12).Text)
-                                fila.Item("Refrendo") = Trim(producto.SubItems(12).Text)
-                                fila.Item("SalarioTMM") = Trim(producto.SubItems(12).Text)
-
+                                fila.Item("dias") = Trim(producto.SubItems(12).Text)
+                                fila.Item("Salario") = ""
+                                fila.Item("Bono") = ""
+                                fila.Item("Refrendo") = ""
+                                fila.Item("SalarioTMM") = Trim(producto.SubItems(14).Text)
+                                fila.Item("CodigoPuesto") = Trim(producto.SubItems(5).Text)
+                                fila.Item("CodigoBuque") = Trim(producto.SubItems(2).Text)
                                 dsReporte.Tables("Tabla").Rows.Add(fila)
 
                             End If
