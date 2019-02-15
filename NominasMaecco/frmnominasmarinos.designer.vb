@@ -177,6 +177,7 @@ Partial Class frmnominasmarinos
         '
         'cboTipoNomina
         '
+        Me.cboTipoNomina.Enabled = False
         Me.cboTipoNomina.FormattingEnabled = True
         Me.cboTipoNomina.Items.AddRange(New Object() {"Abordo", "Descanso"})
         Me.cboTipoNomina.Location = New System.Drawing.Point(151, 34)
