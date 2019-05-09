@@ -406,6 +406,8 @@
   <ItemGroup>
     <Content Include="logomaecco2.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
+    <None Include="obj\CUOTA SINDICALES FEBRERO 2019.xlsx" />
+    <None Include="obj\TMM CUOTAS SINDICALES FEBRERO 2019.pdf" />
     <None Include="Resources\32_cerrar.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
