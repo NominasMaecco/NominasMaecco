@@ -177,7 +177,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD
         <dsig:DigestValue>h0Yq0aORGB6G5SMKLOu56h15ETE=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>NbAh5ko+rQ75Hwr7bCWUreCEF1c=</dsig:DigestValue>
+>>>>>>> origin/master
       </hash>
     </dependentAssembly>
   </dependency>
