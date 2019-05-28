@@ -2146,6 +2146,9 @@ Public Class frmnominasmarinos
 
 
                         'INFONAVIT
+                        'If dtgDatos.Rows(x).Cells(3).Value = "252107" Then
+                        '    MsgBox("este cuate es el bueno")
+                        'End If
                         If dtgDatos.Rows(x).Tag = "" Then
                             dtgDatos.Rows(x).Cells(38).Value = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)), 2).ToString("###,##0.00")
                         End If
@@ -2172,7 +2175,7 @@ Public Class frmnominasmarinos
                         dtgDatos.Rows(x).Cells(46).Value = Math.Round((baseSubsidiototal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)) / 30 * Double.Parse(dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
                         'MAECCO
 
-                        
+
 
 
                         'TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
@@ -2750,6 +2753,7 @@ Public Class frmnominasmarinos
                             Dim rwDatosEmbarque As DataRow() = nConsulta(sql)
                             If rwDatosEmbarque Is Nothing = False Then
                                 FechaInicioPeriodo1 = rwDatosEmbarque(0)("FechaEmbarque")
+                                FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
                                 FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
 
@@ -2769,6 +2773,7 @@ Public Class frmnominasmarinos
                                 'Si no lo tiene sumamos de inicio del periodo hasta el numero de dias
                                 'Verificamos si esta dentro del mismo mes
                                 FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                                FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
                                 FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
                                 If FechaInicioPeriodo1.Month = FechaFinPeriodo2.Month Then
@@ -2777,7 +2782,7 @@ Public Class frmnominasmarinos
                                     FechaFinPeriodo2 = Date.Parse("01/01/1900")
 
                                 Else
-                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
+                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                     FechaInicioPeriodo2 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
                                 End If
                             End If
@@ -9053,6 +9058,39 @@ Public Class frmnominasmarinos
                 dtgDatos.Rows(x).Tag = ""
             End If
         Next
+    End Sub
+
+    Private Sub btnBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
+        Try
+            Dim dialogo As New SaveFileDialog()
+            Dim sql As String
+            Dim Forma As New frmBuscar
+            Dim temp As Integer = 0
+            Dim encontro As Boolean = False
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                For Each fila As DataGridViewRow In dtgDatos.Rows
+
+                    fila.DefaultCellStyle.BackColor = Color.White
+
+                    If fila.Cells.Item(4).Value.ToString().Contains(Forma.txtbuscar.Text.ToUpper) Then
+                        fila.DefaultCellStyle.BackColor = Color.Yellow
+                        encontro = True
+                        temp = temp + 1
+
+                    End If
+                Next
+
+            End If
+
+            If encontro = False Then
+                MsgBox("No se encontro nada")
+            Else
+                MsgBox("Se encontrarón " & temp & " Registro")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class
 

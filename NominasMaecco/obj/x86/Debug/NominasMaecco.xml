@@ -19,6 +19,18 @@ NominasMaecco
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
+</member><member name="P:NominasMaecco.My.Resources.Resources.busqueda">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member><member name="P:NominasMaecco.My.Resources.Resources.busqueda__1_">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member><member name="P:NominasMaecco.My.Resources.Resources.busqueda__2_">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
 </member><member name="P:NominasMaecco.My.Resources.Resources.if_calculator_1055102">
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
@@ -136,6 +148,10 @@ NominasMaecco
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member><member name="P:NominasMaecco.My.Resources.Resources.if_rotation_job_seeker_employee_unemployee_work_2620504">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member><member name="P:NominasMaecco.My.Resources.Resources.research">
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
