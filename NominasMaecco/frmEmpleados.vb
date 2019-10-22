@@ -292,6 +292,7 @@ Public Class frmEmpleados
                     Dim Fila As DataRow = rwFilas(0)
                     If Fila.Item("Clave") <> IIf(cbostatus.SelectedIndex = 0, "A", "B") Then
 
+
                         SQL = "EXEC setIngresoBajaAltaInsertar  0," & gIdEmpleado & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Date.Today.ToShortDateString & "','01/01/1900','',''"
 
                         'Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, gIdEmpleado), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Modificacion Baja/reingreso")
