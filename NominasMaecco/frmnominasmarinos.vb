@@ -6267,22 +6267,22 @@ Public Class frmnominasmarinos
 
                         'Prestamo Personal Sindicato
                         dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(48).ReadOnly = True
+                        'dtgDatos.Columns(48).ReadOnly = True
                         dtgDatos.Columns(48).Width = 150
 
                         'Adeudo_Infonavit_S
                         dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(49).ReadOnly = True
+                        'dtgDatos.Columns(49).ReadOnly = True
                         dtgDatos.Columns(49).Width = 150
 
                         'Difencia infonavit Sindicato
                         dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(50).ReadOnly = True
+                        'dtgDatos.Columns(50).ReadOnly = True
                         dtgDatos.Columns(50).Width = 150
 
                         'Complemento Sindicato
                         dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(51).ReadOnly = True
+                        'dtgDatos.Columns(51).ReadOnly = True
                         dtgDatos.Columns(51).Width = 150
 
                         'Retenciones_Maecco
