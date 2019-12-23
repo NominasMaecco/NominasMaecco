@@ -2146,6 +2146,9 @@ Public Class frmnominasmarinos
 
 
                         'INFONAVIT
+                        'If dtgDatos.Rows(x).Cells(3).Value = "252107" Then
+                        '    MsgBox("este cuate es el bueno")
+                        'End If
                         If dtgDatos.Rows(x).Tag = "" Then
                             dtgDatos.Rows(x).Cells(38).Value = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)), 2).ToString("###,##0.00")
                         End If
@@ -2172,7 +2175,7 @@ Public Class frmnominasmarinos
                         dtgDatos.Rows(x).Cells(46).Value = Math.Round((baseSubsidiototal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)) / 30 * Double.Parse(dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
                         'MAECCO
 
-                        
+
 
 
                         'TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
@@ -2750,6 +2753,7 @@ Public Class frmnominasmarinos
                             Dim rwDatosEmbarque As DataRow() = nConsulta(sql)
                             If rwDatosEmbarque Is Nothing = False Then
                                 FechaInicioPeriodo1 = rwDatosEmbarque(0)("FechaEmbarque")
+                                FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
                                 FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
 
@@ -2769,6 +2773,7 @@ Public Class frmnominasmarinos
                                 'Si no lo tiene sumamos de inicio del periodo hasta el numero de dias
                                 'Verificamos si esta dentro del mismo mes
                                 FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                                FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
                                 FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
                                 If FechaInicioPeriodo1.Month = FechaFinPeriodo2.Month Then
@@ -2777,7 +2782,7 @@ Public Class frmnominasmarinos
                                     FechaFinPeriodo2 = Date.Parse("01/01/1900")
 
                                 Else
-                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
+                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                                     FechaInicioPeriodo2 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
                                 End If
                             End If
@@ -4347,6 +4352,13 @@ Public Class frmnominasmarinos
                         hoja3.Cell(filaExcel, 6).Value = ""
                         hoja3.Cell(filaExcel, 7).Value = ""
                         hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'INCAPACIDAD *IMPORTE*
+
+                        If dtgD.Rows(x).Cells(4).Value = "FLORES MONTES DANIEL" Then
+                            MsgBox(dtgD.Rows(x).Cells(4).Value)
+                        End If
+
+
+
                         hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(42).Value  'PENSION ALIMENTICIA
                         If (dtgD.Rows(x).Cells(38).Value = "") Then
                             hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value
@@ -7556,10 +7568,10 @@ Public Class frmnominasmarinos
                 hoja.Range(tula + 1, 3, tula + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 hoja.Range(durango + 1, 3, durango + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 hoja.Range(veracruz + 1, 3, veracruz + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Cell(durango, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(tajin, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(tula, 3).Style.Fill.BackgroundColor = XLColor.Yellow
-                hoja.Cell(veracruz, 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(IIf(durango = 0, 1, durango), 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(IIf(tajin = 0, 1, tajin), 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(IIf(tula = 0, 1, tula), 3).Style.Fill.BackgroundColor = XLColor.Yellow
+                hoja.Cell(IIf(veracruz = 0, 1, veracruz), 3).Style.Fill.BackgroundColor = XLColor.Yellow
 
                 hoja.Cell(durango + 1, 3).Value = ("TOTAL DURANGO").ToUpper
                 hoja.Cell(tajin + 1, 3).Value = ("TOTAL TAJIN").ToUpper
@@ -7853,6 +7865,9 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
                     hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR
                     hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMS
+                    If dtgDatos.Rows(x).Cells(4).Value = "FLORES MONTES DANIEL" Then
+                        MsgBox("Aqui te atrape")
+                    End If
                     hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
                     hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
                     hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
@@ -8353,11 +8368,13 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 1).Value = app 'Paterno
                         hoja.Cell(filaExcel + x, 2).Value = apm 'Materno
                         hoja.Cell(filaExcel + x, 3).Value = nom 'Nombre
+
                         If dtgD.Rows(x).Cells(51).Value < 1 Then
                             hoja.Cell(filaExcel + x, 4).Value = 0.0
                         Else
                             hoja.Cell(filaExcel + x, 4).Value = dtgD.Rows(x).Cells(51).Value '+ getDatosNomina(0, dtgD.Rows(x).Cells(3).Value, dtgD.Rows(x).Cells(18).Value, "Asimilado") ' asimilados
                         End If
+
 
                         hoja.Cell(filaExcel + x, 5).Value = dtgD.Rows(x).Cells(8).Value
                         hoja.Cell(filaExcel + x, 6).Value = dtgD.Rows(x).Cells(18).Value ' Dias Trabjados
@@ -9053,6 +9070,139 @@ Public Class frmnominasmarinos
                 dtgDatos.Rows(x).Tag = ""
             End If
         Next
+    End Sub
+
+    Private Sub btnBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
+        Try
+            Dim dialogo As New SaveFileDialog()
+            Dim sql As String
+            Dim Forma As New frmBuscar
+            Dim temp As Integer = 0
+            Dim encontro As Boolean = False
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                For Each fila As DataGridViewRow In dtgDatos.Rows
+
+                    fila.DefaultCellStyle.BackColor = Color.White
+
+                    If fila.Cells.Item(4).Value.ToString().Contains(Forma.txtbuscar.Text.ToUpper) Then
+                        fila.DefaultCellStyle.BackColor = Color.Yellow
+                        encontro = True
+                        temp = temp + 1
+
+                    End If
+                Next
+
+            End If
+
+            If encontro = False Then
+                MsgBox("No se encontro nada")
+            Else
+                MsgBox("Se encontrarón " & temp & " Registro")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub cmdAcumuladosMaecco_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAcumuladosMaecco.Click
+        Try
+            Dim SQL As String
+            Dim filaExcel As Integer = 0
+            Dim filatmp As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim periodo, iejercicio, iMes As String
+
+            Dim ruta As String
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                Dim Fechafin As Date = rwPeriodo0(0).Item("dFechaFin")
+                periodo = "1 " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " AL " & Fechafin.Day & " " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & rwPeriodo0(0).Item("iEjercicio")
+                iejercicio = (rwPeriodo0(0).Item("iEjercicio"))
+                iMes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+            End If
+
+            ruta = My.Application.Info.DirectoryPath() & "\Archivos\acumuladosmaecco19.xlsx"
+          
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+            book.Worksheet(1).CopyTo(libro, iMes)
+
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+
+            filaExcel = 2
+            Dim nombrebuque As String
+            Dim inicio As Integer = 0
+            Dim contadorexcelbuqueinicial As Integer = 0
+            Dim contadorexcelbuquefinal As Integer = 0
+            Dim total As Integer = dtgDatos.Rows.Count - 1
+
+            Dim fecha As String
+
+            '<<<<<<<<<<<<<<<<<<<<<<<<<<operadora>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            recorrerFilasColumnas(hoja, 2, dtgDatos.Rows.Count + 10, 40, "clear")
+
+            SQL = "EXEC getAcumuladosMaecco " & cboperiodo.SelectedValue
+            Dim rwFilas As DataRow() = nConsulta(SQL)
+
+            If rwFilas.Length > 0 Then
+
+                For x As Integer = 0 To rwFilas.Length - 1
+                    hoja.Range(1, 5, filaExcel + x, 33).Style.NumberFormat.NumberFormatId = 4
+                    hoja.Range(1, 1, filaExcel + x, 4).Style.NumberFormat.Format = "@"
+
+
+                    hoja.Cell(filaExcel + x, 1).Value = rwFilas(x)("cCodigoEmpleado")
+                    hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("cNombreLargo")
+                    hoja.Cell(filaExcel + x, 3).Value = rwFilas(x)("cRFC")
+                    hoja.Cell(filaExcel + x, 4).Value = rwFilas(x)("ccurp")
+                    hoja.Cell(filaExcel + x, 5).Value = rwFilas(x)("fSalarioBase")
+                    hoja.Cell(filaExcel + x, 6).Value = rwFilas(x)("fSueldoBruto")
+                    hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("fTExtraFijo")
+                    hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("fTExtraOcasional")
+                    hoja.Cell(filaExcel + x, 9).Value = rwFilas(x)("fDescSemObligatorio")
+                    hoja.Cell(filaExcel + x, 10).Value = rwFilas(x)("fVacacionesProporcionales")
+                    hoja.Cell(filaExcel + x, 11).Value = rwFilas(x)("fAguinaldoGravado")
+                    hoja.Cell(filaExcel + x, 12).Value = rwFilas(x)("fAguinaldoExento")
+                    hoja.Cell(filaExcel + x, 13).Value = rwFilas(x)("fPrimaVacacionalGravado")
+                    hoja.Cell(filaExcel + x, 14).Value = rwFilas(x)("fPrimaVacacionalExento")
+                    hoja.Cell(filaExcel + x, 15).Value = rwFilas(x)("fTotalPercepciones")
+                    hoja.Cell(filaExcel + x, 16).Value = rwFilas(x)("fTotalPercepcionesISR")
+                    hoja.Cell(filaExcel + x, 17).Value = rwFilas(x)("fIncapacidad")
+                    hoja.Cell(filaExcel + x, 18).Value = rwFilas(x)("fIsr")
+                    hoja.Cell(filaExcel + x, 19).Value = rwFilas(x)("fImss")
+                    hoja.Cell(filaExcel + x, 20).Value = rwFilas(x)("fInfonavit")
+                    hoja.Cell(filaExcel + x, 21).Value = rwFilas(x)("fInfonavitBanterior")
+                    hoja.Cell(filaExcel + x, 22).Value = rwFilas(x)("fAjusteInfonavit")
+                    hoja.Cell(filaExcel + x, 23).Value = rwFilas(x)("fCuotaSindical")
+                    hoja.Cell(filaExcel + x, 24).Value = rwFilas(x)("fPensionAlimenticia")
+                    hoja.Cell(filaExcel + x, 25).Value = rwFilas(x)("fPrestamo")
+                    hoja.Cell(filaExcel + x, 26).Value = rwFilas(x)("fFonacot")
+                    hoja.Cell(filaExcel + x, 27).Value = rwFilas(x)("fSubsidioGenerado")
+                    hoja.Cell(filaExcel + x, 28).Value = rwFilas(x)("fSubsidioAplicado")
+                    hoja.Cell(filaExcel + x, 29).Value = rwFilas(x)("fMaecco")
+                    hoja.Cell(filaExcel + x, 30).Value = rwFilas(x)("fPrestamoPerS")
+                    hoja.Cell(filaExcel + x, 31).Value = rwFilas(x)("fAdeudoInfonavitS")
+                    hoja.Cell(filaExcel + x, 32).Value = rwFilas(x)("fDiferenciaInfonavitS")
+                    hoja.Cell(filaExcel + x, 33).Value = rwFilas(x)("fComplementoSindicato")
+                Next
+            End If
+
+            dialogo.DefaultExt = "*.xlsx"
+            dialogo.FileName = "Reporte Acumulados " & Usuario.Nombre
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.ShowDialog()
+            libro.SaveAs(dialogo.FileName)
+            libro = Nothing
+
+            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString())
+        End Try
     End Sub
 End Class
 

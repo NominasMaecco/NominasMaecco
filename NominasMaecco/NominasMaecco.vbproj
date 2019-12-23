@@ -124,6 +124,12 @@
     <Compile Include="frmAgregarEmpleado.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBuscar.Designer.vb">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBuscarEmpleado.designer.vb">
       <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
     </Compile>
@@ -305,6 +311,9 @@
     <EmbeddedResource Include="frmAgregarEmpleado.resx">
       <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscar.resx">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarEmpleado.resx">
       <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
     </EmbeddedResource>
@@ -413,6 +422,9 @@
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
     <Content Include="Resources\bloggif_5aa2e2fc58d9a.png" />
     <Content Include="Resources\bloggif_5aac5ea61bc88.png" />
+    <None Include="Resources\busqueda.png" />
+    <None Include="Resources\busqueda %281%29.png" />
+    <None Include="Resources\busqueda %282%29.png" />
     <Content Include="Resources\cerrar.png" />
     <Content Include="Resources\disquete.png" />
     <Content Include="Resources\escala-de-la-justicia.png" />
@@ -440,6 +452,7 @@
     <None Include="Resources\if_receipt_3339034.jpg" />
     <None Include="Resources\if_excel_272697.jpg" />
     <Content Include="Resources\pasaporte.png" />
+    <None Include="Resources\research.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>
   <ItemGroup>
