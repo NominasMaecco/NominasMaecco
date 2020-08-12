@@ -82,13 +82,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML">
-      <HintPath>..\..\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\ClosedXML.dll</HintPath>
+      <HintPath>C:\Update System\Operadora\Original Libreria\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -118,6 +121,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Excel\frmNominaFinalE.Designer.vb">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\frmNominaFinalE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAgregarEmpleado.designer.vb">
       <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
     </Compile>
@@ -308,6 +317,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Excel\frmNominaFinalE.resx">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarEmpleado.resx">
       <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
     </EmbeddedResource>
@@ -451,6 +463,7 @@
     <None Include="Resources\if_receipt_3583272.jpg" />
     <None Include="Resources\if_receipt_3339034.jpg" />
     <None Include="Resources\if_excel_272697.jpg" />
+    <None Include="Resources\infonavit.png" />
     <Content Include="Resources\pasaporte.png" />
     <None Include="Resources\research.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
@@ -477,10 +490,13 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

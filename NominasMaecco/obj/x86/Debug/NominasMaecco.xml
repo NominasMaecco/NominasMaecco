@@ -151,6 +151,10 @@ NominasMaecco
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
+</member><member name="P:NominasMaecco.My.Resources.Resources.infonavit">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
 </member><member name="P:NominasMaecco.My.Resources.Resources.research">
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.

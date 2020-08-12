@@ -112,7 +112,7 @@ Public Class frmnominasmarinos
         'Verificar si se tienen permisos
         Dim sql As String
         Try
-            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos order by iEjercicio,iNumeroPeriodo"
+            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 order by iEjercicio,iNumeroPeriodo"
             nCargaCBO(cboperiodo, sql, "dFechainicio", "iIdPeriodo")
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -1768,6 +1768,14 @@ Public Class frmnominasmarinos
                     'pnlProgreso.Visible = False
                     Exit Sub
                 End If
+                sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+                Dim rwPeriodo As DataRow() = nConsulta(sql)
+                If rwPeriodo Is Nothing = False Then
+
+                    aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
+
+                End If
+
                 calcular()
             End If
 
@@ -2301,7 +2309,7 @@ Public Class frmnominasmarinos
 
 
                 'Calcular el costo social
-
+                Dim isn As Double = CDbl(dtgDatos.Rows(x).Cells(33).Value) - CDbl(dtgDatos.Rows(x).Cells(22).Value)
                 'Obtenemos los datos del empleado,id puesto
                 'de acuerdo a la edad y el status
                 If diastrabajados = 0 Then
@@ -2310,6 +2318,12 @@ Public Class frmnominasmarinos
                     dtgDatos.Rows(x).Cells(58).Value = "0.00"
                     dtgDatos.Rows(x).Cells(59).Value = "0.00"
                 Else
+                    If diastrabajados = 30 Then
+
+                        diastrabajados = DiasMes(cboperiodo.SelectedValue)
+
+                    End If
+
                     sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     Dim rwEmpleado As DataRow() = nConsulta(sql)
                     If rwEmpleado Is Nothing = False Then
@@ -2319,31 +2333,31 @@ Public Class frmnominasmarinos
                         If rwCostoSocial Is Nothing = False Then
                             If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                                 If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                    dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("imsstopado")
-                                    dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("RCVtopado")
-                                    dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("infonavittopado")
-                                    dtgDatos.Rows(x).Cells(59).Value = rwCostoSocial(0)("ISNtopado")
+                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round((isn * 0.03) + (isn * 0.03 * 0.15), 2) 'ISN
 
                                 Else
-                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round((isn * 0.03) + (isn * 0.03 * 0.15), 2) 'ISN'Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * diastrabajados, 2)
 
                                 End If
 
                             Else
                                 If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                    dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("imss")
-                                    dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("RCV")
-                                    dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("Infonavit")
-                                    dtgDatos.Rows(x).Cells(59).Value = rwCostoSocial(0)("ISN")
+                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavit").ToString) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round((isn * 0.03) + (isn * 0.03 * 0.15), 2) 'ISN'rwCostoSocial(0)("ISN")
 
                                 Else
-                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * diastrabajados, 2)
+                                    dtgDatos.Rows(x).Cells(59).Value = Math.Round((isn * 0.03) + (isn * 0.03 * 0.15), 2) 'ISN Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * diastrabajados, 2)
 
                                 End If
                             End If
@@ -7316,7 +7330,7 @@ Public Class frmnominasmarinos
                         'hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AC" & filaExcel + x & "*0.16"
                         'hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+AC" & filaExcel + x & "+AD" & filaExcel + x
                         hoja.Cell(filaExcel + x, 3).Value = "GASTOS ADMINISTRATIVOS"
-                        hoja.Cell(filaExcel + x, 19).Value = "3,000.00"
+                        hoja.Cell(filaExcel + x, 19).Value = "3,300.00"
                         hoja.Cell(filaExcel + x, 23).Value = "2%"
                         hoja.Cell(filaExcel + x, 24).Value = "60.00"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=+(T" & filaExcel + x & "+N" & filaExcel + x & ")*W" & filaExcel + x
@@ -7468,7 +7482,7 @@ Public Class frmnominasmarinos
                 contadorexcelbuquefinal = filaExcel + total ' - 1
                 veracruz = contadorexcelbuquefinal '+ 1
                 hoja.Cell(filaExcel + total, 3).Value = "GASTOS ADMINISTRATIVOS"
-                hoja.Cell(filaExcel + total, 19).Value = "3,000.00"
+                hoja.Cell(filaExcel + total, 19).Value = "3,300.00"
                 hoja.Cell(filaExcel + total, 23).Value = "2%"
                 hoja.Cell(filaExcel + total, 24).Value = "60.00"
                 hoja.Cell(filaExcel + total, 25).FormulaA1 = "=+(T" & filaExcel + total & "+N" & filaExcel + total & ")*W" & filaExcel + total
@@ -9204,6 +9218,134 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message.ToString())
         End Try
     End Sub
+
+    
+    Private Sub cmdInfonavitxBim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavitxBim.Click
+        Try
+            Dim SQL, SQL1 As String
+            Dim filaExcel As Integer = 0
+            Dim filatmp As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim periodo, iejercicio, iMes As String
+            Dim seriecount As Integer
+            Dim ruta As String
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                Dim Fechafin As Date = rwPeriodo0(0).Item("dFechaFin")
+                periodo = "1 " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " AL " & Fechafin.Day & " " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & rwPeriodo0(0).Item("iEjercicio")
+                iejercicio = (rwPeriodo0(0).Item("iEjercicio"))
+                iMes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+            End If
+
+            ruta = My.Application.Info.DirectoryPath() & "\Archivos\resumeninfonavitxbim.xlsx"
+
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+            book.Worksheet(1).CopyTo(libro, iMes)
+
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+
+            filaExcel = 7
+            Dim nombrebuque As String
+            Dim inicio As Integer = 0
+            Dim contadorexcelbuqueinicial As Integer = 0
+            Dim contadorexcelbuquefinal As Integer = 0
+            Dim total As Integer = dtgDatos.Rows.Count - 1
+
+            'Buscar la ultima serie del periodo
+            SQL1 = "SELECT * FROM Nomina WHERE "
+            SQL1 &= "fkiIdPeriodo=" & cboperiodo.SelectedValue
+            SQL1 &= " AND iEstatusEmpleado=(SELECT MAX(iEstatusEmpleado) FROM Nomina) "
+
+            Dim rwSerieMax As DataRow() = nConsulta(SQL1)
+            If rwSerieMax Is Nothing = False Then
+                seriecount = rwSerieMax(0).Item("iEstatusNomina")
+            End If
+
+            'Comparar la nomina con mayor datos
+            Dim nominamayor As List(Of Integer)
+            Dim seriemayor As Integer
+            For x As Integer = 0 To seriecount
+
+                SQL = "SELECT count(iIdNomina) As Total"
+                SQL &= "FROM Nomina WHERE "
+                SQL &= "fkiIdPeriodo =" & cboserie.SelectedValue
+                SQL &= "AND iEstatusEmpleado=" & x
+
+                Dim rwTotalxNomina As DataRow() = nConsulta(SQL)
+
+                nominamayor.Add(rwTotalxNomina(0).Item("Total"))
+
+                If nominamayor.Max() = nominamayor.IndexOf(x) Then
+                    seriemayor = x
+                End If
+            Next
+           
+            ''Buscar por periodo
+            'SQL = "select * from nomina"
+            'SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+
+            'Dim rwFilas As DataRow() = nConsulta(SQL)
+
+
+            If dtgDatos.Rows.Count > 0 Then
+
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    If dtgDatos.Rows(x).Cells(38).Value <> "0" Then
+
+                        hoja.Cell(filaExcel + x, 1).Value = x + 1 'Consecutivo
+                        hoja.Cell(filaExcel + x, 2).Value = iejercicio
+                        hoja.Cell(filaExcel + x, 3).Value = "Bim"
+                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(13).Value 'TipoFactor
+                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(14).Value 'Factor
+
+                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT sa
+                        hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(39).Value 'BIM ANTERIOR sa
+                        hoja.Cell(filaExcel + x, 11).Value = dtgDatos.Rows(x).Cells(40).Value 'AJUSTE sa
+                        hoja.Cell(filaExcel + x, 13).Value = dtgDatos.Rows(x).Cells(40).Value 'INFONAVIT ASIM
+                        hoja.Cell(filaExcel + x, 15).Value = dtgDatos.Rows(x).Cells(39).Value 'BIM ANTERIOR ASIM
+                        hoja.Cell(filaExcel + x, 16).Value = dtgDatos.Rows(x).Cells(40).Value 'AJUSTE ASIM
+                    End If
+
+                Next
+
+            End If
+
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString())
+        End Try
+    End Sub
+
+    Function DiasMes(ByVal NumPeriodo As Integer) As Integer
+        Try
+            Dim sql As String
+
+            Dim FechaInicioPeriodo1 As Date
+            Dim dias As Integer
+            sql = "select * from periodos where iIdPeriodo= " & NumPeriodo
+            Dim rwPeriodo As DataRow() = nConsulta(Sql)
+            dias = 0
+            If rwPeriodo Is Nothing = False Then
+                FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+
+                dias = DateTime.DaysInMonth(Year(FechaInicioPeriodo1), Month(FechaInicioPeriodo1))
+
+            End If
+            Return dias
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            Return 0
+        End Try
+    End Function
+
 End Class
 
 

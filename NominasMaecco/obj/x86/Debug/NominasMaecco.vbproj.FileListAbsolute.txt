@@ -75,3 +75,5 @@ C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.v
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe.manifest
 C:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.application
 D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmBuscar.resources
+D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\bin\Debug\ClosedXML.dll
+D:\Escritorio\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.frmNominaFinalE.resources
