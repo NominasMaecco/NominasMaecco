@@ -24,6 +24,7 @@ Partial Class frmnominasmarinos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdInfonavitxBim = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.cmdexcel = New System.Windows.Forms.Button()
@@ -81,6 +82,7 @@ Partial Class frmnominasmarinos
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdInfonavitxBim)
         Me.pnlCatalogo.Controls.Add(Me.btnBuscar)
         Me.pnlCatalogo.Controls.Add(Me.chkNoinfonavit)
         Me.pnlCatalogo.Controls.Add(Me.cmdexcel)
@@ -112,6 +114,19 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 481)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdInfonavitxBim
+        '
+        Me.cmdInfonavitxBim.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdInfonavitxBim.Image = Global.NominasMaecco.My.Resources.Resources.infonavit
+        Me.cmdInfonavitxBim.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdInfonavitxBim.Location = New System.Drawing.Point(961, 62)
+        Me.cmdInfonavitxBim.Name = "cmdInfonavitxBim"
+        Me.cmdInfonavitxBim.Size = New System.Drawing.Size(111, 57)
+        Me.cmdInfonavitxBim.TabIndex = 32
+        Me.cmdInfonavitxBim.Text = "Infonavit x Periodo"
+        Me.cmdInfonavitxBim.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdInfonavitxBim.UseVisualStyleBackColor = True
         '
         'btnBuscar
         '
@@ -583,7 +598,7 @@ Partial Class frmnominasmarinos
         '
         'cmdAcumuladosMaecco
         '
-        Me.cmdAcumuladosMaecco.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdAcumuladosMaecco.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdAcumuladosMaecco.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdAcumuladosMaecco.Location = New System.Drawing.Point(1048, 493)
         Me.cmdAcumuladosMaecco.Name = "cmdAcumuladosMaecco"
@@ -670,5 +685,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
     Friend WithEvents btnBuscar As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladosMaecco As System.Windows.Forms.Button
+    Friend WithEvents cmdInfonavitxBim As System.Windows.Forms.Button
 
 End Class
