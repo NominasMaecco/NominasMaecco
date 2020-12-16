@@ -170,22 +170,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-<<<<<<< HEAD
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NominasMaecco.exe" size="1468928">
-=======
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NominasMaecco.exe" size="1303040">
->>>>>>> origin/master
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NominasMaecco.exe" size="1472512">
       <assemblyIdentity name="NominasMaecco" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< HEAD
-        <dsig:DigestValue>p0C0b8b6Z+a8rx+qbEOOy0Tv6KY=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>yaMeH0wCgJ+mhfsuZsVWvN9ECXk=</dsig:DigestValue>
->>>>>>> origin/master
+        <dsig:DigestValue>rMaEgn8ENLI4g4qR+Og9Ve0RRYs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
