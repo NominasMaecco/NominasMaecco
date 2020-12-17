@@ -2289,17 +2289,17 @@ Public Class frmnominasmarinos
                 dtgDatos.Rows(x).Cells(51).Value = ComplementoSindicato
 
                 'Calcular retenciones Maecco
-                RetencionMaecco = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + cuotasindical + pension + prestamo + fonacot)
+                RetencionMaecco = Math.Round((Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + cuotasindical + pension + prestamo + fonacot), 2)
                 dtgDatos.Rows(x).Cells(52).Value = RetencionMaecco
 
                 '%Comision
-                dtgDatos.Rows(x).Cells(53).Value = "2%"
+                dtgDatos.Rows(x).Cells(53).Value = "4%"
                 'Comision Maecco
-                ComisionMaecco = Math.Round((Maecco + RetencionMaecco) * 0.02, 2)
+                ComisionMaecco = Math.Round((Maecco + RetencionMaecco) * 0.04, 2)
                 dtgDatos.Rows(x).Cells(54).Value = ComisionMaecco
 
                 'Comision Complemento
-                ComisionComplemento = Math.Round((ComplementoSindicato + PrestamoPersonalSindicato + AdeudoINfonavitSindicato + DiferenciaInfonavitSindicato) * 0.02, 2)
+                ComisionComplemento = Math.Round((ComplementoSindicato + PrestamoPersonalSindicato + AdeudoINfonavitSindicato + DiferenciaInfonavitSindicato) * 0.035, 2)
                 dtgDatos.Rows(x).Cells(55).Value = ComisionComplemento
 
 
@@ -3830,8 +3830,10 @@ Public Class frmnominasmarinos
                     sql &= " SUM(fDescSemObligatorio) AS fDescSemObligatorio, SUM(fVacacionesProporcionales) AS fVacacionesProporcionales, SUM(fAguinaldoGravado + fAguinaldoExento) AS totalAguinaldo, "
                     sql &= " SUM(fPrimaVacacionalExento+ fPrimaVacacionalGravado) AS totalPrimaVacacional, SUM(fPrestamo) AS fPrestamo, "
                     sql &= "SUM (fPrestamoPerS) as Complemento,"
-                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco)+60 AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
-                    sql &= " SUM(fImssCS) AS  fImssCS, SUM(fRcvCS) AS  fRcvCS, SUM(fInfonavitCS) AS  fInfonavitCS, SUM(fIsnCS) AS  fIsnCS, SUM(fTotalCostoSocial) AS  fTotalCostoSocial"
+                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco)+132 AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
+                    sql &= " SUM(fImssCS) AS  fImssCS, SUM(fRcvCS) AS  fRcvCS, SUM(fInfonavitCS) AS  fInfonavitCS, SUM(fIsnCS) AS  fIsnCS, SUM(fTotalCostoSocial) AS  fTotalCostoSocial,"
+                    sql &= "SUM(fRetencionesMaecco) AS fRetencionesMaecco,"
+                    sql &= "SUM(fMaecco) as fMaecco"
                     sql &= " FROM Nomina inner join EmpleadosC ON fkiIdEmpleadoC=iIdEmpleadoC  "
                     sql &= " WHERE Nomina.fkiIdEmpresa =1"
                     sql &= " AND fkiIdPeriodo = " & cboperiodo.SelectedValue
@@ -3850,17 +3852,20 @@ Public Class frmnominasmarinos
                         hoja.Cell(filabuque, 9).Value = sumatorias(0).Item("fVacacionesProporcionales")
                         hoja.Cell(filabuque, 10).Value = sumatorias(0).Item("totalAguinaldo")
                         hoja.Cell(filabuque, 11).Value = sumatorias(0).Item("totalPrimaVacacional")
-                        hoja.Cell(filabuque, 12).Value = "0.0" 'sumatorias(0).Item("fPrestamo")
+                        hoja.Cell(filabuque, 12).Value = sumatorias(0).Item("fPrestamo")
                         hoja.Cell(filabuque, 13).FormulaA1 = "=SUM(E" & filabuque & ":L" & filabuque & ")"
-                        hoja.Cell(filabuque, 14).Value = sumatorias(0).Item("fComplementoSindicato") ' COMPLEMENTO
-                        hoja.Cell(filabuque, 15).Value = sumatorias(0).Item("fComisionMaecco")
-                        hoja.Cell(filabuque, 16).Value = sumatorias(0).Item("fComisionComplemento")
-                        hoja.Cell(filabuque, 17).Value = "3000" ' SINDICATO
-                        hoja.Cell(filabuque, 18).Value = sumatorias(0).Item("fTotalCostoSocial")
-                        hoja.Cell(filabuque, 19).FormulaA1 = "=SUM(M" & filabuque & ":R" & filabuque & ")" 'subtotal
-                        hoja.Cell(filabuque, 20).FormulaA1 = "=+S" & filabuque & "*0.16" 'IVA 
-                        hoja.Cell(filabuque, 21).Value = "0.0" 'Bonificacion
-                        hoja.Cell(filabuque, 22).FormulaA1 = "=+S" & filabuque & "+T" & filabuque 'TOTAL
+                        hoja.Cell(filabuque, 14).Value = sumatorias(0).Item("fRetencionesMaecco") ' RETENCIONES
+                        hoja.Cell(filabuque, 15).Value = sumatorias(0).Item("fComplementoSindicato") ' COMPLEMENTO
+                        hoja.Cell(filabuque, 16).Value = sumatorias(0).Item("fMaecco") 'Maecco
+                        hoja.Cell(filabuque, 17).Value = sumatorias(0).Item("fComisionMaecco")
+                        hoja.Cell(filabuque, 18).Value = sumatorias(0).Item("fComisionComplemento")
+                        hoja.Cell(filabuque, 19).Value = "3300" ' SINDICATO
+                        hoja.Cell(filabuque, 20).Value = sumatorias(0).Item("fTotalCostoSocial")
+                        hoja.Cell(filabuque, 21).FormulaA1 = "=+L" & filabuque & "+N" & filabuque & "+O" & filabuque & "+P" & filabuque & "+Q" & filabuque & "+R" & filabuque & "+T" & filabuque & "+S" & filabuque 'subtotal
+                        hoja.Cell(filabuque, 22).FormulaA1 = "=+U" & filabuque & "*0.16" 'IVA 
+                        hoja.Cell(filabuque, 23).FormulaA1 = "=+(N" & filabuque & "+P" & filabuque & "+Q" & filabuque & "+T" & filabuque & "+S" & filabuque & ")*6%"
+                        hoja.Cell(filabuque, 24).Value = "0.0" 'Bonificacion
+                        hoja.Cell(filabuque, 25).FormulaA1 = "=+U" & filabuque & "+V" & filabuque & "-W" & filabuque 'TOTAL
 
                         'SUMATORIAS DE LAS SUMATORIAS
 
@@ -3882,7 +3887,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(7, 20).FormulaA1 = "=SUM(T3:T6)"
                         hoja.Cell(7, 21).FormulaA1 = "=SUM(U3:U6)"
                         hoja.Cell(7, 22).FormulaA1 = "=SUM(V3:V6)"
-
+                        hoja.Cell(7, 23).FormulaA1 = "=SUM(W3:W6)"
+                        hoja.Cell(7, 24).FormulaA1 = "=SUM(X3:X6)"
+                        hoja.Cell(7, 25).FormulaA1 = "=SUM(Y3:Y6)"
 
                         hoja.Cell(8, 5).FormulaA1 = "=E7"
                         hoja.Cell(8, 6).FormulaA1 = "=F7"
@@ -3902,6 +3909,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(8, 20).FormulaA1 = "=T7"
                         hoja.Cell(8, 21).FormulaA1 = "=U7"
                         hoja.Cell(8, 22).FormulaA1 = "=V7"
+                        hoja.Cell(8, 23).FormulaA1 = "=W7"
+                        hoja.Cell(8, 24).FormulaA1 = "=X7"
+                        hoja.Cell(8, 25).FormulaA1 = "=Y7"
 
                         'SEGUNDA TABLE
                         hoja.Cell(letrabuque & 14).FormulaA1 = "=E" & filabuque
@@ -3911,18 +3921,19 @@ Public Class frmnominasmarinos
                         hoja.Cell(letrabuque & 18).FormulaA1 = "=I" & filabuque
                         hoja.Cell(letrabuque & 19).FormulaA1 = "=J" & filabuque
                         hoja.Cell(letrabuque & 20).FormulaA1 = "=K" & filabuque
-                        hoja.Cell(letrabuque & 21).FormulaA1 = "=U" & filabuque
-                        hoja.Cell(letrabuque & 22).FormulaA1 = "=N" & filabuque
+                        hoja.Cell(letrabuque & 21).FormulaA1 = "=X" & filabuque
+                        hoja.Cell(letrabuque & 22).FormulaA1 = "=O" & filabuque
                         hoja.Cell(letrabuque & 23).FormulaA1 = "=L" & filabuque
                         hoja.Cell(letrabuque & 24).Value = sumatorias(0).Item("fImssCS") 'IMSS
                         hoja.Cell(letrabuque & 25).Value = sumatorias(0).Item("fRcvCS") 'SAR
                         hoja.Cell(letrabuque & 26).Value = sumatorias(0).Item("fInfonavitCS") 'INFONAVIT
                         hoja.Cell(letrabuque & 27).Value = sumatorias(0).Item("fIsnCS") ' ISN
-                        hoja.Cell(letrabuque & 28).FormulaA1 = "=Q" & filabuque ' AYUDA SINDICAL
-                        hoja.Cell(letrabuque & 29).FormulaA1 = "=O" & filabuque & " +P" & filabuque
+                        hoja.Cell(letrabuque & 28).FormulaA1 = "=S" & filabuque ' AYUDA SINDICAL
+                        hoja.Cell(letrabuque & 29).FormulaA1 = "=Q" & filabuque & " +R" & filabuque
                         hoja.Cell(letrabuque & 30).FormulaA1 = "=SUBTOTAL(109," & letrabuque & "13:" & letrabuque & "29)	"
                         hoja.Cell(letrabuque & 31).FormulaA1 = "=+" & letrabuque & "30*0.16"
-                        hoja.Cell(letrabuque & 32).FormulaA1 = "=+" & letrabuque & "30+" & letrabuque & "31"
+                        hoja.Cell(letrabuque & 32).FormulaA1 = "=W" & filabuque
+                        hoja.Cell(letrabuque & 33).FormulaA1 = "=+" & letrabuque & "30+" & letrabuque & "31-" & letrabuque & "32"
                         'SUMATORIA COLUMNA FINAL
                         hoja.Cell(24, 9).FormulaA1 = "=SUM(E24:H24)"
                         hoja.Cell(25, 9).FormulaA1 = "=SUM(E25:H25)"
