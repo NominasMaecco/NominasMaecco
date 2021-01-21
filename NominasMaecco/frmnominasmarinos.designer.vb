@@ -70,6 +70,9 @@ Partial Class frmnominasmarinos
         Me.Subirdatos = New System.Windows.Forms.Button()
         Me.cmdCalcularSindicato = New System.Windows.Forms.Button()
         Me.cmdAcumuladosMaecco = New System.Windows.Forms.Button()
+        Me.chkNOPension = New System.Windows.Forms.CheckBox()
+        Me.NoCalcularPensiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActivarCalcularPensiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
@@ -79,9 +82,10 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkNOPension)
         Me.pnlCatalogo.Controls.Add(Me.cmdInfonavitxBim)
         Me.pnlCatalogo.Controls.Add(Me.btnBuscar)
         Me.pnlCatalogo.Controls.Add(Me.chkNoinfonavit)
@@ -146,7 +150,7 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.AutoSize = True
         Me.chkNoinfonavit.BackColor = System.Drawing.Color.Transparent
         Me.chkNoinfonavit.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNoinfonavit.Location = New System.Drawing.Point(191, 85)
+        Me.chkNoinfonavit.Location = New System.Drawing.Point(116, 85)
         Me.chkNoinfonavit.Name = "chkNoinfonavit"
         Me.chkNoinfonavit.Size = New System.Drawing.Size(104, 22)
         Me.chkNoinfonavit.TabIndex = 30
@@ -260,7 +264,7 @@ Partial Class frmnominasmarinos
         Me.chkgrupo.AutoSize = True
         Me.chkgrupo.BackColor = System.Drawing.Color.Transparent
         Me.chkgrupo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkgrupo.Location = New System.Drawing.Point(871, 85)
+        Me.chkgrupo.Location = New System.Drawing.Point(893, 85)
         Me.chkgrupo.Name = "chkgrupo"
         Me.chkgrupo.Size = New System.Drawing.Size(65, 22)
         Me.chkgrupo.TabIndex = 19
@@ -272,7 +276,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.AutoSize = True
         Me.chkinter.BackColor = System.Drawing.Color.Transparent
         Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkinter.Location = New System.Drawing.Point(426, 86)
+        Me.chkinter.Location = New System.Drawing.Point(448, 86)
         Me.chkinter.Name = "chkinter"
         Me.chkinter.Size = New System.Drawing.Size(110, 22)
         Me.chkinter.TabIndex = 18
@@ -282,7 +286,7 @@ Partial Class frmnominasmarinos
         'cbobancos
         '
         Me.cbobancos.FormattingEnabled = True
-        Me.cbobancos.Location = New System.Drawing.Point(541, 82)
+        Me.cbobancos.Location = New System.Drawing.Point(563, 82)
         Me.cbobancos.Name = "cbobancos"
         Me.cbobancos.Size = New System.Drawing.Size(252, 27)
         Me.cbobancos.TabIndex = 17
@@ -292,7 +296,7 @@ Partial Class frmnominasmarinos
         Me.chkSindicato.AutoSize = True
         Me.chkSindicato.BackColor = System.Drawing.Color.Transparent
         Me.chkSindicato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSindicato.Location = New System.Drawing.Point(343, 86)
+        Me.chkSindicato.Location = New System.Drawing.Point(365, 86)
         Me.chkSindicato.Name = "chkSindicato"
         Me.chkSindicato.Size = New System.Drawing.Size(84, 22)
         Me.chkSindicato.TabIndex = 16
@@ -304,7 +308,7 @@ Partial Class frmnominasmarinos
         Me.chkAll.AutoSize = True
         Me.chkAll.BackColor = System.Drawing.Color.Transparent
         Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAll.Location = New System.Drawing.Point(59, 85)
+        Me.chkAll.Location = New System.Drawing.Point(7, 85)
         Me.chkAll.Name = "chkAll"
         Me.chkAll.Size = New System.Drawing.Size(107, 22)
         Me.chkAll.TabIndex = 15
@@ -340,7 +344,7 @@ Partial Class frmnominasmarinos
         'cmdlayouts
         '
         Me.cmdlayouts.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdlayouts.Location = New System.Drawing.Point(799, 83)
+        Me.cmdlayouts.Location = New System.Drawing.Point(821, 83)
         Me.cmdlayouts.Name = "cmdlayouts"
         Me.cmdlayouts.Size = New System.Drawing.Size(66, 27)
         Me.cmdlayouts.TabIndex = 11
@@ -405,8 +409,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 128)
         Me.dtgDatos.Name = "dtgDatos"
@@ -483,9 +487,9 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInfonavitToolStripMenuItem, Me.ActivarCalculoInfonavitToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInfonavitToolStripMenuItem, Me.ActivarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPensiónToolStripMenuItem, Me.ActivarCalcularPensiónToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(205, 114)
+        Me.cMenu.Size = New System.Drawing.Size(205, 180)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -607,6 +611,30 @@ Partial Class frmnominasmarinos
         Me.cmdAcumuladosMaecco.Text = "Acumulados Mary"
         Me.cmdAcumuladosMaecco.UseVisualStyleBackColor = True
         '
+        'chkNOPension
+        '
+        Me.chkNOPension.AutoSize = True
+        Me.chkNOPension.BackColor = System.Drawing.Color.Transparent
+        Me.chkNOPension.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkNOPension.Location = New System.Drawing.Point(226, 85)
+        Me.chkNOPension.Name = "chkNOPension"
+        Me.chkNOPension.Size = New System.Drawing.Size(98, 22)
+        Me.chkNOPension.TabIndex = 33
+        Me.chkNOPension.Text = "No Pensión"
+        Me.chkNOPension.UseVisualStyleBackColor = False
+        '
+        'NoCalcularPensiónToolStripMenuItem
+        '
+        Me.NoCalcularPensiónToolStripMenuItem.Name = "NoCalcularPensiónToolStripMenuItem"
+        Me.NoCalcularPensiónToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPensiónToolStripMenuItem.Text = "No Calcular Pensión"
+        '
+        'ActivarCalcularPensiónToolStripMenuItem
+        '
+        Me.ActivarCalcularPensiónToolStripMenuItem.Name = "ActivarCalcularPensiónToolStripMenuItem"
+        Me.ActivarCalcularPensiónToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivarCalcularPensiónToolStripMenuItem.Text = "Activar Calcular Pensión"
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -686,5 +714,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents btnBuscar As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladosMaecco As System.Windows.Forms.Button
     Friend WithEvents cmdInfonavitxBim As System.Windows.Forms.Button
+    Friend WithEvents chkNOPension As System.Windows.Forms.CheckBox
+    Friend WithEvents NoCalcularPensiónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ActivarCalcularPensiónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

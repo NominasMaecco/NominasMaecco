@@ -2200,71 +2200,73 @@ Public Class frmnominasmarinos
                         subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
                         subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(46).Value = "", "0", dtgDatos.Rows(x).Cells(46).Value))
 
+                        If dtgDatos.Rows(x).Cells(2).Tag = "" Then
+                            'PENSION
 
-                        'PENSION
+                            PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado - cuotasindical
+                            'Buscamos la Pension
 
-                        PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado - cuotasindical
-                        'Buscamos la Pension
+                            sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
 
-                        sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
-
-                        Dim rwPensionEmpleado As DataRow() = nConsulta(sql)
-                        pension = 0
-
-
-                        If rwPensionEmpleado Is Nothing = False Then
-                            For y As Integer = 0 To rwPensionEmpleado.Length - 1
-
-
-                                pension = pension + Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
-
-
-                                'dtgDatos.Rows(x).Cells(41).Value = PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100)
-
-                                'Insertar la pension
-                                'Insertamos los datos
-
-                                sql = "EXEC [setDetallePensionAlimenticiaInsertar] 0"
-                                'Id Empleado
-                                sql &= "," & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-                                'id Pension
-                                sql &= "," & Integer.Parse(rwPensionEmpleado(y)("iIdPensionAlimenticia"))
-                                'id Periodo
-                                sql &= ",'" & cboperiodo.SelectedValue
-                                'serie
-                                sql &= "'," & cboserie.SelectedIndex
-                                'tipo
-                                sql &= "," & cboTipoNomina.SelectedIndex
-                                'Monto
-                                sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
-                                'Estatus
-                                sql &= ",1"
-
-
-
-
-
-
-                                If nExecute(sql) = False Then
-                                    MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-
-
-                                End If
-
-
-
-                            Next
-
-
-                            dtgDatos.Rows(x).Cells(42).Value = pension
-
-
-
-                        Else
+                            Dim rwPensionEmpleado As DataRow() = nConsulta(sql)
                             pension = 0
-                            dtgDatos.Rows(x).Cells(42).Value = "0"
+
+
+                            If rwPensionEmpleado Is Nothing = False Then
+                                For y As Integer = 0 To rwPensionEmpleado.Length - 1
+
+
+                                    pension = pension + Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
+
+
+                                    'dtgDatos.Rows(x).Cells(41).Value = PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100)
+
+                                    'Insertar la pension
+                                    'Insertamos los datos
+
+                                    sql = "EXEC [setDetallePensionAlimenticiaInsertar] 0"
+                                    'Id Empleado
+                                    sql &= "," & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                                    'id Pension
+                                    sql &= "," & Integer.Parse(rwPensionEmpleado(y)("iIdPensionAlimenticia"))
+                                    'id Periodo
+                                    sql &= ",'" & cboperiodo.SelectedValue
+                                    'serie
+                                    sql &= "'," & cboserie.SelectedIndex
+                                    'tipo
+                                    sql &= "," & cboTipoNomina.SelectedIndex
+                                    'Monto
+                                    sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
+                                    'Estatus
+                                    sql &= ",1"
+
+
+
+
+
+
+                                    If nExecute(sql) = False Then
+                                        MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+
+                                    End If
+
+
+
+                                Next
+
+
+                                dtgDatos.Rows(x).Cells(42).Value = pension
+
+
+
+                            Else
+                                pension = 0
+                                dtgDatos.Rows(x).Cells(42).Value = "0"
+                            End If
+                            '#termina pension
                         End If
-                        '#termina pension
+                        pension = IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0.00", dtgDatos.Rows(x).Cells(42).Value)
 
 
 
@@ -3692,7 +3694,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-  
+
 
     Public Sub recorrerFilasColumnas(ByRef hoja As IXLWorksheet, ByRef filainicio As Integer, ByRef filafinal As Integer, ByRef colTotal As Integer, ByRef tipo As String, Optional ByVal inicioCol As Integer = 1)
 
@@ -3752,7 +3754,7 @@ Public Class frmnominasmarinos
 
                 book.Worksheet(1).CopyTo(libro, mes)
                 Dim hoja As IXLWorksheet = libro.Worksheets(0)
-                
+
 
                 '<<<<<<REPORTE DEL CONTADOR>>>>>>>
                 filaExcel = 3
@@ -3958,7 +3960,7 @@ Public Class frmnominasmarinos
                 Dim year As Integer = moment.Year
 
 
-                dialogo.FileName = "REPORTE MAECCO " + mes.ToUpper + " "+ iejercicio & " SERIE " & cboserie.SelectedItem
+                dialogo.FileName = "REPORTE MAECCO " + mes.ToUpper + " " + iejercicio & " SERIE " & cboserie.SelectedItem
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -4022,46 +4024,46 @@ Public Class frmnominasmarinos
             ejercicio = rwPeriodo0(0).Item("iEjercicio")
 
 
-            
-        filaExcel = 10
-        For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-            ' dtgDatos.Rows(x).Cells(11).FormattedValue
-            hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value
-            hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value
-            hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(5).Value
-            hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(12).Value
-            hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(6).Value
-            hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(7).Value
-            hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(8).Value
-            hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(9).Value
-            hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(10).FormattedValue
-            hoja.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
-            hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'SALARIO DIARO
-            hoja.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
-            hoja.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS TRABAJADOS
-            hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
+            filaExcel = 10
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                ' dtgDatos.Rows(x).Cells(11).FormattedValue
+                hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value
+                hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value
+                hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(5).Value
+                hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(12).Value
+                hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(6).Value
+                hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(7).Value
+                hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(8).Value
+                hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(9).Value
+                hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(10).FormattedValue
+                hoja.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
+                hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(16).Value 'SALARIO DIARO
+                hoja.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
+                hoja.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(18).Value 'DIAS TRABAJADOS
+                hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(41).Value 'CUOTA SINDICAL
 
 
-            filaExcel = filaExcel + 1
+                filaExcel = filaExcel + 1
 
-        Next x
+            Next x
             hoja.Cell(filaExcel + 2, 14).Style.NumberFormat.Format = "@"
             hoja.Cell(filaExcel + 2, 14).FormulaA1 = "=SUM(N10:N" & filaExcel + 1 & ")"
 
-        dialogo.FileName = "CUOTA SINDICALES " + mesperiodo.ToUpper + " " + ejercicio
-        dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.FileName = "CUOTA SINDICALES " + mesperiodo.ToUpper + " " + ejercicio
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
 
 
-        If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            ' OK button pressed
-            libro.SaveAs(dialogo.FileName)
-            libro = Nothing
-            MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-            MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                ' OK button pressed
+                libro.SaveAs(dialogo.FileName)
+                libro = Nothing
+                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        End If
+            End If
         End If
 
     End Sub
@@ -4073,7 +4075,7 @@ Public Class frmnominasmarinos
         ExisteEnLista()
         '<<<<<<<<>>>>>>
 
-    
+
 
     End Sub
     Public Function ExisteEnLista(Optional ByVal tipo As String = "sa")
@@ -4229,7 +4231,7 @@ Public Class frmnominasmarinos
         End If
         dtgDupl2.Rows.Clear()
     End Function
- 
+
 
 
     Function generarLayout2(ByVal dtgD As DataGridView, ByVal path As String)
@@ -4342,7 +4344,7 @@ Public Class frmnominasmarinos
                     filaExcel = filaExcel + 1
                 Next x
 
-             
+
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
 
@@ -4418,7 +4420,7 @@ Public Class frmnominasmarinos
         End Try
     End Function
 
- 
+
 
     Public Function validateInfonavit(ByVal diferencia As Object, ByVal infonavit As Object) As String
         Dim negativo As Integer = diferencia.ToString.IndexOf("-")
@@ -4453,7 +4455,7 @@ Public Class frmnominasmarinos
         Return Contenido
 
     End Function
-  
+
     Private Sub tsbImportar_Click(ByVal sender As Object, ByVal e As EventArgs)
 
 
@@ -7039,7 +7041,7 @@ Public Class frmnominasmarinos
 
                             End If
                         End If
-                        
+
                     Next
 
 
@@ -7181,7 +7183,7 @@ Public Class frmnominasmarinos
             If dtgDatos.Rows.Count > 0 Then
                 Dim ruta As String
                 ruta = My.Application.Info.DirectoryPath() & "\Archivos\tmmMaecco.xlsx"
-             
+
                 Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
 
 
@@ -7202,7 +7204,7 @@ Public Class frmnominasmarinos
 
 
                 ''<<<<<<<<<<<<<<<<<<<<<<TMM>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-               
+
 
                 filaExcel = 11
                 Dim nombrebuque As String
@@ -7312,7 +7314,7 @@ Public Class frmnominasmarinos
                         hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!S" & filaExcel + x
                         hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!T" & filaExcel + x
 
-                       
+
 
 
 
@@ -7490,14 +7492,14 @@ Public Class frmnominasmarinos
                         hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!S" & filaExcel + x
                         hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!T" & filaExcel + x
 
-                  
+
 
 
 
                     End If
                 Next x
 
-               
+
                 'Segunda parte de reporte principal
                 filaExcel = filaExcel + 1
                 contadorexcelbuquefinal = filaExcel + total ' - 1
@@ -7930,7 +7932,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 39).FormulaA1 = "=AK" & filaExcel & "-AL" & filaExcel 'NETO A DISPERSAR
 
                     filaExcel = filaExcel + 1
-                  
+
 
                 Next x
 
@@ -7976,7 +7978,7 @@ Public Class frmnominasmarinos
 
                 pnlProgreso.Visible = False
                 pnlCatalogo.Enabled = True
-				Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+                Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
 
                 dialogo.FileName = "TMM " & rwUsuario(0).Item("Nombre").ToUpper & " " & mesperiodo + " " + iEjercicio & " SERIE " & cboserie.SelectedItem
                 'dialogo.FileName = "TMM NOMINA MAECCO" + " " + year.ToString + " "
@@ -7987,7 +7989,7 @@ Public Class frmnominasmarinos
                     ' OK button pressed
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
-                    
+
                     MessageBox.Show("Archivo Generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -8001,7 +8003,7 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
-    
+
     Private Sub btnKiosko_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnKiosko.Click
 
         Try
@@ -8052,7 +8054,7 @@ Public Class frmnominasmarinos
                 Dim complemento, maecco As Double
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-                  
+
                     incapacidad = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
                     isr = dtgDatos.Rows(x).Cells(36).Value 'ISR
                     imss = dtgDatos.Rows(x).Cells(37).Value 'IMS
@@ -8125,11 +8127,11 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    
-    
 
-  
-    
+
+
+
+
     Private Sub cmdReporteMensual_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdReporteMensual.Click
         Try
             Dim sql As String
@@ -8139,7 +8141,7 @@ Public Class frmnominasmarinos
             Dim mes, anio As String
             Dim fechapagoletra() As String
 
-           
+
             If dtgDatos.Rows.Count > 0 Then
 
                 'Clonar el XLSX
@@ -8220,7 +8222,7 @@ Public Class frmnominasmarinos
                 Dim countH As Integer = 0
                 Dim countM As Integer = 0
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                  
+
                     Dim fechaantiguedad As Date = Date.Parse(getDatosNomina(2, dtgDatos.Rows(x).Cells(2).Value, dtgDatos.Rows(x).Cells(18).Value, "fechaantiguedad"))
                     Dim fechahoy As Date = Date.Now
                     sumatoriaaños = sumatoriaaños + (fechahoy.Year - fechaantiguedad.Year)
@@ -9153,7 +9155,7 @@ Public Class frmnominasmarinos
 
                         End If
                     End If
-                   
+
                 Next
 
             End If
@@ -9395,6 +9397,42 @@ Public Class frmnominasmarinos
         End Try
     End Function
 
+    Private Sub chkNOPension_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkNOPension.CheckedChanged
+        Try
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                If chkNoinfonavit.Checked Then
+                    dtgDatos.Rows(x).Cells(2).Style.BackColor = Color.Beige
+                    dtgDatos.Rows(x).Cells(2).Tag = "1"
+                Else
+                    dtgDatos.Rows(x).Cells(2).Style.BackColor = Color.White
+                    dtgDatos.Rows(x).Cells(2).Tag = ""
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+
+        End Try
+    End Sub
+
+    Private Sub NoCalcularPensiónToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularPensiónToolStripMenuItem.Click
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(2).Tag = "1"
+            iFila.Cells(2).Style.BackColor = Color.Beige
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ActivarCalcularPensiónToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActivarCalcularPensiónToolStripMenuItem.Click
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(2).Tag = ""
+            iFila.Cells(2).Style.BackColor = Color.White
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
 
 
