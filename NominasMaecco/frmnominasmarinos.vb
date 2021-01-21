@@ -2289,17 +2289,17 @@ Public Class frmnominasmarinos
                 dtgDatos.Rows(x).Cells(51).Value = ComplementoSindicato
 
                 'Calcular retenciones Maecco
-                RetencionMaecco = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + cuotasindical + pension + prestamo + fonacot)
+                RetencionMaecco = Math.Round((Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + cuotasindical + pension + prestamo + fonacot), 2)
                 dtgDatos.Rows(x).Cells(52).Value = RetencionMaecco
 
                 '%Comision
-                dtgDatos.Rows(x).Cells(53).Value = "2%"
+                dtgDatos.Rows(x).Cells(53).Value = "4%"
                 'Comision Maecco
-                ComisionMaecco = Math.Round((Maecco + RetencionMaecco) * 0.02, 2)
+                ComisionMaecco = Math.Round((Maecco + RetencionMaecco) * 0.04, 2)
                 dtgDatos.Rows(x).Cells(54).Value = ComisionMaecco
 
                 'Comision Complemento
-                ComisionComplemento = Math.Round((ComplementoSindicato + PrestamoPersonalSindicato + AdeudoINfonavitSindicato + DiferenciaInfonavitSindicato) * 0.02, 2)
+                ComisionComplemento = Math.Round((ComplementoSindicato + PrestamoPersonalSindicato + AdeudoINfonavitSindicato + DiferenciaInfonavitSindicato) * 0.035, 2)
                 dtgDatos.Rows(x).Cells(55).Value = ComisionComplemento
 
 
@@ -3830,8 +3830,10 @@ Public Class frmnominasmarinos
                     sql &= " SUM(fDescSemObligatorio) AS fDescSemObligatorio, SUM(fVacacionesProporcionales) AS fVacacionesProporcionales, SUM(fAguinaldoGravado + fAguinaldoExento) AS totalAguinaldo, "
                     sql &= " SUM(fPrimaVacacionalExento+ fPrimaVacacionalGravado) AS totalPrimaVacacional, SUM(fPrestamo) AS fPrestamo, "
                     sql &= "SUM (fPrestamoPerS) as Complemento,"
-                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco)+60 AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
-                    sql &= " SUM(fImssCS) AS  fImssCS, SUM(fRcvCS) AS  fRcvCS, SUM(fInfonavitCS) AS  fInfonavitCS, SUM(fIsnCS) AS  fIsnCS, SUM(fTotalCostoSocial) AS  fTotalCostoSocial"
+                    sql &= " SUM(fComplementoSindicato) AS fComplementoSindicato, SUM(fComisionMaecco)+132 AS fComisionMaecco, SUM(fComisionComplemento) AS fComisionComplemento, "
+                    sql &= " SUM(fImssCS) AS  fImssCS, SUM(fRcvCS) AS  fRcvCS, SUM(fInfonavitCS) AS  fInfonavitCS, SUM(fIsnCS) AS  fIsnCS, SUM(fTotalCostoSocial) AS  fTotalCostoSocial,"
+                    sql &= "SUM(fRetencionesMaecco) AS fRetencionesMaecco,"
+                    sql &= "SUM(fMaecco) as fMaecco"
                     sql &= " FROM Nomina inner join EmpleadosC ON fkiIdEmpleadoC=iIdEmpleadoC  "
                     sql &= " WHERE Nomina.fkiIdEmpresa =1"
                     sql &= " AND fkiIdPeriodo = " & cboperiodo.SelectedValue
@@ -3850,17 +3852,20 @@ Public Class frmnominasmarinos
                         hoja.Cell(filabuque, 9).Value = sumatorias(0).Item("fVacacionesProporcionales")
                         hoja.Cell(filabuque, 10).Value = sumatorias(0).Item("totalAguinaldo")
                         hoja.Cell(filabuque, 11).Value = sumatorias(0).Item("totalPrimaVacacional")
-                        hoja.Cell(filabuque, 12).Value = "0.0" 'sumatorias(0).Item("fPrestamo")
+                        hoja.Cell(filabuque, 12).Value = sumatorias(0).Item("fPrestamo")
                         hoja.Cell(filabuque, 13).FormulaA1 = "=SUM(E" & filabuque & ":L" & filabuque & ")"
-                        hoja.Cell(filabuque, 14).Value = sumatorias(0).Item("fComplementoSindicato") ' COMPLEMENTO
-                        hoja.Cell(filabuque, 15).Value = sumatorias(0).Item("fComisionMaecco")
-                        hoja.Cell(filabuque, 16).Value = sumatorias(0).Item("fComisionComplemento")
-                        hoja.Cell(filabuque, 17).Value = "3000" ' SINDICATO
-                        hoja.Cell(filabuque, 18).Value = sumatorias(0).Item("fTotalCostoSocial")
-                        hoja.Cell(filabuque, 19).FormulaA1 = "=SUM(M" & filabuque & ":R" & filabuque & ")" 'subtotal
-                        hoja.Cell(filabuque, 20).FormulaA1 = "=+S" & filabuque & "*0.16" 'IVA 
-                        hoja.Cell(filabuque, 21).Value = "0.0" 'Bonificacion
-                        hoja.Cell(filabuque, 22).FormulaA1 = "=+S" & filabuque & "+T" & filabuque 'TOTAL
+                        hoja.Cell(filabuque, 14).Value = sumatorias(0).Item("fRetencionesMaecco") ' RETENCIONES
+                        hoja.Cell(filabuque, 15).Value = sumatorias(0).Item("fComplementoSindicato") ' COMPLEMENTO
+                        hoja.Cell(filabuque, 16).Value = sumatorias(0).Item("fMaecco") 'Maecco
+                        hoja.Cell(filabuque, 17).Value = sumatorias(0).Item("fComisionMaecco")
+                        hoja.Cell(filabuque, 18).Value = sumatorias(0).Item("fComisionComplemento")
+                        hoja.Cell(filabuque, 19).Value = "3300" ' SINDICATO
+                        hoja.Cell(filabuque, 20).Value = sumatorias(0).Item("fTotalCostoSocial")
+                        hoja.Cell(filabuque, 21).FormulaA1 = "=+L" & filabuque & "+N" & filabuque & "+O" & filabuque & "+P" & filabuque & "+Q" & filabuque & "+R" & filabuque & "+T" & filabuque & "+S" & filabuque 'subtotal
+                        hoja.Cell(filabuque, 22).FormulaA1 = "=+U" & filabuque & "*0.16" 'IVA 
+                        hoja.Cell(filabuque, 23).FormulaA1 = "=+(N" & filabuque & "+P" & filabuque & "+Q" & filabuque & "+T" & filabuque & "+S" & filabuque & ")*6%"
+                        hoja.Cell(filabuque, 24).Value = "0.0" 'Bonificacion
+                        hoja.Cell(filabuque, 25).FormulaA1 = "=+U" & filabuque & "+V" & filabuque & "-W" & filabuque 'TOTAL
 
                         'SUMATORIAS DE LAS SUMATORIAS
 
@@ -3882,7 +3887,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(7, 20).FormulaA1 = "=SUM(T3:T6)"
                         hoja.Cell(7, 21).FormulaA1 = "=SUM(U3:U6)"
                         hoja.Cell(7, 22).FormulaA1 = "=SUM(V3:V6)"
-
+                        hoja.Cell(7, 23).FormulaA1 = "=SUM(W3:W6)"
+                        hoja.Cell(7, 24).FormulaA1 = "=SUM(X3:X6)"
+                        hoja.Cell(7, 25).FormulaA1 = "=SUM(Y3:Y6)"
 
                         hoja.Cell(8, 5).FormulaA1 = "=E7"
                         hoja.Cell(8, 6).FormulaA1 = "=F7"
@@ -3902,6 +3909,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(8, 20).FormulaA1 = "=T7"
                         hoja.Cell(8, 21).FormulaA1 = "=U7"
                         hoja.Cell(8, 22).FormulaA1 = "=V7"
+                        hoja.Cell(8, 23).FormulaA1 = "=W7"
+                        hoja.Cell(8, 24).FormulaA1 = "=X7"
+                        hoja.Cell(8, 25).FormulaA1 = "=Y7"
 
                         'SEGUNDA TABLE
                         hoja.Cell(letrabuque & 14).FormulaA1 = "=E" & filabuque
@@ -3911,18 +3921,19 @@ Public Class frmnominasmarinos
                         hoja.Cell(letrabuque & 18).FormulaA1 = "=I" & filabuque
                         hoja.Cell(letrabuque & 19).FormulaA1 = "=J" & filabuque
                         hoja.Cell(letrabuque & 20).FormulaA1 = "=K" & filabuque
-                        hoja.Cell(letrabuque & 21).FormulaA1 = "=U" & filabuque
-                        hoja.Cell(letrabuque & 22).FormulaA1 = "=N" & filabuque
+                        hoja.Cell(letrabuque & 21).FormulaA1 = "=X" & filabuque
+                        hoja.Cell(letrabuque & 22).FormulaA1 = "=O" & filabuque
                         hoja.Cell(letrabuque & 23).FormulaA1 = "=L" & filabuque
                         hoja.Cell(letrabuque & 24).Value = sumatorias(0).Item("fImssCS") 'IMSS
                         hoja.Cell(letrabuque & 25).Value = sumatorias(0).Item("fRcvCS") 'SAR
                         hoja.Cell(letrabuque & 26).Value = sumatorias(0).Item("fInfonavitCS") 'INFONAVIT
                         hoja.Cell(letrabuque & 27).Value = sumatorias(0).Item("fIsnCS") ' ISN
-                        hoja.Cell(letrabuque & 28).FormulaA1 = "=Q" & filabuque ' AYUDA SINDICAL
-                        hoja.Cell(letrabuque & 29).FormulaA1 = "=O" & filabuque & " +P" & filabuque
+                        hoja.Cell(letrabuque & 28).FormulaA1 = "=S" & filabuque ' AYUDA SINDICAL
+                        hoja.Cell(letrabuque & 29).FormulaA1 = "=Q" & filabuque & " +R" & filabuque
                         hoja.Cell(letrabuque & 30).FormulaA1 = "=SUBTOTAL(109," & letrabuque & "13:" & letrabuque & "29)	"
                         hoja.Cell(letrabuque & 31).FormulaA1 = "=+" & letrabuque & "30*0.16"
-                        hoja.Cell(letrabuque & 32).FormulaA1 = "=+" & letrabuque & "30+" & letrabuque & "31"
+                        hoja.Cell(letrabuque & 32).FormulaA1 = "=W" & filabuque
+                        hoja.Cell(letrabuque & 33).FormulaA1 = "=+" & letrabuque & "30+" & letrabuque & "31-" & letrabuque & "32"
                         'SUMATORIA COLUMNA FINAL
                         hoja.Cell(24, 9).FormulaA1 = "=SUM(E24:H24)"
                         hoja.Cell(25, 9).FormulaA1 = "=SUM(E25:H25)"
@@ -4366,13 +4377,6 @@ Public Class frmnominasmarinos
                         hoja3.Cell(filaExcel, 6).Value = ""
                         hoja3.Cell(filaExcel, 7).Value = ""
                         hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'INCAPACIDAD *IMPORTE*
-
-                        If dtgD.Rows(x).Cells(4).Value = "FLORES MONTES DANIEL" Then
-                            MsgBox(dtgD.Rows(x).Cells(4).Value)
-                        End If
-
-
-
                         hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(42).Value  'PENSION ALIMENTICIA
                         If (dtgD.Rows(x).Cells(38).Value = "") Then
                             hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value
@@ -4384,6 +4388,12 @@ Public Class frmnominasmarinos
                         'INFONAVIT
                         hoja3.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(44).Value 'FONACOT
                         hoja3.Cell(filaExcel, 12).Value = dtgD.Rows(x).Cells(41).Value 'CUOTA SINDICAL
+
+
+                        ''Otros pagos
+                        hoja4.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'rfc
+                        hoja4.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
+
                     End If
 
 
@@ -7166,7 +7176,7 @@ Public Class frmnominasmarinos
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
 
-            Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC, AD, AE, AF, AG As String
+            Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH As String
 
             If dtgDatos.Rows.Count > 0 Then
                 Dim ruta As String
@@ -7259,9 +7269,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AM" & filatmp + x
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "=Q" & filaExcel + x & "-S" & filaExcel + x
                         hoja.Cell(filaExcel + x, 21).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 22).Value = ""
-                        hoja.Cell(filaExcel + x, 23).Value = "2%" 'comision
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+((S" & filaExcel + x & "+U" & filaExcel + x & ")*W" & filaExcel + x & ")" 'COMISION MAECCO
+                        hoja.Cell(filaExcel + x, 22).Value = "4%" 'COMISION SA
+                        hoja.Cell(filaExcel + x, 23).Value = "3.5%" 'COMISION ASIM
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+((S" & filaExcel + x & "+U" & filaExcel + x & ")*V" & filaExcel + x & ")" 'COMISION MAECCO
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=+(T" & filaExcel + x & "+O" & filaExcel + x & "+P" & filaExcel + x & "+N" & filaExcel + x & ")*W" & filaExcel + x 'COMISION COMPLEMENTO
                         hoja.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(56).Value
                         hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(57).Value
@@ -7270,13 +7280,14 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value 'COSTO SOCIAL
 
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "=+N" & filaExcel + x & "+O" & filaExcel + x & "+P" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & "+Y" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AE" & filaExcel + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x
-                        hoja.Cell(9, 34).Clear()
-                        hoja.Cell(10, 34).Clear()
-                        hoja.Cell(filaExcel + x, 34).Value = " "
-                        hoja.Cell(filaExcel + x, 35).FormulaA1 = "=AD" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 36).FormulaA1 = "30.00"
+                        hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AE" & filaExcel + x & "*0.16" 'IVA AF
+                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+(S" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & ")*6%"
+                        hoja.Cell(filaExcel + x, 34).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x & "-AG" & filaExcel + x
+                        hoja.Cell(9, 35).Clear()
+                        hoja.Cell(10, 35).Clear()
+                        hoja.Cell(filaExcel + x, 35).Value = " " 'AI
+                        hoja.Cell(filaExcel + x, 36).FormulaA1 = "=AD" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 37).FormulaA1 = "30.00"
 
 
                         '<<<<SINDICATO>>>>
@@ -7286,6 +7297,8 @@ Public Class frmnominasmarinos
 
                         hoja3.Range(5, 7, filaExcel + x - 6, 7).Style.NumberFormat.Format = "@"
                         hoja3.Range(5, 8, filaExcel + x - 6, 8).Style.NumberFormat.Format = "@"
+
+                        hoja3.Cell("b2").Value = "MAECCO " & mesperiodo.ToUpper & " " & iEjercicio
 
                         Dim datos As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado='" & dtgDatos.Rows(x).Cells(3).Value & "'")
                         Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco=" & datos(0).Item("fkiIdBanco"))
@@ -7299,12 +7312,13 @@ Public Class frmnominasmarinos
                         hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!S" & filaExcel + x
                         hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!T" & filaExcel + x
 
+                       
 
 
 
                     Else
                         recorrerFilasColumnas(hoja, 11, (total + filaExcel) + 200, 200, "sin relleno")
-                        recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 36, "bold false")
+                        recorrerFilasColumnas(hoja, 11, (total + filaExcel + 10), 38, "bold false")
 
                         contadorexcelbuquefinal = filaExcel + x
 
@@ -7331,12 +7345,14 @@ Public Class frmnominasmarinos
                         'hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+AC" & filaExcel + x & "+AD" & filaExcel + x
                         hoja.Cell(filaExcel + x, 3).Value = "GASTOS ADMINISTRATIVOS"
                         hoja.Cell(filaExcel + x, 19).Value = "3,300.00"
-                        hoja.Cell(filaExcel + x, 23).Value = "2%"
-                        hoja.Cell(filaExcel + x, 24).Value = "60.00"
+                        hoja.Cell(filaExcel + x, 22).Value = "4%"
+                        hoja.Cell(filaExcel + x, 23).Value = "3.5%"
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=((S" & filaExcel + x & "+U" & filaExcel + x & ")*V" & filaExcel + x & ")"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=+(T" & filaExcel + x & "+N" & filaExcel + x & ")*W" & filaExcel + x
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "=+N" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & "+Y" & filaExcel + x
                         hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AE" & filaExcel + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+(S" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & ")*6%"
+                        hoja.Cell(filaExcel + x, 34).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x & "-AG" & filaExcel + x
 
                         'hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
                         'hoja.Cell(filaExcel + x, 3).Style.Fill.BackgroundColor = XLColor.Yellow
@@ -7371,6 +7387,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x + 1, 31).FormulaA1 = "=SUM(AE" & contadorexcelbuqueinicial & ":AE" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x + 1, 32).FormulaA1 = "=SUM(AF" & contadorexcelbuqueinicial & ":AF" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x + 1, 33).FormulaA1 = "=SUM(AG" & contadorexcelbuqueinicial & ":AG" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + x + 1, 34).FormulaA1 = "=SUM(Ah" & contadorexcelbuqueinicial & ":AH" & contadorexcelbuquefinal & ")"
 
                         H += " +" & "H" & filaExcel + x + 1
                         I += " +" & "I" & filaExcel + x + 1
@@ -7398,6 +7415,7 @@ Public Class frmnominasmarinos
                         AE += " +" & "AE" & filaExcel + x + 1
                         AF += " +" & "AF" & filaExcel + x + 1
                         AG += " +" & "AG" & filaExcel + x + 1
+                        AH += " +" & "AH" & filaExcel + x + 1
 
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
                         filaExcel = filaExcel + 2
@@ -7425,9 +7443,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=MAECCO!AM" & filatmp + x
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "=Q" & filaExcel + x & "-S" & filaExcel + x
                         hoja.Cell(filaExcel + x, 21).FormulaA1 = "=MAECCO!AB" & filatmp + x & "+MAECCO!AC" & filatmp + x & "+MAECCO!AD" & filatmp + x & "+MAECCO!AE" & filatmp + x & "+MAECCO!AF" & filatmp + x & "+MAECCO!AG" & filatmp + x & "+MAECCO!AH" & filatmp + x & "+MAECCO!AI" & filatmp + x & "+MAECCO!AL" & filatmp + x
-                        hoja.Cell(filaExcel + x, 22).Value = ""
-                        hoja.Cell(filaExcel + x, 23).Value = "2%" 'comision
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+((S" & filaExcel + x & "+U" & filaExcel + x & ")*W" & filaExcel + x & ")" 'COMISION MAECCO
+                        hoja.Cell(filaExcel + x, 22).Value = "4%" 'COMISION SA
+                        hoja.Cell(filaExcel + x, 23).Value = "3.5%" 'COMISION ASIM
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+((S" & filaExcel + x & "+U" & filaExcel + x & ")*V" & filaExcel + x & ")" 'COMISION MAECCO
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=+(T" & filaExcel + x & "+O" & filaExcel + x & "+P" & filaExcel + x & "+N" & filaExcel + x & ")*W" & filaExcel + x 'COMISION COMPLEMENTO
                         hoja.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(56).Value
                         hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(57).Value
@@ -7436,19 +7454,22 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = dtgDatos.Rows(x).Cells(60).Value 'COSTO SOCIAL
 
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "=+N" & filaExcel + x & "+O" & filaExcel + x & "+P" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & "+Y" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AE" & filaExcel + x & "*0.16"
-                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x
-                        hoja.Cell(9, 34).Clear()
-                        hoja.Cell(10, 34).Clear()
-                        hoja.Cell(filaExcel + x, 34).Value = " "
-                        hoja.Cell(filaExcel + x, 35).FormulaA1 = "=AD" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 36).FormulaA1 = "30.00"
+                        hoja.Cell(filaExcel + x, 32).FormulaA1 = "=+AE" & filaExcel + x & "*0.16" 'IVA AF
+                        hoja.Cell(filaExcel + x, 33).FormulaA1 = "=+(S" & filaExcel + x & "+U" & filaExcel + x & "+X" & filaExcel + x & "+AD" & filaExcel + x & ")*6%"
+                        hoja.Cell(filaExcel + x, 34).FormulaA1 = "=+AE" & filaExcel + x & "+AF" & filaExcel + x & "-AG" & filaExcel + x
+                        hoja.Cell(9, 35).Clear()
+                        hoja.Cell(10, 35).Clear()
+                        hoja.Cell(filaExcel + x, 35).Value = " " 'AI
+                        hoja.Cell(filaExcel + x, 36).FormulaA1 = "=AD" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 37).FormulaA1 = "30.00"
+
 
 
 
 
                         '<<<<SINDICATO>>>>
 
+                        hoja3.Cell("B2").Value = "MAECCO " & mesperiodo.ToUpper & " " & iEjercicio
                         'Style
                         hoja3.Cell((filaExcel + x) - 6, 7).Style.NumberFormat.Format = "##################"
                         hoja3.Cell((filaExcel + x) - 6, 8).Style.NumberFormat.Format = "@"
@@ -7469,7 +7490,7 @@ Public Class frmnominasmarinos
                         hoja3.Cell((filaExcel + x) - 6, 9).FormulaA1 = "=TMM!S" & filaExcel + x
                         hoja3.Cell((filaExcel + x) - 6, 10).FormulaA1 = "=TMM!T" & filaExcel + x
 
-
+                  
 
 
 
@@ -7483,12 +7504,14 @@ Public Class frmnominasmarinos
                 veracruz = contadorexcelbuquefinal '+ 1
                 hoja.Cell(filaExcel + total, 3).Value = "GASTOS ADMINISTRATIVOS"
                 hoja.Cell(filaExcel + total, 19).Value = "3,300.00"
-                hoja.Cell(filaExcel + total, 23).Value = "2%"
-                hoja.Cell(filaExcel + total, 24).Value = "60.00"
+                hoja.Cell(filaExcel + total, 22).Value = "4%"
+                hoja.Cell(filaExcel + total, 23).Value = "3.5%"
+                hoja.Cell(filaExcel + total, 24).FormulaA1 = "=((S" & filaExcel + total & "+U" & filaExcel + total & ")*V" & filaExcel + total & ")"
                 hoja.Cell(filaExcel + total, 25).FormulaA1 = "=+(T" & filaExcel + total & "+N" & filaExcel + total & ")*W" & filaExcel + total
                 hoja.Cell(filaExcel + total, 31).FormulaA1 = "=+N" & filaExcel + total & "+S" & filaExcel + total & "+T" & filaExcel + total & "+U" & filaExcel + total & "+X" & filaExcel + total & "+AD" & filaExcel + total & "+Y" & filaExcel + total
                 hoja.Cell(filaExcel + total, 32).FormulaA1 = "=+AE" & filaExcel + total & "*0.16"
-                hoja.Cell(filaExcel + total, 33).FormulaA1 = "=+AE" & filaExcel + total & "+AF" & filaExcel + total
+                hoja.Cell(filaExcel + total, 33).FormulaA1 = "=+(S" & filaExcel + total & "+U" & filaExcel + total & "+X" & filaExcel + total & "+AD" & filaExcel + total & ")*6%"
+                hoja.Cell(filaExcel + total, 34).FormulaA1 = "=+AE" & filaExcel + total & "+AF" & filaExcel + total & "-AG" & filaExcel + total
 
 
                 hoja.Cell(filaExcel + total + 1, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
@@ -7517,6 +7540,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 1, 31).FormulaA1 = "=SUM(AE" & contadorexcelbuqueinicial & ":AE" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 32).FormulaA1 = "=SUM(AF" & contadorexcelbuqueinicial & ":AF" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total + 1, 33).FormulaA1 = "=SUM(AG" & contadorexcelbuqueinicial & ":AG" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total + 1, 34).FormulaA1 = "=SUM(AH" & contadorexcelbuqueinicial & ":AH" & contadorexcelbuquefinal & ")"
 
                 H += " +" & "H" & filaExcel + total + 1
                 I += " +" & "I" & filaExcel + total + 1
@@ -7544,6 +7568,7 @@ Public Class frmnominasmarinos
                 AE += " +" & "AE" & filaExcel + total + 1
                 AF += " +" & "AF" & filaExcel + total + 1
                 AG += " +" & "AG" & filaExcel + total + 1
+                AH += " +" & "AH" & filaExcel + total + 1
 
 
                 hoja.Cell(filaExcel + total + 4, 3).Value = "TOTAL FINAL DURANGO, TAJIN, TULA Y VERACRUZ"
@@ -7573,15 +7598,16 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 4, 31).FormulaA1 = "=" & AE
                 hoja.Cell(filaExcel + total + 4, 32).FormulaA1 = "=" & AF
                 hoja.Cell(filaExcel + total + 4, 33).FormulaA1 = "=" & AG
+                hoja.Cell(filaExcel + total + 4, 34).FormulaA1 = "=" & AH
 
-                hoja.Range(filaExcel + total + 4, 3, filaExcel + total + 4, 33).Style.Fill.BackgroundColor = XLColor.PeachOrange
+                hoja.Range(filaExcel + total + 4, 3, filaExcel + total + 4, 34).Style.Fill.BackgroundColor = XLColor.PeachOrange
                 recorrerFilasColumnas(hoja, 11, (total + filaExcel + 30), 38, "text black")
 
                 'Style
-                hoja.Range(tajin + 1, 3, tajin + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(tula + 1, 3, tula + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(durango + 1, 3, durango + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                hoja.Range(veracruz + 1, 3, veracruz + 1, 33).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(tajin + 1, 3, tajin + 1, 34).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(tula + 1, 3, tula + 1, 34).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(durango + 1, 3, durango + 1, 34).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(veracruz + 1, 3, veracruz + 1, 34).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 hoja.Cell(IIf(durango = 0, 1, durango), 3).Style.Fill.BackgroundColor = XLColor.Yellow
                 hoja.Cell(IIf(tajin = 0, 1, tajin), 3).Style.Fill.BackgroundColor = XLColor.Yellow
                 hoja.Cell(IIf(tula = 0, 1, tula), 3).Style.Fill.BackgroundColor = XLColor.Yellow
@@ -7590,27 +7616,34 @@ Public Class frmnominasmarinos
                 hoja.Cell(durango + 1, 3).Value = ("TOTAL DURANGO").ToUpper
                 hoja.Cell(tajin + 1, 3).Value = ("TOTAL TAJIN").ToUpper
                 hoja.Cell(tula + 1, 3).Value = ("TOTAL TULA").ToUpper
-                hoja.Cell(veracruz + 1, 3).Value = ("TOTAL VERACRUZ").ToUpper
+                hoja.Cell(veracruz + 1, 3).Value = ("TOTAL TULA .").ToUpper
 
                 hoja.Range(11, 8, filaExcel + total + 30, 31).Style.NumberFormat.NumberFormatId = 4
 
+
+                '<<<<<<SUMATORIA SINDICATO>>>>>>
+
+                hoja3.Cell((filaExcel + total) - 5, 9).FormulaA1 = "=SUM(I5:I" & (filaExcel + total) - 6 & ")"
+                hoja3.Cell((filaExcel + total) - 5, 10).FormulaA1 = "=SUM(J5:J" & (filaExcel + total) - 6 & ")"
 
                 Dim sep As Integer = filaExcel + total + 8
                 hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
 
                 'Durango
                 hoja.Cell(sep, 3).Value = "DURANGO"
-                hoja.Cell(sep + 1, 3).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 1, 3).Value = "DEPOSIT MAECCO BBVA"
                 hoja.Cell(sep + 2, 3).Value = "IVA"
-                hoja.Cell(sep + 3, 3).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 3, 3).Value = "RETENCIO 6%"
+                hoja.Cell(sep + 4, 3).Value = "TOTAL DEPOSITO MAECCO"
                 hoja.Cell(sep + 5, 3).Value = "DEPOSITO SPROUL BANAMEX"
                 hoja.Cell(sep + 6, 3).Value = "IVA"
                 hoja.Cell(sep + 7, 3).Value = "TOTAL DEPOSITO SPROUL"
 
                 hoja.Cell(sep + 1, 4).FormulaA1 = "=S" & durango + 1 & "+U" & durango + 1 & "+X" & durango + 1 & "+AD" & durango + 1
                 hoja.Cell(sep + 2, 4).FormulaA1 = "=D" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 4).FormulaA1 = "=D" & sep + 1 & "+D" & sep + 2
-                hoja.Range(sep + 3, 3, sep + 3, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 3, 4).FormulaA1 = "=D" & sep + 1 & "*6%"
+                hoja.Cell(sep + 4, 4).FormulaA1 = "=D" & sep + 1 & "+D" & sep + 2 & "-D" & sep + 3
+                hoja.Range(sep + 4, 3, sep + 3, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 hoja.Cell(sep + 5, 4).FormulaA1 = "=N" & durango + 1 & "+O" & durango + 1 & "+P" & durango + 1 & "+T" & durango + 1 & "+Y" & durango + 1
                 hoja.Cell(sep + 6, 4).FormulaA1 = "=D" & sep + 5 & "*16%"
@@ -7619,17 +7652,19 @@ Public Class frmnominasmarinos
 
                 'Tajin
                 hoja.Cell(sep, 6).Value = "TAJIN"
-                hoja.Cell(sep + 1, 6).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 1, 6).Value = "DEPOSITO MAECCO BBVA"
                 hoja.Cell(sep + 2, 6).Value = "IVA"
-                hoja.Cell(sep + 3, 6).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 3, 6).Value = "RETENCION 6%"
+                hoja.Cell(sep + 4, 6).Value = "TOTAL DEPOSITO MAECCO"
                 hoja.Cell(sep + 5, 6).Value = "DEPOSITO SPROUL BANAMEX"
                 hoja.Cell(sep + 6, 6).Value = "IVA"
                 hoja.Cell(sep + 7, 6).Value = "TOTAL DEPOSITO SPROUL"
 
                 hoja.Cell(sep + 1, 8).FormulaA1 = "=S" & tajin + 1 & "+U" & tajin + 1 & "+X" & tajin + 1 & "+AD" & tajin + 1
                 hoja.Cell(sep + 2, 8).FormulaA1 = "=H" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 8).FormulaA1 = "=H" & sep + 1 & "+H" & sep + 2
-                hoja.Range(sep + 3, 6, sep + 3, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 3, 8).FormulaA1 = "=H" & sep + 1 & "*6%"
+                hoja.Cell(sep + 4, 8).FormulaA1 = "=H" & sep + 1 & "+H" & sep + 2 & "-H" & sep + 3
+                hoja.Range(sep + 4, 6, sep + 4, 8).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 hoja.Cell(sep + 5, 8).FormulaA1 = "=N" & tajin + 1 & "+O" & tajin + 1 & "+P" & tajin + 1 & "+T" & tajin + 1 & "+Y" & tajin + 1
                 hoja.Cell(sep + 6, 8).FormulaA1 = "=H" & sep + 5 & "*16%"
@@ -7638,17 +7673,19 @@ Public Class frmnominasmarinos
 
                 'Tula
                 hoja.Cell(sep, 10).Value = "TULA"
-                hoja.Cell(sep + 1, 10).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 1, 10).Value = "DEPOSITO MAECCO BBVA"
                 hoja.Cell(sep + 2, 10).Value = "IVA"
-                hoja.Cell(sep + 3, 10).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 3, 10).Value = "RETENCION 6%"
+                hoja.Cell(sep + 4, 10).Value = "TOTAL DEPOSITO MAECCO"
                 hoja.Cell(sep + 5, 10).Value = "DEPOSITO SPROUL BANAMEX"
                 hoja.Cell(sep + 6, 10).Value = "IVA"
                 hoja.Cell(sep + 7, 10).Value = "TOTAL DEPOSITO SPROUL"
 
                 hoja.Cell(sep + 1, 12).FormulaA1 = "=S" & tula + 1 & "+U" & tula + 1 & "+X" & tula + 1 & "+AD" & tula + 1
                 hoja.Cell(sep + 2, 12).FormulaA1 = "=L" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 12).FormulaA1 = "=L" & sep + 1 & "+L" & sep + 2
-                hoja.Range(sep + 3, 10, sep + 3, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 3, 12).FormulaA1 = "=L" & sep + 1 & "*6%"
+                hoja.Cell(sep + 4, 12).FormulaA1 = "=L" & sep + 1 & "+L" & sep + 2 & "-L" & sep + 3
+                hoja.Range(sep + 4, 10, sep + 4, 12).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 hoja.Cell(sep + 5, 12).FormulaA1 = "=N" & tula + 1 & "+O" & tula + 1 & "+P" & tula + 1 & "+T" & tula + 1 & "+Y" & tula + 1
                 hoja.Cell(sep + 6, 12).FormulaA1 = "=L" & sep + 5 & "*16%"
                 hoja.Cell(sep + 7, 12).FormulaA1 = "=L" & sep + 5 & "+L" & sep + 6
@@ -7656,9 +7693,10 @@ Public Class frmnominasmarinos
 
                 'Veracruz
                 hoja.Cell(sep, 14).Value = "VERACRUZ"
-                hoja.Cell(sep + 1, 14).Value = "DEPOSITO DRUPP BAJIO"
+                hoja.Cell(sep + 1, 14).Value = "DEPOSITO MAECCO BBVA"
                 hoja.Cell(sep + 2, 14).Value = "IVA"
-                hoja.Cell(sep + 3, 14).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 3, 14).Value = "RETENCION 6%"
+                hoja.Cell(sep + 4, 14).Value = "TOTAL DEPOSITO MAECCO"
                 hoja.Cell(sep + 5, 14).Value = "DEPOSITO SPROUL BANAMEX"
                 hoja.Cell(sep + 6, 14).Value = "IVA"
                 hoja.Cell(sep + 7, 14).Value = "TOTAL DEPOSITO SPROUL"
@@ -7666,8 +7704,9 @@ Public Class frmnominasmarinos
 
                 hoja.Cell(sep + 1, 17).FormulaA1 = "=S" & veracruz + 1 & "+U" & veracruz + 1 & "+X" & veracruz + 1 & "+AD" & veracruz + 1
                 hoja.Cell(sep + 2, 17).FormulaA1 = "=Q" & sep + 1 & "*16%"
-                hoja.Cell(sep + 3, 17).FormulaA1 = "=Q" & sep + 1 & "+Q" & sep + 2
-                hoja.Range(sep + 3, 14, sep + 3, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Cell(sep + 3, 17).FormulaA1 = "=Q" & sep + 1 & "*6%"
+                hoja.Cell(sep + 4, 17).FormulaA1 = "=Q" & sep + 1 & "+Q" & sep + 2 & "-Q" & sep + 3
+                hoja.Range(sep + 4, 14, sep + 4, 17).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 hoja.Cell(sep + 5, 17).FormulaA1 = "=N" & veracruz + 1 & "+O" & veracruz + 1 & "+P" & veracruz + 1 & "+T" & veracruz + 1 & "+Y" & veracruz + 1
                 hoja.Cell(sep + 6, 17).FormulaA1 = "=Q" & sep + 5 & "*16%"
                 hoja.Cell(sep + 7, 17).FormulaA1 = "=Q" & sep + 5 & "+Q" & sep + 6
@@ -7675,10 +7714,11 @@ Public Class frmnominasmarinos
 
 
                 'Total
-                'hoja.Cell(sep, 3).Value = "DURANGO"
-                hoja.Cell(sep + 11, 3).Value = "DEPOSITO DRUPP BAJIO"
+
+                hoja.Cell(sep + 11, 3).Value = "DEPOSITO  MAECCO BBVA"
                 hoja.Cell(sep + 12, 3).Value = "IVA"
-                hoja.Cell(sep + 13, 3).Value = "TOTAL DEPOSITO DRUPP"
+                hoja.Cell(sep + 13, 3).Value = "RETENCION 6%"
+                hoja.Cell(sep + 14, 3).Value = "TOTAL DEPOSITO DRUPP"
                 hoja.Cell(sep + 15, 3).Value = "DEPOSITO SPROUL BANAMEX"
                 hoja.Cell(sep + 16, 3).Value = "IVA"
                 hoja.Cell(sep + 17, 3).Value = "TOTAL DEPOSITO SPROUL"
@@ -7878,10 +7918,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPCIONES /ISR
                     hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(35).Value 'INAPACIDA
                     hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(36).Value 'ISR
-                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMS
-                    If dtgDatos.Rows(x).Cells(4).Value = "FLORES MONTES DANIEL" Then
-                        MsgBox("Aqui te atrape")
-                    End If
+                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(37).Value 'IMSS              
                     hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(38).Value 'INFONAVIT
                     hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(39).Value ' INFO_BIM_ANTE
                     hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(44).Value ' FONACOT
@@ -7905,26 +7942,26 @@ Public Class frmnominasmarinos
                 recorrerFilasColumnas(hoja2, 12, filaExcel, 39, "bold")
                 hoja2.Range(filaExcel + 4, 20, filaExcel + 4, 39).Style.Font.SetBold(True)
 
-                'hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S9:S" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T9:T" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 21).FormulaA1 = "=SUM(U9:U" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 22).FormulaA1 = "=SUM(V9:V" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 23).FormulaA1 = "=SUM(W9:W" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R12:R" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S12:S" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T12:T" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 21).FormulaA1 = "=SUM(U12:U" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 22).FormulaA1 = "=SUM(V12:V" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 23).FormulaA1 = "=SUM(W12:W" & filaExcel & ")"
 
-                'hoja2.Cell(filaExcel + 4, 24).FormulaA1 = "=SUM(X9:X" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 25).FormulaA1 = "=SUM(Y9:Y" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 26).FormulaA1 = "=SUM(Z9:Z" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 27).FormulaA1 = "=SUM(AA9:AA" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 28).FormulaA1 = "=SUM(AB9:AB" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 24).FormulaA1 = "=SUM(X12:X" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 25).FormulaA1 = "=SUM(Y12:Y" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 26).FormulaA1 = "=SUM(Z12:Z" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 27).FormulaA1 = "=SUM(AA12:AA" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 28).FormulaA1 = "=SUM(AB12:AB" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 29).FormulaA1 = "=SUM(AC12:AC" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 30).FormulaA1 = "=SUM(AD12:AD" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 31).FormulaA1 = "=SUM(AE12:AE" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 32).FormulaA1 = "=SUM(AF12:AF" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 33).FormulaA1 = "=SUM(AG12:AG" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 31).FormulaA1 = "=SUM(AE12:AE" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 32).FormulaA1 = "=SUM(AF12:AF" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 33).FormulaA1 = "=SUM(AG12:AG" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 34).FormulaA1 = "=SUM(AH12:AH" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 35).FormulaA1 = "=SUM(AI12:AI" & filaExcel & ")"
-                'hoja2.Cell(filaExcel + 4, 36).FormulaA1 = "=SUM(AJ12:AJ" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 35).FormulaA1 = "=SUM(AI12:AI" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 36).FormulaA1 = "=SUM(AJ12:AJ" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 37).FormulaA1 = "=SUM(AK12:AK" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL12:AL" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 39).FormulaA1 = "=SUM(AM12:AL" & filaExcel & ")"
@@ -9099,12 +9136,24 @@ Public Class frmnominasmarinos
 
                     fila.DefaultCellStyle.BackColor = Color.White
 
-                    If fila.Cells.Item(4).Value.ToString().Contains(Forma.txtbuscar.Text.ToUpper) Then
-                        fila.DefaultCellStyle.BackColor = Color.Yellow
-                        encontro = True
-                        temp = temp + 1
+                    If Forma.rdbNombre.Checked = True Then
 
+                        If fila.Cells.Item(4).Value.ToString().Contains(Forma.txtbuscar.Text.ToUpper) Then
+                            fila.DefaultCellStyle.BackColor = Color.Yellow
+                            encontro = True
+                            temp = temp + 1
+
+                        End If
+
+                    Else
+                        If fila.Cells.Item(3).Value.ToString().Contains(Forma.txtbuscar.Text.ToUpper) Then
+                            fila.DefaultCellStyle.BackColor = Color.Yellow
+                            encontro = True
+                            temp = temp + 1
+
+                        End If
                     End If
+                   
                 Next
 
             End If

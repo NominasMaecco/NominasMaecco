@@ -43,6 +43,7 @@ Public Class frmSubirDatos
         tsbCancelar.Enabled = False
         lsvLista.Visible = False
         tsbImportar.Enabled = False
+        tsbEmpleados.Enabled = False
         Me.cmdCerrar.Enabled = False
         Me.Cursor = Cursors.WaitCursor
         Me.Enabled = False
@@ -178,6 +179,7 @@ Public Class frmSubirDatos
                         Me.Cursor = Cursors.Default
                         tsbImportar.Enabled = True
                         lsvLista.Visible = True
+                        tsbEmpleados.Enabled = True
                     End If
 
 
@@ -226,6 +228,7 @@ Public Class frmSubirDatos
         tsbCancelar.Enabled = False
         tsbAgregar.Enabled = False
         tsbNuevo.Enabled = True
+        tsbEmpleados.Enabled = True
     End Sub
 
     Private Sub cmdCerrar_Click(sender As System.Object, e As System.EventArgs) Handles cmdCerrar.Click
@@ -384,6 +387,15 @@ Public Class frmSubirDatos
                 End If
                 pnlCatalogo.Enabled = True
             End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tsbEmpleados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbEmpleados.Click
+        Try
+            Dim Forma As New frmEmpleados
+            Forma.ShowDialog()
         Catch ex As Exception
 
         End Try
