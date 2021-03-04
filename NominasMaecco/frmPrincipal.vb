@@ -12,6 +12,7 @@ Public Class frmPrincipal
                 chkCBB.Visible = False
                 AjustarBarra()
             End If
+            'COMENTARIO
         End If
     End Sub
 

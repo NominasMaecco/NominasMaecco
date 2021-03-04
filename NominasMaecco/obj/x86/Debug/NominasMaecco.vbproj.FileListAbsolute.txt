@@ -116,3 +116,7 @@ E:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.u
 E:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.vbproj.GenerateResource.Cache
 E:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe.manifest
 E:\c\systemw\proyectos\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.application
+D:\Desarrollo\Maecco\NominasMaecco\NominasMaecco\bin\Debug\NominasMaecco.exe.config
+D:\Desarrollo\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.exe
+D:\Desarrollo\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.xml
+D:\Desarrollo\Maecco\NominasMaecco\NominasMaecco\obj\x86\Debug\NominasMaecco.pdb
